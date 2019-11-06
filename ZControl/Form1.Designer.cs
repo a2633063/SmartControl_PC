@@ -28,59 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxMQTT = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.panelLog = new System.Windows.Forms.Panel();
+            this.LabelLog = new System.Windows.Forms.Label();
             this.txtMQTTPassword = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.txtMQTTUser = new System.Windows.Forms.TextBox();
             this.numMQTTPort = new System.Windows.Forms.NumericUpDown();
             this.txtMQTTServer = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
+            this.btMQTTConfirm = new System.Windows.Forms.Button();
+            this.groupBoxMQTT.SuspendLayout();
+            this.panelLog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // groupBoxMQTT
             // 
-            this.button1.Location = new System.Drawing.Point(289, 185);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 40);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(394, 243);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.txtMQTTPassword);
-            this.groupBox1.Controls.Add(this.txtMQTTUser);
-            this.groupBox1.Controls.Add(this.numMQTTPort);
-            this.groupBox1.Controls.Add(this.txtMQTTServer);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(943, 43);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "MQTT服务器配置";
+            this.groupBoxMQTT.Controls.Add(this.btMQTTConfirm);
+            this.groupBoxMQTT.Controls.Add(this.txtMQTTPassword);
+            this.groupBoxMQTT.Controls.Add(this.txtMQTTUser);
+            this.groupBoxMQTT.Controls.Add(this.numMQTTPort);
+            this.groupBoxMQTT.Controls.Add(this.txtMQTTServer);
+            this.groupBoxMQTT.Controls.Add(this.label4);
+            this.groupBoxMQTT.Controls.Add(this.label3);
+            this.groupBoxMQTT.Controls.Add(this.label2);
+            this.groupBoxMQTT.Controls.Add(this.label1);
+            this.groupBoxMQTT.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxMQTT.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxMQTT.Name = "groupBoxMQTT";
+            this.groupBoxMQTT.Size = new System.Drawing.Size(943, 43);
+            this.groupBoxMQTT.TabIndex = 3;
+            this.groupBoxMQTT.TabStop = false;
+            this.groupBoxMQTT.Text = "MQTT服务器配置";
             // 
             // label1
             // 
@@ -121,25 +103,35 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "密码:";
             // 
+            // panelLog
+            // 
+            this.panelLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLog.Controls.Add(this.LabelLog);
+            this.panelLog.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelLog.Location = new System.Drawing.Point(0, 425);
+            this.panelLog.Name = "panelLog";
+            this.panelLog.Size = new System.Drawing.Size(943, 25);
+            this.panelLog.TabIndex = 4;
+            // 
+            // LabelLog
+            // 
+            this.LabelLog.AutoSize = true;
+            this.LabelLog.Location = new System.Drawing.Point(6, 5);
+            this.LabelLog.Name = "LabelLog";
+            this.LabelLog.Size = new System.Drawing.Size(101, 12);
+            this.LabelLog.TabIndex = 0;
+            this.LabelLog.Text = "MQTT服务器未连接";
+            // 
             // txtMQTTPassword
             // 
             this.txtMQTTPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMQTTPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ZControl.Properties.Settings.Default, "MQTTPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMQTTPassword.Location = new System.Drawing.Point(713, 13);
+            this.txtMQTTPassword.Location = new System.Drawing.Point(713, 14);
             this.txtMQTTPassword.Name = "txtMQTTPassword";
             this.txtMQTTPassword.PasswordChar = '*';
-            this.txtMQTTPassword.Size = new System.Drawing.Size(166, 21);
+            this.txtMQTTPassword.Size = new System.Drawing.Size(164, 21);
             this.txtMQTTPassword.TabIndex = 7;
             this.txtMQTTPassword.Text = global::ZControl.Properties.Settings.Default.MQTTPassword;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(885, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(52, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "确认";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // txtMQTTUser
             // 
@@ -183,28 +175,40 @@
             this.txtMQTTServer.TabIndex = 4;
             this.txtMQTTServer.Text = global::ZControl.Properties.Settings.Default.MQTTServer;
             // 
+            // btMQTTConfirm
+            // 
+            this.btMQTTConfirm.Image = global::ZControl.Properties.Resources.close;
+            this.btMQTTConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btMQTTConfirm.Location = new System.Drawing.Point(883, 8);
+            this.btMQTTConfirm.Name = "btMQTTConfirm";
+            this.btMQTTConfirm.Size = new System.Drawing.Size(54, 31);
+            this.btMQTTConfirm.TabIndex = 8;
+            this.btMQTTConfirm.Text = "连接";
+            this.btMQTTConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btMQTTConfirm.UseVisualStyleBackColor = true;
+            this.btMQTTConfirm.Click += new System.EventHandler(this.BtMQTTConfirm_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(943, 450);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panelLog);
+            this.Controls.Add(this.groupBoxMQTT);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.groupBoxMQTT.ResumeLayout(false);
+            this.groupBoxMQTT.PerformLayout();
+            this.panelLog.ResumeLayout(false);
+            this.panelLog.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxMQTT;
         private System.Windows.Forms.TextBox txtMQTTPassword;
         private System.Windows.Forms.TextBox txtMQTTUser;
         private System.Windows.Forms.NumericUpDown numMQTTPort;
@@ -213,7 +217,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Panel panelLog;
+        private System.Windows.Forms.Label LabelLog;
+        private System.Windows.Forms.Button btMQTTConfirm;
     }
 }
 
