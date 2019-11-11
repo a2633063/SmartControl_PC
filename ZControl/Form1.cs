@@ -15,10 +15,15 @@ namespace ZControl
     public partial class Form1 : Form
     {
         private MqttClient client;
-        private Boolean reConnect=false;
+        private Boolean reConnect = false;
         public Form1()
         {
             InitializeComponent();
+
+            if (txtMQTTServer.TextLength > 0 || txtMQTTUser.TextLength > 0 || txtMQTTPassword.TextLength > 0)
+            {
+                mqtt_connect(txtMQTTServer.Text, txtMQTTUser.Text, txtMQTTPassword.Text);
+            }
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -32,7 +37,15 @@ namespace ZControl
         {
             if (this.LabelLog.InvokeRequired)
             {
-                this.Invoke(new SetTextCallBack(Log), new object[] { text });
+                try
+                {
+                    this.Invoke(new SetTextCallBack(Log), new object[] { text });
+
+                }
+                catch (Exception)
+                {
+                    //throw;
+                }
             }
             else
             {
@@ -71,7 +84,15 @@ namespace ZControl
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new MQTTConnectInit_dg(MQTTConnectInitCallBack), new object[] { isConnect });
+                try
+                {
+                    this.Invoke(new MQTTConnectInit_dg(MQTTConnectInitCallBack), new object[] { isConnect });
+
+                }
+                catch (Exception)
+                {
+                    //throw;
+                }
             }
             else
             {
@@ -80,6 +101,7 @@ namespace ZControl
         }
         #endregion
 
+        #region mqtt连接/断开子函数
         private void mqtt_disconnect()
         {
             if (client != null && client.IsConnected)
@@ -132,13 +154,16 @@ namespace ZControl
                 MessageBox.Show("无法连接，请确定代理服务器是否启动，IP端口是否正确");
             }
         }
+        #endregion
 
-
-        static void MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        #region mqtt状态事件函数
+        void MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             // Handle message received
-            var message = System.Text.Encoding.Default.GetString(e.Message);
-            System.Console.WriteLine("MqttMsgPublishReceived: " + message);
+            //var message = System.Text.Encoding.Default.GetString(e.Message);
+            //System.Console.WriteLine("MqttMsgPublishReceived: " + message);
+
+            MQTTPublishReceived(e.Topic, System.Text.Encoding.Default.GetString(e.Message));
         }
         void ConnectionClosed(object sender, EventArgs e)
         {
@@ -158,6 +183,39 @@ namespace ZControl
         {
             System.Console.WriteLine("MqttMsgPublished");
         }
+        #endregion
+
+
+
+
+        #region mqtt接受数据处理函数(包含线程处理)
+        private void MQTTPublishReceivedCallBack(String topic, String message)
+        {
+            System.Console.WriteLine("MQTT Received topic [" + topic + "] :" + message);
+
+        }
+        private delegate void MQTTPublishReceived_dg(String topic, String message);
+        private void MQTTPublishReceived(String topic, String message)
+        {
+            if (this.InvokeRequired)
+            {
+                try
+                {
+                    this.Invoke(new MQTTPublishReceived_dg(MQTTPublishReceivedCallBack), new object[] { topic, message });
+
+                }
+                catch (Exception)
+                {
+                    //throw;
+                }
+            }
+            else
+            {
+                MQTTPublishReceivedCallBack(topic, message);
+            }
+        }
+        #endregion
+
         private void BtMQTTConfirm_Click(object sender, EventArgs e)
         {
             if (txtMQTTServer.TextLength < 1 || txtMQTTUser.TextLength < 1 || txtMQTTPassword.TextLength < 1)
@@ -166,7 +224,7 @@ namespace ZControl
                 return;
             }
 
-            if (client!=null && client.IsConnected)
+            if (client != null && client.IsConnected)
                 mqtt_disconnect();
             else
                 mqtt_connect(txtMQTTServer.Text, txtMQTTUser.Text, txtMQTTPassword.Text);
