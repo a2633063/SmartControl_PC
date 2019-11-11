@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,9 @@ namespace ZControl
             {
                 mqtt_connect(txtMQTTServer.Text, txtMQTTUser.Text, txtMQTTPassword.Text);
             }
+
+            for(int i=0;i<50;i++)
+            listBox1.Items.Add(new DeviceItem(1, "test"+i, "00000000000" + i));
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -233,5 +237,55 @@ namespace ZControl
 
         }
 
+
+        const int DEVICE_LIST_ITEM_HEIGHT = 40;
+        private void ListBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+
+
+            if (e.Index == -1)
+                return;
+            e.DrawBackground();
+
+            e.DrawFocusRectangle();
+            // prefixes are drawed bold
+            
+            DeviceItem device = (DeviceItem)((ListBox)sender).Items[e.Index];
+
+
+            //draw the ICON
+            Rectangle rectangle = new Rectangle(e.Bounds.Location, new Size(DEVICE_LIST_ITEM_HEIGHT, DEVICE_LIST_ITEM_HEIGHT));
+            //e.Graphics.DrawImage(Properties.Resources.device_item_0, e.Bounds.Location);
+            e.Graphics.DrawImage(Properties.Resources.device_item_0, rectangle);
+
+            //draw the txt
+            Brush fontColor = new SolidBrush(Color.Black);
+            Font nameFont = new Font(e.Font.FontFamily, 20);
+
+            Rectangle newBounds = new Rectangle(e.Bounds.Location, e.Bounds.Size);
+
+            // draw the name string
+            e.Graphics.DrawString(device.name, nameFont, fontColor, newBounds.X + DEVICE_LIST_ITEM_HEIGHT, newBounds.Y);
+            // calculate the new rectangle
+
+
+            // draw the mac string
+            e.Graphics.DrawString(device.mac, e.Font, fontColor, newBounds.X+ DEVICE_LIST_ITEM_HEIGHT+2, newBounds.Y+25);
+
+            // draw the focus
+            e.DrawFocusRectangle();
+            
+
+        }
+
+        private void ListBox1_MeasureItem(object sender, MeasureItemEventArgs e)
+        {
+            //if (e.Index == 2)
+
+            {
+
+                e.ItemHeight = DEVICE_LIST_ITEM_HEIGHT;
+            }
+        }
     }
 }
