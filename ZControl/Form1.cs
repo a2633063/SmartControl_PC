@@ -27,8 +27,9 @@ namespace ZControl
                 mqtt_connect(txtMQTTServer.Text, txtMQTTUser.Text, txtMQTTPassword.Text);
             }
 
-            for(int i=0;i<10;i++)
-            listBox1.Items.Add(new DeviceItemZTC1("zTC1_000"+i, "00000000000" + i));
+                listBox1.Items.Add(new DeviceItemZTC1("zTC1_184d", "d0bae463184d"));
+            for (int i = 0; i < 10; i++)
+                listBox1.Items.Add(new DeviceItemZTC1("zTC1_000" + i, "00000000000" + i));
 
             listBox1.SelectedIndex = 0;
             deviceControl1.Device = (DeviceItem)listBox1.SelectedItem;
@@ -139,7 +140,7 @@ namespace ZControl
                 MQTTConnectInit(true);
                 Log("MQTT服务器已连接");
 
-                client.Subscribe(new String[] { "/testing" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                client.Subscribe(new String[] { "device/ztc1/d0bae463184d/sensor" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
                 String temp = "asdf";
                 client.Publish("sensor/temp", Encoding.UTF8.GetBytes(temp));
@@ -194,14 +195,13 @@ namespace ZControl
         #endregion
 
 
-
-
         #region mqtt接受数据处理函数(包含线程处理)
         private void MQTTPublishReceivedCallBack(String topic, String message)
         {
             System.Console.WriteLine("MQTT Received topic [" + topic + "] :" + message);
 
         }
+        #region mqtt接受数据线程处理函数
         private delegate void MQTTPublishReceived_dg(String topic, String message);
         private void MQTTPublishReceived(String topic, String message)
         {
@@ -221,6 +221,55 @@ namespace ZControl
             {
                 MQTTPublishReceivedCallBack(topic, message);
             }
+        } 
+        #endregion
+        #endregion
+
+
+        #region 设置devicelist Item自定义界面
+        const int DEVICE_LIST_ITEM_HEIGHT = 40;
+        private void ListBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+
+
+            if (e.Index == -1)
+                return;
+            e.DrawBackground();
+
+            e.DrawFocusRectangle();
+            // prefixes are drawed bold
+
+            DeviceItem device = (DeviceItem)((ListBox)sender).Items[e.Index];
+
+
+            //draw the ICON
+            Rectangle rectangle = new Rectangle(e.Bounds.Location, new Size(DEVICE_LIST_ITEM_HEIGHT, DEVICE_LIST_ITEM_HEIGHT));
+            //e.Graphics.DrawImage(Properties.Resources.device_item_0, e.Bounds.Location);
+            e.Graphics.DrawImage(Properties.Resources.device_item_0, rectangle);
+
+            //draw the txt
+            Brush fontColor = new SolidBrush(Color.Black);
+            Font nameFont = new Font(e.Font.FontFamily, 20);
+
+            Rectangle newBounds = new Rectangle(e.Bounds.Location, e.Bounds.Size);
+
+            // draw the name string
+            e.Graphics.DrawString(device.name, nameFont, fontColor, newBounds.X + DEVICE_LIST_ITEM_HEIGHT, newBounds.Y);
+            // calculate the new rectangle
+
+
+            // draw the mac string
+            e.Graphics.DrawString(device.mac, e.Font, fontColor, newBounds.X + DEVICE_LIST_ITEM_HEIGHT + 2, newBounds.Y + 26);
+
+            // draw the focus
+            e.DrawFocusRectangle();
+
+
+        }
+
+        private void ListBox1_MeasureItem(object sender, MeasureItemEventArgs e)
+        {
+            e.ItemHeight = DEVICE_LIST_ITEM_HEIGHT;
         }
         #endregion
 
@@ -242,54 +291,9 @@ namespace ZControl
         }
 
 
-        const int DEVICE_LIST_ITEM_HEIGHT = 40;
-        private void ListBox1_DrawItem(object sender, DrawItemEventArgs e)
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-
-            if (e.Index == -1)
-                return;
-            e.DrawBackground();
-
-            e.DrawFocusRectangle();
-            // prefixes are drawed bold
-            
-            DeviceItem device = (DeviceItem)((ListBox)sender).Items[e.Index];
-
-
-            //draw the ICON
-            Rectangle rectangle = new Rectangle(e.Bounds.Location, new Size(DEVICE_LIST_ITEM_HEIGHT, DEVICE_LIST_ITEM_HEIGHT));
-            //e.Graphics.DrawImage(Properties.Resources.device_item_0, e.Bounds.Location);
-            e.Graphics.DrawImage(Properties.Resources.device_item_0, rectangle);
-
-            //draw the txt
-            Brush fontColor = new SolidBrush(Color.Black);
-            Font nameFont = new Font(e.Font.FontFamily, 20);
-
-            Rectangle newBounds = new Rectangle(e.Bounds.Location, e.Bounds.Size);
-
-            // draw the name string
-            e.Graphics.DrawString(device.name, nameFont, fontColor, newBounds.X + DEVICE_LIST_ITEM_HEIGHT, newBounds.Y);
-            // calculate the new rectangle
-
-
-            // draw the mac string
-            e.Graphics.DrawString(device.mac, e.Font, fontColor, newBounds.X+ DEVICE_LIST_ITEM_HEIGHT+2, newBounds.Y+25);
-
-            // draw the focus
-            e.DrawFocusRectangle();
-            
-
-        }
-
-        private void ListBox1_MeasureItem(object sender, MeasureItemEventArgs e)
-        {
-            //if (e.Index == 2)
-
-            {
-
-                e.ItemHeight = DEVICE_LIST_ITEM_HEIGHT;
-            }
+            deviceControl1.Device = (DeviceItem)listBox1.SelectedItem;
         }
     }
 }

@@ -241,6 +241,7 @@
             this.listBox1.TabIndex = 0;
             this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox1_DrawItem);
             this.listBox1.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.ListBox1_MeasureItem);
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -254,12 +255,15 @@
             // deviceControl1
             // 
             this.deviceControl1.AutoCheck = true;
+            this.deviceControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.deviceControl1.Device = null;
             this.deviceControl1.DeviceMac = null;
             this.deviceControl1.DeviceName = null;
-            this.deviceControl1.Location = new System.Drawing.Point(35, 24);
+            this.deviceControl1.Location = new System.Drawing.Point(6, 6);
+            this.deviceControl1.MaximumSize = new System.Drawing.Size(312, 355);
+            this.deviceControl1.MinimumSize = new System.Drawing.Size(312, 355);
             this.deviceControl1.Name = "deviceControl1";
-            this.deviceControl1.Size = new System.Drawing.Size(357, 352);
+            this.deviceControl1.Size = new System.Drawing.Size(312, 355);
             this.deviceControl1.TabIndex = 0;
             // 
             // Form1
