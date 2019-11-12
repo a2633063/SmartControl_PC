@@ -236,8 +236,12 @@ namespace ZControl
 
 
 
+
         #endregion
 
-
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (MsgPublishEvent != null) MsgPublishEvent("device/ztc1/" + device.mac + "/set", "{\"mac\": \"" + device.mac + "\",\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}{\"mac\": \"d0bae4618552\",\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}{\"mac\": \"d0bae463184d\",\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}"); 
+        }
     }
 }

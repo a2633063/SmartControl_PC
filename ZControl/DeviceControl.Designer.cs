@@ -49,6 +49,7 @@
             this.labZTC1Switch3Name = new System.Windows.Forms.Label();
             this.labZTC1Switch2Name = new System.Windows.Forms.Label();
             this.labZTC1Switch1Name = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panelTitle.SuspendLayout();
             this.panelZTC1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZTC1SwitchAll)).BeginInit();
@@ -108,6 +109,7 @@
             // panelZTC1
             // 
             this.panelZTC1.BackColor = System.Drawing.Color.Transparent;
+            this.panelZTC1.Controls.Add(this.linkLabel1);
             this.panelZTC1.Controls.Add(this.labelZTC1TotalTime);
             this.panelZTC1.Controls.Add(this.picZTC1SwitchAll);
             this.panelZTC1.Controls.Add(this.label3);
@@ -135,8 +137,9 @@
             // 
             this.labelZTC1TotalTime.Location = new System.Drawing.Point(39, 281);
             this.labelZTC1TotalTime.Name = "labelZTC1TotalTime";
-            this.labelZTC1TotalTime.Size = new System.Drawing.Size(238, 23);
+            this.labelZTC1TotalTime.Size = new System.Drawing.Size(238, 16);
             this.labelZTC1TotalTime.TabIndex = 23;
+            this.labelZTC1TotalTime.Text = "当前时间";
             // 
             // picZTC1SwitchAll
             // 
@@ -322,6 +325,17 @@
             this.labZTC1Switch1Name.Text = "插座2";
             this.labZTC1Switch1Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(39, 299);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(77, 12);
+            this.linkLabel1.TabIndex = 24;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "更新获取状态";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
+            // 
             // DeviceControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -371,5 +385,6 @@
         private System.Windows.Forms.PictureBox picZTC1Switch2;
         private System.Windows.Forms.PictureBox picZTC1Switch3;
         private System.Windows.Forms.Label labelZTC1TotalTime;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

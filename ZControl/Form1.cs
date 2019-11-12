@@ -361,6 +361,7 @@ namespace ZControl
             {
                 device.name = jsonObject["name"].ToString();
                 if (index == listBox1.SelectedIndex) deviceControl1.zTC1RefreshName();
+                listBox1.Refresh(); //更新列表里的名称/mac地址
             }
             if (jsonObject.Property("power") != null)
             {
