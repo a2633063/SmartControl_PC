@@ -231,15 +231,41 @@ namespace ZControl
         private void PublishReceivedCallBack(String topic, String message)
         {
             System.Console.WriteLine("Received topic [" + topic + "] :" + message);
-
+            int index;
             try
             {
                 JObject jObject = JObject.Parse(message);
                 if (jObject.Property("mac") == null) return;
 
+                if(jObject.Property("type") != null
+                   && jObject.Property("type_name") != null
+                   && jObject.Property("name") != null
+                   && jObject.Property("mac") != null)
+                {
+
+                    for (index = 0; index < listBox1.Items.Count; index++)
+                    {
+                        if (jObject["mac"].ToString().Equals(((DeviceItem)listBox1.Items[index]).mac))
+                        {
+                            break;
+                        }
+                    }
+                    if (index < listBox1.Items.Count) return;   //设备重复,不增加
+                    switch ((DEVICETYPE)(int)jObject["type"])
+                    {
+                        case DEVICETYPE.TYPE_TC1:
+                            DeviceItemZTC1 deviceItemZTC1 = new DeviceItemZTC1(jObject["name"].ToString(), jObject["mac"].ToString());
+                            listBox1.Items.Insert(0,deviceItemZTC1);
+                            break;
+
+                    }
+                    return;
+                }
+
+
                 String reMac = jObject["mac"].ToString();
 
-                int index;
+                
                 for (index = 0; index < listBox1.Items.Count; index++)
                 {
                     //if(index)
