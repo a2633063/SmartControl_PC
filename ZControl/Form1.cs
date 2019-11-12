@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+using static ZControl.DeviceItem;
 
 namespace ZControl
 {
@@ -26,8 +27,11 @@ namespace ZControl
                 mqtt_connect(txtMQTTServer.Text, txtMQTTUser.Text, txtMQTTPassword.Text);
             }
 
-            for(int i=0;i<50;i++)
-            listBox1.Items.Add(new DeviceItem(1, "test"+i, "00000000000" + i));
+            for(int i=0;i<10;i++)
+            listBox1.Items.Add(new DeviceItemZTC1("zTC1_000"+i, "00000000000" + i));
+
+            listBox1.SelectedIndex = 0;
+            deviceControl1.Device = (DeviceItem)listBox1.SelectedItem;
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {

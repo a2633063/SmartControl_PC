@@ -48,6 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceItemZTC1.cs" />
+    <Compile Include="DeviceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DeviceControl.Designer.cs">
+      <DependentUpon>DeviceControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeviceItem.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -57,6 +64,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DeviceControl.resx">
+      <DependentUpon>DeviceControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\device_item_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\device_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\device_close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

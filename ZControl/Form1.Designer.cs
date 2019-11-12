@@ -45,10 +45,12 @@
             this.btn_device_list_add = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.deviceControl1 = new ZControl.DeviceControl();
             this.groupBoxMQTT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).BeginInit();
             this.panelLog.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxMQTT
@@ -242,11 +244,23 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.deviceControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(258, 43);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(685, 382);
             this.panel2.TabIndex = 6;
+            // 
+            // deviceControl1
+            // 
+            this.deviceControl1.AutoCheck = true;
+            this.deviceControl1.Device = null;
+            this.deviceControl1.DeviceMac = null;
+            this.deviceControl1.DeviceName = null;
+            this.deviceControl1.Location = new System.Drawing.Point(35, 24);
+            this.deviceControl1.Name = "deviceControl1";
+            this.deviceControl1.Size = new System.Drawing.Size(357, 352);
+            this.deviceControl1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -266,6 +280,7 @@
             this.panelLog.ResumeLayout(false);
             this.panelLog.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -288,6 +303,7 @@
         private System.Windows.Forms.Button btn_device_list_del;
         private System.Windows.Forms.Button btn_device_list_add;
         private System.Windows.Forms.Panel panel2;
+        private DeviceControl deviceControl1;
     }
 }
 
