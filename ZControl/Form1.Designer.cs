@@ -41,8 +41,8 @@
             this.panelLog = new System.Windows.Forms.Panel();
             this.LabelLog = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_device_list_del = new System.Windows.Forms.Button();
-            this.btn_device_list_add = new System.Windows.Forms.Button();
+            this.btnDeviceListDel = new System.Windows.Forms.Button();
+            this.btnDeviceListAdd = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.deviceControl1 = new ZControl.DeviceControl();
@@ -67,7 +67,7 @@
             this.groupBoxMQTT.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxMQTT.Location = new System.Drawing.Point(0, 0);
             this.groupBoxMQTT.Name = "groupBoxMQTT";
-            this.groupBoxMQTT.Size = new System.Drawing.Size(943, 43);
+            this.groupBoxMQTT.Size = new System.Drawing.Size(585, 43);
             this.groupBoxMQTT.TabIndex = 3;
             this.groupBoxMQTT.TabStop = false;
             this.groupBoxMQTT.Text = "MQTT服务器配置";
@@ -77,7 +77,7 @@
             this.btMQTTConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btMQTTConfirm.Image = global::ZControl.Properties.Resources.close;
             this.btMQTTConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btMQTTConfirm.Location = new System.Drawing.Point(883, 8);
+            this.btMQTTConfirm.Location = new System.Drawing.Point(525, 9);
             this.btMQTTConfirm.Name = "btMQTTConfirm";
             this.btMQTTConfirm.Size = new System.Drawing.Size(54, 31);
             this.btMQTTConfirm.TabIndex = 8;
@@ -90,10 +90,10 @@
             // 
             this.txtMQTTPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMQTTPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ZControl.Properties.Settings.Default, "MQTTPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMQTTPassword.Location = new System.Drawing.Point(713, 14);
+            this.txtMQTTPassword.Location = new System.Drawing.Point(425, 14);
             this.txtMQTTPassword.Name = "txtMQTTPassword";
             this.txtMQTTPassword.PasswordChar = '*';
-            this.txtMQTTPassword.Size = new System.Drawing.Size(164, 21);
+            this.txtMQTTPassword.Size = new System.Drawing.Size(95, 21);
             this.txtMQTTPassword.TabIndex = 7;
             this.txtMQTTPassword.Text = global::ZControl.Properties.Settings.Default.MQTTPassword;
             // 
@@ -101,9 +101,9 @@
             // 
             this.txtMQTTUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMQTTUser.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ZControl.Properties.Settings.Default, "MQTTUser", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMQTTUser.Location = new System.Drawing.Point(500, 13);
+            this.txtMQTTUser.Location = new System.Drawing.Point(302, 14);
             this.txtMQTTUser.Name = "txtMQTTUser";
-            this.txtMQTTUser.Size = new System.Drawing.Size(166, 21);
+            this.txtMQTTUser.Size = new System.Drawing.Size(87, 21);
             this.txtMQTTUser.TabIndex = 6;
             this.txtMQTTUser.Text = global::ZControl.Properties.Settings.Default.MQTTUser;
             // 
@@ -111,7 +111,7 @@
             // 
             this.numMQTTPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.numMQTTPort.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::ZControl.Properties.Settings.Default, "MQTTPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numMQTTPort.Location = new System.Drawing.Point(375, 13);
+            this.numMQTTPort.Location = new System.Drawing.Point(185, 14);
             this.numMQTTPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -133,9 +133,9 @@
             this.txtMQTTServer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMQTTServer.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ZControl.Properties.Settings.Default, "MQTTServer", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMQTTServer.Location = new System.Drawing.Point(59, 14);
+            this.txtMQTTServer.Location = new System.Drawing.Point(49, 14);
             this.txtMQTTServer.Name = "txtMQTTServer";
-            this.txtMQTTServer.Size = new System.Drawing.Size(267, 21);
+            this.txtMQTTServer.Size = new System.Drawing.Size(98, 21);
             this.txtMQTTServer.TabIndex = 4;
             this.txtMQTTServer.Text = global::ZControl.Properties.Settings.Default.MQTTServer;
             // 
@@ -143,7 +143,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(672, 17);
+            this.label4.Location = new System.Drawing.Point(392, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 3;
@@ -153,7 +153,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(447, 17);
+            this.label3.Location = new System.Drawing.Point(257, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 12);
             this.label3.TabIndex = 2;
@@ -163,7 +163,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(334, 17);
+            this.label2.Location = new System.Drawing.Point(153, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 1;
@@ -172,7 +172,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 17);
+            this.label1.Location = new System.Drawing.Point(2, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 12);
             this.label1.TabIndex = 0;
@@ -185,7 +185,7 @@
             this.panelLog.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelLog.Location = new System.Drawing.Point(0, 425);
             this.panelLog.Name = "panelLog";
-            this.panelLog.Size = new System.Drawing.Size(943, 25);
+            this.panelLog.Size = new System.Drawing.Size(585, 25);
             this.panelLog.TabIndex = 4;
             // 
             // LabelLog
@@ -199,8 +199,8 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btn_device_list_del);
-            this.panel1.Controls.Add(this.btn_device_list_add);
+            this.panel1.Controls.Add(this.btnDeviceListDel);
+            this.panel1.Controls.Add(this.btnDeviceListAdd);
             this.panel1.Controls.Add(this.listBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 43);
@@ -208,25 +208,27 @@
             this.panel1.Size = new System.Drawing.Size(258, 382);
             this.panel1.TabIndex = 5;
             // 
-            // btn_device_list_del
+            // btnDeviceListDel
             // 
-            this.btn_device_list_del.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_device_list_del.Location = new System.Drawing.Point(129, 359);
-            this.btn_device_list_del.Name = "btn_device_list_del";
-            this.btn_device_list_del.Size = new System.Drawing.Size(126, 23);
-            this.btn_device_list_del.TabIndex = 1;
-            this.btn_device_list_del.Text = "删除此设备";
-            this.btn_device_list_del.UseVisualStyleBackColor = true;
+            this.btnDeviceListDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeviceListDel.Location = new System.Drawing.Point(129, 359);
+            this.btnDeviceListDel.Name = "btnDeviceListDel";
+            this.btnDeviceListDel.Size = new System.Drawing.Size(126, 23);
+            this.btnDeviceListDel.TabIndex = 1;
+            this.btnDeviceListDel.Text = "删除此设备";
+            this.btnDeviceListDel.UseVisualStyleBackColor = true;
+            this.btnDeviceListDel.Click += new System.EventHandler(this.BtnDeviceListDel_Click);
             // 
-            // btn_device_list_add
+            // btnDeviceListAdd
             // 
-            this.btn_device_list_add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_device_list_add.Location = new System.Drawing.Point(4, 359);
-            this.btn_device_list_add.Name = "btn_device_list_add";
-            this.btn_device_list_add.Size = new System.Drawing.Size(126, 23);
-            this.btn_device_list_add.TabIndex = 1;
-            this.btn_device_list_add.Text = "获取局域网设备";
-            this.btn_device_list_add.UseVisualStyleBackColor = true;
+            this.btnDeviceListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeviceListAdd.Location = new System.Drawing.Point(4, 359);
+            this.btnDeviceListAdd.Name = "btnDeviceListAdd";
+            this.btnDeviceListAdd.Size = new System.Drawing.Size(126, 23);
+            this.btnDeviceListAdd.TabIndex = 1;
+            this.btnDeviceListAdd.Text = "获取局域网设备";
+            this.btnDeviceListAdd.UseVisualStyleBackColor = true;
+            this.btnDeviceListAdd.Click += new System.EventHandler(this.BtnDeviceListAdd_Click);
             // 
             // listBox1
             // 
@@ -249,16 +251,14 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(258, 43);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(685, 382);
+            this.panel2.Size = new System.Drawing.Size(327, 382);
             this.panel2.TabIndex = 6;
             // 
             // deviceControl1
             // 
-            this.deviceControl1.AutoCheck = true;
+            this.deviceControl1.AutoCheck = false;
             this.deviceControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.deviceControl1.Device = null;
-            this.deviceControl1.DeviceMac = null;
-            this.deviceControl1.DeviceName = null;
             this.deviceControl1.Location = new System.Drawing.Point(6, 6);
             this.deviceControl1.MaximumSize = new System.Drawing.Size(312, 355);
             this.deviceControl1.MinimumSize = new System.Drawing.Size(312, 355);
@@ -270,7 +270,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 450);
+            this.ClientSize = new System.Drawing.Size(585, 450);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelLog);
@@ -304,8 +304,8 @@
         private System.Windows.Forms.Button btMQTTConfirm;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button btn_device_list_del;
-        private System.Windows.Forms.Button btn_device_list_add;
+        private System.Windows.Forms.Button btnDeviceListDel;
+        private System.Windows.Forms.Button btnDeviceListAdd;
         private System.Windows.Forms.Panel panel2;
         private DeviceControl deviceControl1;
     }

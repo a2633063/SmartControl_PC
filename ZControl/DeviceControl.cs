@@ -14,10 +14,11 @@ namespace ZControl
     public partial class DeviceControl : UserControl
     {
 
+        public delegate void MsgPublishEventHandler(String topic,String message);
+        public event MsgPublishEventHandler MsgPublishEvent;
+
         #region 属性
         private DeviceItem device;
-        private String name = null;
-        private String mac = null;
 
         private Boolean autoCheck = true;
 
@@ -27,6 +28,10 @@ namespace ZControl
             get { return device; }
             set
             {
+                labelZTC1Power.Text = "----";
+                labelZTC1TotalTime.Text = "";
+                labelTitle.Text = "";
+                labelMac.Text = "";
                 for (int i = 0; i < (int)DEVICETYPE.TYPE_TOTAL; i++)
                     deviceTypeUIChoise[i].Visible = false;
 
@@ -38,7 +43,7 @@ namespace ZControl
                 switch (device.type)
                 {
                     case DEVICETYPE.TYPE_TC1:
-                        zTC1Refresh();
+                        zTC1RefreshAll();
                         break;
                 }
             }
@@ -47,26 +52,6 @@ namespace ZControl
         {
             get { return autoCheck; }
             set { autoCheck = value; }
-        }
-
-        public String DeviceName
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                labelTitle.Text = name;
-            }
-        }
-
-        public String DeviceMac
-        {
-            get { return mac; }
-            set
-            {
-                mac = value;
-                labelMac.Text = mac;
-            }
         }
 
         #endregion
@@ -84,6 +69,31 @@ namespace ZControl
         }
 
 
+
+
+        #region 通用
+        private void LabelMac_DoubleClick(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(device.mac);
+            MessageBox.Show("设备MAC地址已复制!");
+        }
+
+
+        #region 开关图片按下效果
+        private void PicZTC1Switch_MouseDown(object sender, MouseEventArgs e)
+        {
+            ((PictureBox)sender).BorderStyle = BorderStyle.Fixed3D;
+        }
+        private void PicZTC1Switch_MouseUp(object sender, MouseEventArgs e)
+        {
+            ((PictureBox)sender).BorderStyle = BorderStyle.None;
+        }
+        private void PicZTC1Switch_MouseLeave(object sender, EventArgs e)
+        {
+            ((PictureBox)sender).BorderStyle = BorderStyle.None;
+        }  
+        #endregion
+        #endregion
 
 
         #region zTC1部分
@@ -107,48 +117,127 @@ namespace ZControl
             {
                 picZTC1SwitchPic[i].Click += PicZTC1Switch_Click;
                 picZTC1SwitchPic[i].Tag = i;
+
+                picZTC1SwitchPic[i].MouseDown += PicZTC1Switch_MouseDown;
+                picZTC1SwitchPic[i].MouseUp += PicZTC1Switch_MouseUp;
+                picZTC1SwitchPic[i].MouseLeave += PicZTC1Switch_MouseLeave;
             }
+
+            picZTC1SwitchAll.MouseDown += PicZTC1Switch_MouseDown;
+            picZTC1SwitchAll.MouseUp += PicZTC1Switch_MouseUp;
+            picZTC1SwitchAll.MouseLeave += PicZTC1Switch_MouseLeave;
         }
-        public void zTC1Refresh()
+        public void zTC1RefreshAll()
         {
-            this.DeviceName = device.name;
-            this.DeviceMac = device.mac;
-            zTC1Power();
-            zTC1TotalTime();
+            zTC1RefreshName();
+            zTC1RefreshMac();
+            zTC1RefreshPower();
+            zTC1RefreshTotalTime();
             for (int i = 0; i < picZTC1SwitchPic.Count(); i++)
             {
-                zTC1Switch(i);
-                zTC1SwitchName(i);
+                zTC1RefreshSwitch(i);
+                zTC1RefreshSwitchName(i);
             }
         }
 
-        public void zTC1Switch(int x)
+        public void zTC1RefreshSwitch(int x)
         {
-            picZTC1SwitchPic[x].Image = ((DeviceItemZTC1)device).zTC1Switch[x] ? Properties.Resources.device_open : Properties.Resources.device_close; ;
+            picZTC1SwitchPic[x].Image = ((DeviceItemZTC1)device).zTC1Switch[x] ? Properties.Resources.device_open : Properties.Resources.device_close;
+            for(int i=0;i< picZTC1SwitchPic.Length; i++)
+            {
+                if(((DeviceItemZTC1)device).zTC1Switch[i])
+                {
+                    picZTC1SwitchAll.Image = Properties.Resources.device_open;
+                    return;
+                }
+            }
+            picZTC1SwitchAll.Image = Properties.Resources.device_close;
         }
-        public void zTC1SwitchName(int x)
+        public void zTC1RefreshSwitchName(int x)
         {
             labZTC1SwitchName[x].Text = ((DeviceItemZTC1)device).zTC1SwitchName[x];
+            labZTC1SwitchName[x].Left = picZTC1SwitchPic[x].Left + picZTC1SwitchPic[x].Width / 2 - labZTC1SwitchName[x].Width / 2;
         }
-        public void zTC1TotalTime()
+        public void zTC1RefreshTotalTime()
         {
-            if (((DeviceItemZTC1)device).zTC1TotalTime > 0)
-                labelZTC1TotalTime.Text = "已运行时间:" + ((DeviceItemZTC1)device).zTC1TotalTime;
+            UInt32 time = ((DeviceItemZTC1)device).zTC1TotalTime;
+            if (time > 0)
+            {
+                String str = "";
+                UInt32 days = time / 86400; //天
+                UInt32 hours = ((time % 86400) / 3600); //小时
+                UInt32 minutes = ((time % 3600) / 60); //分
+
+                if (days > 0)   //天
+                {
+                    str += days + "天";
+                }
+                if (hours > 0)   //小时
+                {
+                    str += hours + "小时";
+                }
+                if (minutes > 0)   //分
+                {
+                    str += minutes + "分钟";
+                }
+
+                labelZTC1TotalTime.Text = "已运行时间: " + str;
+            }
         }
-        public void zTC1Power()
+        public void zTC1RefreshPower()
         {
-            labelZTC1Power.Text = ((DeviceItemZTC1)device).zTC1Power + "W";
+            if (((DeviceItemZTC1)device).zTC1Power != null)
+                labelZTC1Power.Text = ((DeviceItemZTC1)device).zTC1Power + "W";
+        }
+
+        public void zTC1RefreshName()
+        {
+            labelTitle.Text = device.name;
+        }
+        public void zTC1RefreshMac()
+        {
+            labelMac.Text = device.mac;
         }
         private void PicZTC1Switch_Click(object sender, EventArgs e)
         {
             PictureBox zTC1SwitchPic = (PictureBox)sender;
             int index = (int)zTC1SwitchPic.Tag;
+            if (MsgPublishEvent != null) MsgPublishEvent("device/ztc1/" + device.mac + "/set", "{\"mac\":\""+device.mac+"\",\"plug_"+ index+"\":{\"on\":"+ (((DeviceItemZTC1)device).zTC1Switch[index] ? "0":"1")+ "}}");
             if (autoCheck)
             {
                 ((DeviceItemZTC1)device).zTC1Switch[index] = !((DeviceItemZTC1)device).zTC1Switch[index];
-                zTC1Switch(index);
+                zTC1RefreshSwitch(index);
             }
         }
+
+        private void PicZTC1SwitchAll_Click(object sender, EventArgs e)
+        {
+            if (MsgPublishEvent == null) return;
+
+            String message = "{\"mac\":\"" + device.mac + "\",\"plug_0\":{\"on\":1},\"plug_1\":{\"on\":1},\"plug_2\":{\"on\":1},\"plug_3\":{\"on\":1},\"plug_4\":{\"on\":1},\"plug_5\":{\"on\":1}}";
+            bool b = true;
+            for (int i = 0; i < picZTC1SwitchPic.Length; i++)
+            {
+                if (((DeviceItemZTC1)device).zTC1Switch[i])
+                {
+                    b = false;
+                    message = "{\"mac\":\"" + device.mac + "\",\"plug_0\":{\"on\":0},\"plug_1\":{\"on\":0},\"plug_2\":{\"on\":0},\"plug_3\":{\"on\":0},\"plug_4\":{\"on\":0},\"plug_5\":{\"on\":0}}";
+                    break;
+                }
+            }
+            if (autoCheck)
+            {
+                picZTC1SwitchAll.Image = b ? Properties.Resources.device_open : Properties.Resources.device_close;
+            }
+
+            MsgPublishEvent("device/ztc1/" + device.mac + "/set", message);
+
+        }
+
+
+
         #endregion
+
+
     }
 }
