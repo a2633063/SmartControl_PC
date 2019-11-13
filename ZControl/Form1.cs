@@ -552,7 +552,7 @@ namespace ZControl
             {
                 int index = listBox1.SelectedIndex;
                 if (listBox1.Items.Count == 1) index = -1;
-                else if (index > 1) index--;
+                else if (index > 0) index--;
                 listBox1.Items.RemoveAt(listBox1.SelectedIndex);
                 listBox1.SelectedIndex = index;
             }
