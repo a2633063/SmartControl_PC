@@ -30,9 +30,48 @@ namespace ZControl
 
 
 
-            listBox1.Items.Add(new DeviceItemZTC1("zTC1_184d", "d0bae463184d"));
-            for (int i = 0; i < 10; i++)
-                listBox1.Items.Add(new DeviceItemZTC1("zTC1_000" + i, "00000000000" + i));
+
+            //listBox1.Items.Add(new DeviceItemZTC1("zTC1_184d", "d0bae463184d"));
+            //for (int i = 0; i < 1; i++)
+            //    listBox1.Items.Add(new DeviceItemZTC1("zTC1_000" + i, "00000000000" + i));
+
+
+            //JArray jArray = new JArray();
+            //JObject obj = new JObject();
+            //foreach (DeviceItem d in listBox1.Items)
+            //{
+            //    JObject objItem = new JObject();
+            //    objItem["mac"] = d.mac;
+            //    objItem["name"] = d.name;
+            //    objItem["type"] = (int)d.type;
+            //    objItem["type_name"] = d.typeName;
+            //    jArray.Add(objItem);
+            //}
+            //obj["device"] = jArray;
+            //string json = obj.ToString();
+            //Console.WriteLine(json);
+
+            try
+            {
+                string json = Properties.Settings.Default.Device;
+                JObject jsonObject = JObject.Parse(json);
+                JArray array = (JArray)jsonObject["device"];
+                for (int i = 0; i < array.Count; i++)
+                {
+                    JObject jObject = (JObject)array[i];
+                    Console.WriteLine(jObject.ToString());
+                    Received(null, jObject.ToString());
+                }
+            }
+            catch (Exception)
+            {
+                listBox1.Items.Clear();
+                //throw;
+            }
+
+
+            if (listBox1.Items.Count < 1)
+                listBox1.Items.Add(new DeviceItemZTC1("zTC1_演示设备", "000000000000"));
 
             listBox1.SelectedIndex = 0;
             deviceControl1.Device = (DeviceItem)listBox1.SelectedItem;
@@ -46,13 +85,14 @@ namespace ZControl
 
         private void send(string topic, string message)
         {
-            if (mqttClient==null || !mqttClient.IsConnected || topic == null) {
+            if (mqttClient == null || !mqttClient.IsConnected || topic == null)
+            {
                 //IPEndPoint ipendpoint = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 10182);
                 //byte[] data = Encoding.Default.GetBytes(message);
                 //udpClient.Send(data, data.Length, ipendpoint);
-                
+
                 UdpClient udpclient = new UdpClient();
-                IPEndPoint ipendpoint = new IPEndPoint(IPAddress.Parse("255.255.255.255"),10182);
+                IPEndPoint ipendpoint = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 10182);
 
                 byte[] data = Encoding.Default.GetBytes(message);
                 udpclient.Send(data, data.Length, ipendpoint);
@@ -66,8 +106,25 @@ namespace ZControl
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.Save();
             mqttDisconnect();
+
+            JArray jArray = new JArray();
+            JObject obj = new JObject();
+            foreach (DeviceItem d in listBox1.Items)
+            {
+                if (d.mac.Equals("000000000000")) continue;
+                JObject objItem = new JObject();
+                objItem["mac"] = d.mac;
+                objItem["name"] = d.name;
+                objItem["type"] = (int)d.type;
+                objItem["type_name"] = d.typeName;
+                jArray.Add(objItem);
+            }
+            obj["device"] = jArray;
+            string json = obj.ToString();
+            Console.WriteLine(json);
+            Properties.Settings.Default.Device=json;
+            Properties.Settings.Default.Save();
         }
 
         #region 更新Log显示内容(包含多线程处理)
@@ -227,6 +284,41 @@ namespace ZControl
         #endregion
 
 
+
+        #endregion
+        #region UDP通信
+        void udpConnect()
+        {
+            //创建接收线程
+            Thread RecivceThread = new Thread(RecivceMsg);
+            RecivceThread.IsBackground = true;
+            RecivceThread.Start();
+
+        }
+
+        private void RecivceMsg()
+        {
+            //IPEndPoint local = new IPEndPoint(0xffffffff, 10181);
+            udpClient = new UdpClient(10181);
+
+            IPEndPoint remote = new IPEndPoint(IPAddress.Any, 0);
+            while (true)
+            {
+                try
+                {
+                    byte[] recivcedata = udpClient.Receive(ref remote);
+                    string strMsg = Encoding.UTF8.GetString(recivcedata, 0, recivcedata.Length);
+                    //System.Console.WriteLine("udp:"+string.Format("来自{0}：{1}", remote, strMsg));
+                    Received(null, strMsg);
+                }
+                catch
+                {
+                    break;
+                }
+            }
+        }
+
+        #endregion
         #region MQTT/UDP接受数据处理函数(包含线程处理)
         private void PublishReceivedCallBack(String topic, String message)
         {
@@ -237,7 +329,7 @@ namespace ZControl
                 JObject jObject = JObject.Parse(message);
                 if (jObject.Property("mac") == null) return;
 
-                if(jObject.Property("type") != null
+                if (jObject.Property("type") != null
                    && jObject.Property("type_name") != null
                    && jObject.Property("name") != null
                    && jObject.Property("mac") != null)
@@ -255,9 +347,9 @@ namespace ZControl
                     {
                         case DEVICETYPE.TYPE_TC1:
                             DeviceItemZTC1 deviceItemZTC1 = new DeviceItemZTC1(jObject["name"].ToString(), jObject["mac"].ToString());
-                            listBox1.Items.Insert(0,deviceItemZTC1);
+                            deviceItemZTC1.typeName = jObject["type_name"].ToString();
+                            listBox1.Items.Insert(0, deviceItemZTC1);
                             break;
-
                     }
                     return;
                 }
@@ -265,7 +357,7 @@ namespace ZControl
 
                 String reMac = jObject["mac"].ToString();
 
-                
+
                 for (index = 0; index < listBox1.Items.Count; index++)
                 {
                     //if(index)
@@ -317,38 +409,6 @@ namespace ZControl
         }
         #endregion
         #endregion
-
-        #endregion
-        void udpConnect()
-        {
-            //创建接收线程
-            Thread RecivceThread = new Thread(RecivceMsg);
-            RecivceThread.IsBackground = true;
-            RecivceThread.Start();
-
-        }
-
-        private void RecivceMsg()
-        {
-            //IPEndPoint local = new IPEndPoint(0xffffffff, 10181);
-            udpClient = new UdpClient(10181);
-
-            IPEndPoint remote = new IPEndPoint(IPAddress.Any, 0);
-            while (true)
-            {
-                try
-                {
-                    byte[] recivcedata = udpClient.Receive(ref remote);
-                    string strMsg = Encoding.UTF8.GetString(recivcedata, 0, recivcedata.Length);
-                    //System.Console.WriteLine("udp:"+string.Format("来自{0}：{1}", remote, strMsg));
-                    Received(null, strMsg);
-                }
-                catch
-                {
-                    break;
-                }
-            }
-        }
 
         private void zTC1Received(int index, string message)
         {
@@ -500,7 +560,7 @@ namespace ZControl
 
         private void BtnDeviceListAdd_Click(object sender, EventArgs e)
         {
-            send(null,"{\"cmd\":\"device report\"}");
+            send(null, "{\"cmd\":\"device report\"}");
         }
     }
 }

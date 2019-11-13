@@ -25,6 +25,7 @@ namespace ZControl
 
         public String name;
         public String mac;
+        public String typeName;
 
 
 

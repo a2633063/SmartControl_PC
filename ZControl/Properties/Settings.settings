@@ -14,5 +14,8 @@
     <Setting Name="MQTTPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="Device" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"device":[]}</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
