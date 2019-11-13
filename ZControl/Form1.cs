@@ -28,6 +28,7 @@ namespace ZControl
         {
             InitializeComponent();
 
+            this.Text = this.Text + " v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion;
 
 
 
