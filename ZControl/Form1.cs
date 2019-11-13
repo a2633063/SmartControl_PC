@@ -78,7 +78,7 @@ namespace ZControl
             deviceControl1.MsgPublishEvent += send;
             if (txtMQTTServer.TextLength > 0 && txtMQTTUser.TextLength > 0 && txtMQTTPassword.TextLength > 0)
             {
-                mqttConnect(txtMQTTServer.Text, txtMQTTUser.Text, txtMQTTPassword.Text);
+                mqttConnect(txtMQTTServer.Text, (int)numMQTTPort.Value, txtMQTTUser.Text, txtMQTTPassword.Text);
             }
             udpConnect();
         }
@@ -123,7 +123,7 @@ namespace ZControl
             obj["device"] = jArray;
             string json = obj.ToString();
             Console.WriteLine(json);
-            Properties.Settings.Default.Device=json;
+            Properties.Settings.Default.Device = json;
             Properties.Settings.Default.Save();
         }
 
@@ -206,7 +206,7 @@ namespace ZControl
                 mqttClient.Disconnect();
             }
         }
-        private void mqttConnect(String url, String user, String password)
+        private void mqttConnect(String url, int port, String user, String password)
         {
             try
             {
@@ -459,8 +459,6 @@ namespace ZControl
             #endregion
 
 
-
-
             //if (index == listBox1.SelectedIndex)
             //{
             //    deviceControl1.zTC1RefreshName();
@@ -533,7 +531,7 @@ namespace ZControl
             if (mqttClient != null && mqttClient.IsConnected)
                 mqttDisconnect();
             else
-                mqttConnect(txtMQTTServer.Text, txtMQTTUser.Text, txtMQTTPassword.Text);
+                mqttConnect(txtMQTTServer.Text, (int)numMQTTPort.Value, txtMQTTUser.Text, txtMQTTPassword.Text);
 
 
 
@@ -548,6 +546,7 @@ namespace ZControl
         private void BtnDeviceListDel_Click(object sender, EventArgs e)
         {
             DeviceItem d = (DeviceItem)listBox1.SelectedItem;
+            if (d == null) return;
             if (MessageBox.Show("删除设备:\n" + d.name + " (" + d.mac + ")", "删除设备", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.OK)
             {
                 int index = listBox1.SelectedIndex;
@@ -561,6 +560,34 @@ namespace ZControl
         private void BtnDeviceListAdd_Click(object sender, EventArgs e)
         {
             send(null, "{\"cmd\":\"device report\"}");
+        }
+
+        private void BtnDeviceMQTTSend_Click(object sender, EventArgs e)
+        {
+            DeviceItem d = (DeviceItem)listBox1.SelectedItem;
+            if (d == null) return;
+
+            if (!mqttClient.IsConnected)
+            {
+                MessageBox.Show("MQTT服务器未连接成功,请先确认连接成后,再同步mqtt服务器", "MQTT未连接");
+                return;
+            }
+
+            JArray jArray = new JArray();
+            JObject obj = new JObject();
+            obj["mac"] = d.mac;
+
+            JObject objItem = new JObject();
+            objItem["mqtt_uri"] = txtMQTTServer.Text;
+            objItem["mqtt_port"] = (int)numMQTTPort.Value;
+            objItem["mqtt_user"] = txtMQTTUser.Text;
+            objItem["mqtt_password"] = txtMQTTPassword.Text;
+
+
+            obj["setting"] = objItem;
+            string json = obj.ToString();
+
+            send(null, json);
         }
     }
 }

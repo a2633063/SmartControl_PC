@@ -46,6 +46,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.deviceControl1 = new ZControl.DeviceControl();
+            this.btnDeviceMQTTSend = new System.Windows.Forms.Button();
             this.groupBoxMQTT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).BeginInit();
             this.panelLog.SuspendLayout();
@@ -200,6 +201,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.btnDeviceListDel);
+            this.panel1.Controls.Add(this.btnDeviceMQTTSend);
             this.panel1.Controls.Add(this.btnDeviceListAdd);
             this.panel1.Controls.Add(this.listBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -211,7 +213,7 @@
             // btnDeviceListDel
             // 
             this.btnDeviceListDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeviceListDel.Location = new System.Drawing.Point(129, 359);
+            this.btnDeviceListDel.Location = new System.Drawing.Point(129, 338);
             this.btnDeviceListDel.Name = "btnDeviceListDel";
             this.btnDeviceListDel.Size = new System.Drawing.Size(126, 23);
             this.btnDeviceListDel.TabIndex = 1;
@@ -222,7 +224,7 @@
             // btnDeviceListAdd
             // 
             this.btnDeviceListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeviceListAdd.Location = new System.Drawing.Point(4, 359);
+            this.btnDeviceListAdd.Location = new System.Drawing.Point(3, 338);
             this.btnDeviceListAdd.Name = "btnDeviceListAdd";
             this.btnDeviceListAdd.Size = new System.Drawing.Size(126, 23);
             this.btnDeviceListAdd.TabIndex = 1;
@@ -239,7 +241,7 @@
             this.listBox1.ItemHeight = 20;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(258, 358);
+            this.listBox1.Size = new System.Drawing.Size(258, 338);
             this.listBox1.TabIndex = 0;
             this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox1_DrawItem);
             this.listBox1.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.ListBox1_MeasureItem);
@@ -265,6 +267,17 @@
             this.deviceControl1.Name = "deviceControl1";
             this.deviceControl1.Size = new System.Drawing.Size(312, 355);
             this.deviceControl1.TabIndex = 0;
+            // 
+            // btnDeviceMQTTSend
+            // 
+            this.btnDeviceMQTTSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeviceMQTTSend.Location = new System.Drawing.Point(3, 359);
+            this.btnDeviceMQTTSend.Name = "btnDeviceMQTTSend";
+            this.btnDeviceMQTTSend.Size = new System.Drawing.Size(126, 23);
+            this.btnDeviceMQTTSend.TabIndex = 1;
+            this.btnDeviceMQTTSend.Text = "同步MQTT服务器";
+            this.btnDeviceMQTTSend.UseVisualStyleBackColor = true;
+            this.btnDeviceMQTTSend.Click += new System.EventHandler(this.BtnDeviceMQTTSend_Click);
             // 
             // Form1
             // 
@@ -308,6 +321,7 @@
         private System.Windows.Forms.Button btnDeviceListAdd;
         private System.Windows.Forms.Panel panel2;
         private DeviceControl deviceControl1;
+        private System.Windows.Forms.Button btnDeviceMQTTSend;
     }
 }
 
