@@ -212,8 +212,8 @@ namespace ZControl
             try
             {
                 //创建客户端实例
-                mqttClient = new MqttClient(url);
-
+                mqttClient = new MqttClient(url,port,false,null,null, MqttSslProtocols.None);
+               
                 mqttClient.MqttMsgPublishReceived += MqttMsgPublishReceived;
                 mqttClient.ConnectionClosed += ConnectionClosed;
                 mqttClient.MqttMsgUnsubscribed += MqttMsgUnsubscribed;
@@ -229,24 +229,12 @@ namespace ZControl
                 MQTTConnectInit(true);
                 Log("MQTT服务器已连接");
 
-                mqttClient.Subscribe(new String[] { "device/ztc1/d0bae463184d/sensor" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-                mqttClient.Subscribe(new String[] { "device/ztc1/d0bae463184d/state" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                mqttClient.Subscribe(new String[] { "device/ztc1/+/sensor" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                mqttClient.Subscribe(new String[] { "device/ztc1/+/state" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
-                String temp = "asdf";
-                mqttClient.Publish("sensor/temp", Encoding.UTF8.GetBytes(temp));
+                //String temp = "asdf";
+                //mqttClient.Publish("sensor/temp", Encoding.UTF8.GetBytes(temp));
 
-
-
-
-                //client = new MqttClient(IPAddress.Parse(ip), Convert.ToInt32(port), false, null);
-
-                // admin和password是之前在apache apollo中设置的用户名和密码
-                //byte code = client.Connect("123123123","z","a2633063"); 
-                //client.Connect(clientId, "admin", "password", false, 0x01, false, null, null, true, 60);
-                //buttonLink.Enabled = false;
-                //btnLose.Enabled = true;
-                //textBoxLS.ForeColor = Color.LimeGreen;
-                //textBoxLS.Text = "已连接";
             }
             catch (Exception ee)
             {
@@ -423,6 +411,12 @@ namespace ZControl
                 device.name = jsonObject["name"].ToString();
                 if (index == listBox1.SelectedIndex) deviceControl1.zTC1RefreshName();
                 listBox1.Refresh(); //更新列表里的名称/mac地址
+            }
+
+            if (jsonObject.Property("lock") != null)
+            {
+                device.zTC1Lock = (bool)jsonObject["lock"];
+                if (index == listBox1.SelectedIndex) deviceControl1.zTC1RefreshLock();
             }
             if (jsonObject.Property("power") != null)
             {

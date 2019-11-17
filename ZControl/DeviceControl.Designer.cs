@@ -33,6 +33,7 @@
             this.panelTitle = new System.Windows.Forms.Panel();
             this.labZTC1Switch0Name = new System.Windows.Forms.Label();
             this.panelZTC1 = new System.Windows.Forms.Panel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.labelZTC1TotalTime = new System.Windows.Forms.Label();
             this.picZTC1SwitchAll = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,7 +50,7 @@
             this.labZTC1Switch3Name = new System.Windows.Forms.Label();
             this.labZTC1Switch2Name = new System.Windows.Forms.Label();
             this.labZTC1Switch1Name = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.labLock = new System.Windows.Forms.LinkLabel();
             this.panelTitle.SuspendLayout();
             this.panelZTC1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZTC1SwitchAll)).BeginInit();
@@ -109,6 +110,7 @@
             // panelZTC1
             // 
             this.panelZTC1.BackColor = System.Drawing.Color.Transparent;
+            this.panelZTC1.Controls.Add(this.labLock);
             this.panelZTC1.Controls.Add(this.linkLabel1);
             this.panelZTC1.Controls.Add(this.labelZTC1TotalTime);
             this.panelZTC1.Controls.Add(this.picZTC1SwitchAll);
@@ -132,6 +134,17 @@
             this.panelZTC1.Name = "panelZTC1";
             this.panelZTC1.Size = new System.Drawing.Size(310, 353);
             this.panelZTC1.TabIndex = 0;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(39, 299);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(77, 12);
+            this.linkLabel1.TabIndex = 24;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "更新获取状态";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // labelZTC1TotalTime
             // 
@@ -325,16 +338,13 @@
             this.labZTC1Switch1Name.Text = "插座2";
             this.labZTC1Switch1Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // linkLabel1
+            // labLock
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(39, 299);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(77, 12);
-            this.linkLabel1.TabIndex = 24;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "更新获取状态";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
+            this.labLock.Location = new System.Drawing.Point(256, 58);
+            this.labLock.Name = "labLock";
+            this.labLock.Size = new System.Drawing.Size(54, 14);
+            this.labLock.TabIndex = 25;
+            this.labLock.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // DeviceControl
             // 
@@ -386,5 +396,6 @@
         private System.Windows.Forms.PictureBox picZTC1Switch3;
         private System.Windows.Forms.Label labelZTC1TotalTime;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel labLock;
     }
 }

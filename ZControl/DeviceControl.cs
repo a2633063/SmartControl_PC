@@ -31,6 +31,7 @@ namespace ZControl
                 labelZTC1Power.Text = "----";
                 labelZTC1TotalTime.Text = "";
                 labelTitle.Text = "";
+                labLock.Text = "";
                 labelMac.Text = "";
                 for (int i = 0; i < (int)DEVICETYPE.TYPE_TOTAL; i++)
                     deviceTypeUIChoise[i].Visible = false;
@@ -131,6 +132,7 @@ namespace ZControl
         {
             zTC1RefreshName();
             zTC1RefreshMac();
+            zTC1RefreshLock();
             zTC1RefreshPower();
             zTC1RefreshTotalTime();
             for (int i = 0; i < picZTC1SwitchPic.Count(); i++)
@@ -198,6 +200,16 @@ namespace ZControl
         {
             labelMac.Text = device.mac;
         }
+        public void zTC1RefreshLock()
+        {
+            if (((DeviceItemZTC1)device).zTC1Lock)
+            {
+                labLock.Enabled = false;
+                labLock.Text = "已激活"; }
+            else {labLock.Text = "未激活";
+                labLock.Enabled = true;
+             }
+        }
         private void PicZTC1Switch_Click(object sender, EventArgs e)
         {
             PictureBox zTC1SwitchPic = (PictureBox)sender;
@@ -241,7 +253,7 @@ namespace ZControl
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (MsgPublishEvent != null) MsgPublishEvent("device/ztc1/" + device.mac + "/set", "{\"mac\": \"" + device.mac + "\",\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}{\"mac\": \"d0bae4618552\",\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}{\"mac\": \"d0bae463184d\",\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}"); 
+            if (MsgPublishEvent != null) MsgPublishEvent("device/ztc1/" + device.mac + "/set", "{\"mac\": \"" + device.mac + "\",\"lock\":null,\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}");
         }
     }
 }
