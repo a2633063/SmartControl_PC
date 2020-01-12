@@ -52,6 +52,8 @@
             this.labZTC1Switch1Name = new System.Windows.Forms.Label();
             this.labZTC1Switch0Name = new System.Windows.Forms.Label();
             this.panelZDC1 = new System.Windows.Forms.Panel();
+            this.labelZDC1Current = new System.Windows.Forms.Label();
+            this.labelZDC1Voltage = new System.Windows.Forms.Label();
             this.RegetZDC1 = new System.Windows.Forms.LinkLabel();
             this.labelZDC1TotalTime = new System.Windows.Forms.Label();
             this.labelZDC1Power = new System.Windows.Forms.Label();
@@ -64,8 +66,12 @@
             this.labZDC1Switch2Name = new System.Windows.Forms.Label();
             this.labZDC1Switch1Name = new System.Windows.Forms.Label();
             this.labZDC1Switch0Name = new System.Windows.Forms.Label();
-            this.labelZDC1Voltage = new System.Windows.Forms.Label();
-            this.labelZDC1Current = new System.Windows.Forms.Label();
+            this.panelZDC1WifiSet = new System.Windows.Forms.Panel();
+            this.txtZDC1Wifi = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtZDC1WifiPassword = new System.Windows.Forms.TextBox();
+            this.btnZDC1Wifi = new System.Windows.Forms.Button();
             this.panelTitle.SuspendLayout();
             this.panelZTC1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZTC1SwitchAll)).BeginInit();
@@ -80,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch3)).BeginInit();
+            this.panelZDC1WifiSet.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelTitle
@@ -202,9 +209,9 @@
             // labelZTC1Power
             // 
             this.labelZTC1Power.Font = new System.Drawing.Font("宋体", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelZTC1Power.Location = new System.Drawing.Point(145, 88);
+            this.labelZTC1Power.Location = new System.Drawing.Point(135, 88);
             this.labelZTC1Power.Name = "labelZTC1Power";
-            this.labelZTC1Power.Size = new System.Drawing.Size(124, 23);
+            this.labelZTC1Power.Size = new System.Drawing.Size(152, 23);
             this.labelZTC1Power.TabIndex = 20;
             this.labelZTC1Power.Text = "----";
             this.labelZTC1Power.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -212,7 +219,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(181, 70);
+            this.label1.Location = new System.Drawing.Point(185, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 19;
@@ -371,6 +378,7 @@
             // panelZDC1
             // 
             this.panelZDC1.BackColor = System.Drawing.Color.Transparent;
+            this.panelZDC1.Controls.Add(this.panelZDC1WifiSet);
             this.panelZDC1.Controls.Add(this.labelZDC1Current);
             this.panelZDC1.Controls.Add(this.labelZDC1Voltage);
             this.panelZDC1.Controls.Add(this.RegetZDC1);
@@ -390,19 +398,40 @@
             this.panelZDC1.Size = new System.Drawing.Size(310, 353);
             this.panelZDC1.TabIndex = 27;
             // 
+            // labelZDC1Current
+            // 
+            this.labelZDC1Current.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelZDC1Current.Location = new System.Drawing.Point(203, 91);
+            this.labelZDC1Current.Name = "labelZDC1Current";
+            this.labelZDC1Current.Size = new System.Drawing.Size(87, 23);
+            this.labelZDC1Current.TabIndex = 26;
+            this.labelZDC1Current.Text = "----";
+            this.labelZDC1Current.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelZDC1Voltage
+            // 
+            this.labelZDC1Voltage.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelZDC1Voltage.Location = new System.Drawing.Point(199, 71);
+            this.labelZDC1Voltage.Name = "labelZDC1Voltage";
+            this.labelZDC1Voltage.Size = new System.Drawing.Size(94, 23);
+            this.labelZDC1Voltage.TabIndex = 25;
+            this.labelZDC1Voltage.Text = "----";
+            this.labelZDC1Voltage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // RegetZDC1
             // 
             this.RegetZDC1.AutoSize = true;
-            this.RegetZDC1.Location = new System.Drawing.Point(39, 271);
+            this.RegetZDC1.Location = new System.Drawing.Point(36, 226);
             this.RegetZDC1.Name = "RegetZDC1";
             this.RegetZDC1.Size = new System.Drawing.Size(77, 12);
             this.RegetZDC1.TabIndex = 24;
             this.RegetZDC1.TabStop = true;
             this.RegetZDC1.Text = "更新获取状态";
+            this.RegetZDC1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RegetZDC1_LinkClicked);
             // 
             // labelZDC1TotalTime
             // 
-            this.labelZDC1TotalTime.Location = new System.Drawing.Point(39, 253);
+            this.labelZDC1TotalTime.Location = new System.Drawing.Point(36, 208);
             this.labelZDC1TotalTime.Name = "labelZDC1TotalTime";
             this.labelZDC1TotalTime.Size = new System.Drawing.Size(238, 16);
             this.labelZDC1TotalTime.TabIndex = 23;
@@ -411,9 +440,9 @@
             // labelZDC1Power
             // 
             this.labelZDC1Power.Font = new System.Drawing.Font("宋体", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelZDC1Power.Location = new System.Drawing.Point(118, 85);
+            this.labelZDC1Power.Location = new System.Drawing.Point(110, 83);
             this.labelZDC1Power.Name = "labelZDC1Power";
-            this.labelZDC1Power.Size = new System.Drawing.Size(74, 23);
+            this.labelZDC1Power.Size = new System.Drawing.Size(93, 23);
             this.labelZDC1Power.TabIndex = 20;
             this.labelZDC1Power.Text = "----";
             this.labelZDC1Power.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -421,7 +450,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(129, 71);
+            this.label6.Location = new System.Drawing.Point(130, 71);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 19;
@@ -527,25 +556,59 @@
             this.labZDC1Switch0Name.Text = "插座1";
             this.labZDC1Switch0Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelZDC1Voltage
+            // panelZDC1WifiSet
             // 
-            this.labelZDC1Voltage.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelZDC1Voltage.Location = new System.Drawing.Point(209, 71);
-            this.labelZDC1Voltage.Name = "labelZDC1Voltage";
-            this.labelZDC1Voltage.Size = new System.Drawing.Size(74, 23);
-            this.labelZDC1Voltage.TabIndex = 25;
-            this.labelZDC1Voltage.Text = "----";
-            this.labelZDC1Voltage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panelZDC1WifiSet.Controls.Add(this.btnZDC1Wifi);
+            this.panelZDC1WifiSet.Controls.Add(this.txtZDC1WifiPassword);
+            this.panelZDC1WifiSet.Controls.Add(this.label4);
+            this.panelZDC1WifiSet.Controls.Add(this.label2);
+            this.panelZDC1WifiSet.Controls.Add(this.txtZDC1Wifi);
+            this.panelZDC1WifiSet.Location = new System.Drawing.Point(19, 254);
+            this.panelZDC1WifiSet.Name = "panelZDC1WifiSet";
+            this.panelZDC1WifiSet.Size = new System.Drawing.Size(273, 57);
+            this.panelZDC1WifiSet.TabIndex = 27;
             // 
-            // labelZDC1Current
+            // txtZDC1Wifi
             // 
-            this.labelZDC1Current.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelZDC1Current.Location = new System.Drawing.Point(209, 92);
-            this.labelZDC1Current.Name = "labelZDC1Current";
-            this.labelZDC1Current.Size = new System.Drawing.Size(74, 23);
-            this.labelZDC1Current.TabIndex = 26;
-            this.labelZDC1Current.Text = "----";
-            this.labelZDC1Current.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.txtZDC1Wifi.Location = new System.Drawing.Point(65, 1);
+            this.txtZDC1Wifi.Name = "txtZDC1Wifi";
+            this.txtZDC1Wifi.Size = new System.Drawing.Size(151, 21);
+            this.txtZDC1Wifi.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(0, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 12);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "wifi名称:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(0, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 12);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "wifi密码:";
+            // 
+            // txtZDC1WifiPassword
+            // 
+            this.txtZDC1WifiPassword.Location = new System.Drawing.Point(65, 23);
+            this.txtZDC1WifiPassword.Name = "txtZDC1WifiPassword";
+            this.txtZDC1WifiPassword.Size = new System.Drawing.Size(151, 21);
+            this.txtZDC1WifiPassword.TabIndex = 3;
+            // 
+            // btnZDC1Wifi
+            // 
+            this.btnZDC1Wifi.Location = new System.Drawing.Point(223, 4);
+            this.btnZDC1Wifi.Name = "btnZDC1Wifi";
+            this.btnZDC1Wifi.Size = new System.Drawing.Size(47, 39);
+            this.btnZDC1Wifi.TabIndex = 4;
+            this.btnZDC1Wifi.Text = "配网";
+            this.btnZDC1Wifi.UseVisualStyleBackColor = true;
+            this.btnZDC1Wifi.Click += new System.EventHandler(this.BtnZDC1Wifi_Click);
             // 
             // DeviceControl
             // 
@@ -576,6 +639,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch3)).EndInit();
+            this.panelZDC1WifiSet.ResumeLayout(false);
+            this.panelZDC1WifiSet.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -620,5 +685,11 @@
         private System.Windows.Forms.Label labZDC1Switch0Name;
         private System.Windows.Forms.Label labelZDC1Current;
         private System.Windows.Forms.Label labelZDC1Voltage;
+        private System.Windows.Forms.Panel panelZDC1WifiSet;
+        private System.Windows.Forms.Button btnZDC1Wifi;
+        private System.Windows.Forms.TextBox txtZDC1WifiPassword;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtZDC1Wifi;
     }
 }

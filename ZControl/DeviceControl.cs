@@ -21,6 +21,7 @@ namespace ZControl
         private DeviceItem device;
 
         private Boolean autoCheck = true;
+        private Boolean zDC1WifiShow = false;
 
         Panel[] deviceTypeUIChoise = new Panel[(int)DEVICETYPE.TYPE_TOTAL];
         public DeviceItem Device
@@ -65,7 +66,14 @@ namespace ZControl
             get { return autoCheck; }
             set { autoCheck = value; }
         }
+        public bool ZDC1WifiShow
+        {
+            get { return zDC1WifiShow; }
+            set { zDC1WifiShow = value;
+                panelZDC1WifiSet.Visible = ZDC1WifiShow;
 
+            }
+        }
         #endregion
 
         public DeviceControl()
@@ -394,14 +402,25 @@ namespace ZControl
 
         private void RegetZDC1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (MsgPublishEvent != null) MsgPublishEvent("device/zdc1/" + device.mac + "/set", "{\"mac\": \"" + device.mac + "\",\"lock\":null,\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}");
+            if (MsgPublishEvent != null) MsgPublishEvent("device/zdc1/" + device.mac + "/set", "{\"mac\": \"" + device.mac + "\",\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}");
         }
 
 
 
 
 
-        #endregion
 
+        private void BtnZDC1Wifi_Click(object sender, EventArgs e)
+        {
+            if (txtZDC1Wifi.TextLength < 1)
+            {
+                MessageBox.Show("wifi ssid为空,请填写wifi名称!");
+                return; 
+            }
+            if (MsgPublishEvent != null)
+                MsgPublishEvent(null, "{\"mac\": \"" + device.mac + "\",\"setting\":{\"wifi_ssid\":\"" + txtZDC1Wifi .Text+ "\",\"wifi_password\":\"" + txtZDC1WifiPassword.Text + "\"}}");
+
+        }
+        #endregion
     }
 }

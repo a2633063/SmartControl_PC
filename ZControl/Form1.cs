@@ -28,13 +28,14 @@ namespace ZControl
         {
             InitializeComponent();
 
-            this.Text = this.Text + " v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion;
+            //labVersion.Text = "v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion;
+            labVersion.Text = "软件版本 v0.2.0";
 
 
 
             //listBox1.Items.Add(new DeviceItemZTC1("zTC1_184d", "d0bae463184d"));
             //for (int i = 0; i < 1; i++)
-            //    listBox1.Items.Add(new DeviceItemZTC1("zTC1_000" + i, "00000000000" + i));
+               listBox1.Items.Add(new DeviceItemZDC1("zTC1_0000", "000000000000"));
 
 
             //JArray jArray = new JArray();
@@ -658,6 +659,17 @@ namespace ZControl
             string json = obj.ToString();
 
             send(null, json);
+        }
+
+        private void ZDC1热点配网toolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("zDC1 热点模式配网步骤:\r\n" +
+                "1. 排插断电,等待20秒后按住按键上电.上电2秒左右松开按键(按键不要超过5秒)\r\n" +
+                "2. pc连接热点,并断开其他网络.\r\n" +
+                "3. 单击本软件获取局域网按钮,添加新排插\r\n" +
+                "4. 输入要连接的wifi名称及密码,然后点击配对,等待排插连上路由器\r\n" +
+                "5. 恢复pc网络即可","配对方法:");
+            deviceControl1.ZDC1WifiShow = ((ToolStripMenuItem)sender).Checked;
         }
     }
 }
