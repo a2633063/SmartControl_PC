@@ -30,11 +30,17 @@ namespace ZControl
             {
                 labelZTC1Power.Text = "----";
                 labelZTC1TotalTime.Text = "";
+                labelZDC1Power.Text = "----";
+                labelZDC1Current.Text = "----";
                 labelTitle.Text = "";
                 labLock.Text = "";
                 labelMac.Text = "";
+
                 for (int i = 0; i < (int)DEVICETYPE.TYPE_TOTAL; i++)
+                {
+                    deviceTypeUIChoise[i].Dock = DockStyle.None;
                     deviceTypeUIChoise[i].Visible = false;
+                }
 
                 device = value;
                 if (device == null) return;
@@ -44,7 +50,12 @@ namespace ZControl
                 switch (device.type)
                 {
                     case DEVICETYPE.TYPE_TC1:
+                        panelZTC1.Dock = DockStyle.Fill;
                         zTC1RefreshAll();
+                        break;
+                    case DEVICETYPE.TYPE_DC1:
+                        panelZTC1.Dock = DockStyle.Fill;
+                        zDC1RefreshAll();
                         break;
                 }
             }
@@ -63,10 +74,17 @@ namespace ZControl
 
             deviceTypeUIChoise[0] = panelZTC1;
             deviceTypeUIChoise[1] = panelZTC1;
-            deviceTypeUIChoise[2] = panelZTC1;
+            deviceTypeUIChoise[2] = panelZDC1;
             deviceTypeUIChoise[3] = panelZTC1;
             deviceTypeUIChoise[4] = panelZTC1;
+
+            foreach(Panel p in deviceTypeUIChoise)
+            {
+                p.Location = new Point(0, 0);
+            }
+
             zTC1Init();
+            zDC1Init();
         }
 
 
@@ -81,15 +99,15 @@ namespace ZControl
 
 
         #region 开关图片按下效果
-        private void PicZTC1Switch_MouseDown(object sender, MouseEventArgs e)
+        private void PicSwitch_MouseDown(object sender, MouseEventArgs e)
         {
             ((PictureBox)sender).BorderStyle = BorderStyle.Fixed3D;
         }
-        private void PicZTC1Switch_MouseUp(object sender, MouseEventArgs e)
+        private void PicSwitch_MouseUp(object sender, MouseEventArgs e)
         {
             ((PictureBox)sender).BorderStyle = BorderStyle.None;
         }
-        private void PicZTC1Switch_MouseLeave(object sender, EventArgs e)
+        private void PicSwitch_MouseLeave(object sender, EventArgs e)
         {
             ((PictureBox)sender).BorderStyle = BorderStyle.None;
         }  
@@ -119,14 +137,14 @@ namespace ZControl
                 picZTC1SwitchPic[i].Click += PicZTC1Switch_Click;
                 picZTC1SwitchPic[i].Tag = i;
 
-                picZTC1SwitchPic[i].MouseDown += PicZTC1Switch_MouseDown;
-                picZTC1SwitchPic[i].MouseUp += PicZTC1Switch_MouseUp;
-                picZTC1SwitchPic[i].MouseLeave += PicZTC1Switch_MouseLeave;
+                picZTC1SwitchPic[i].MouseDown += PicSwitch_MouseDown;
+                picZTC1SwitchPic[i].MouseUp += PicSwitch_MouseUp;
+                picZTC1SwitchPic[i].MouseLeave += PicSwitch_MouseLeave;
             }
 
-            picZTC1SwitchAll.MouseDown += PicZTC1Switch_MouseDown;
-            picZTC1SwitchAll.MouseUp += PicZTC1Switch_MouseUp;
-            picZTC1SwitchAll.MouseLeave += PicZTC1Switch_MouseLeave;
+            picZTC1SwitchAll.MouseDown += PicSwitch_MouseDown;
+            picZTC1SwitchAll.MouseUp += PicSwitch_MouseUp;
+            picZTC1SwitchAll.MouseLeave += PicSwitch_MouseLeave;
         }
         public void zTC1RefreshAll()
         {
@@ -246,14 +264,144 @@ namespace ZControl
 
         }
 
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (MsgPublishEvent != null) MsgPublishEvent("device/ztc1/" + device.mac + "/set", "{\"mac\": \"" + device.mac + "\",\"lock\":null,\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}");
+        }
+
+
+        #endregion
+
+        #region zDC1部分
+        PictureBox[] picZDC1SwitchPic = new PictureBox[4];
+        Label[] labZDC1SwitchName = new Label[4];
+        void zDC1Init()
+        {
+            picZDC1SwitchPic[0] = picZDC1Switch0;
+            picZDC1SwitchPic[1] = picZDC1Switch1;
+            picZDC1SwitchPic[2] = picZDC1Switch2;
+            picZDC1SwitchPic[3] = picZDC1Switch3;
+
+            labZDC1SwitchName[0] = labZDC1Switch0Name;
+            labZDC1SwitchName[1] = labZDC1Switch1Name;
+            labZDC1SwitchName[2] = labZDC1Switch2Name;
+            labZDC1SwitchName[3] = labZDC1Switch3Name;
+
+            for (int i = 0; i < picZDC1SwitchPic.Count(); i++)
+            {
+                picZDC1SwitchPic[i].Click += PicZDC1Switch_Click;
+                picZDC1SwitchPic[i].Tag = i;
+
+                picZDC1SwitchPic[i].MouseDown += PicSwitch_MouseDown;
+                picZDC1SwitchPic[i].MouseUp += PicSwitch_MouseUp;
+                picZDC1SwitchPic[i].MouseLeave += PicSwitch_MouseLeave;
+            }
+        }
+        public void zDC1RefreshAll()
+        {
+            zDC1RefreshName();
+            zDC1RefreshMac();
+            zDC1RefreshPower();
+            zDC1RefreshTotalTime();
+            for (int i = 0; i < picZDC1SwitchPic.Count(); i++)
+            {
+                zDC1RefreshSwitch(i);
+                zDC1RefreshSwitchName(i);
+            }
+        }
+
+        public void zDC1RefreshSwitch(int x)
+        {
+            picZDC1SwitchPic[x].Image = ((DeviceItemZDC1)device).zDC1Switch[x] ? Properties.Resources.device_open : Properties.Resources.device_close;
+            for (int i = 0; i < picZDC1SwitchPic.Length; i++)
+            {
+                //if (((DeviceItemZDC1)device).zDC1Switch[i])
+                //{
+                //    //picZDC1SwitchAll.Image = Properties.Resources.device_open;
+                //    return;
+                //}
+            }
+            //picZDC1SwitchAll.Image = Properties.Resources.device_close;
+        }
+        public void zDC1RefreshSwitchName(int x)
+        {
+            labZDC1SwitchName[x].Text = ((DeviceItemZDC1)device).zDC1SwitchName[x];
+            labZDC1SwitchName[x].Left = picZDC1SwitchPic[x].Left + picZDC1SwitchPic[x].Width / 2 - labZDC1SwitchName[x].Width / 2;
+        }
+        public void zDC1RefreshTotalTime()
+        {
+            UInt32 time = ((DeviceItemZDC1)device).zDC1TotalTime;
+            if (time > 0)
+            {
+                String str = "";
+                UInt32 days = time / 86400; //天
+                UInt32 hours = ((time % 86400) / 3600); //小时
+                UInt32 minutes = ((time % 3600) / 60); //分
+
+                if (days > 0)   //天
+                {
+                    str += days + "天";
+                }
+                if (hours > 0)   //小时
+                {
+                    str += hours + "小时";
+                }
+                if (minutes > 0)   //分
+                {
+                    str += minutes + "分钟";
+                }
+
+                labelZDC1TotalTime.Text = "已运行时间: " + str;
+            }
+        }
+        public void zDC1RefreshPower()
+        {
+            if (((DeviceItemZDC1)device).zDC1Power != null)
+                labelZDC1Power.Text = ((DeviceItemZDC1)device).zDC1Power + "W";
+        }
+        public void zDC1RefreshVoltage()
+        {
+            if (((DeviceItemZDC1)device).zDC1Power != null)
+                labelZDC1Voltage.Text = ((DeviceItemZDC1)device).zDC1Voltage + "V";
+        }
+        public void zDC1RefreshCurrent()
+        {
+            if (((DeviceItemZDC1)device).zDC1Power != null)
+                labelZDC1Current.Text = ((DeviceItemZDC1)device).zDC1Current + "A";
+        }
+
+        public void zDC1RefreshName()
+        {
+            labelTitle.Text = device.name;
+        }
+        public void zDC1RefreshMac()
+        {
+            labelMac.Text = device.mac;
+        }
+
+        private void PicZDC1Switch_Click(object sender, EventArgs e)
+        {
+            PictureBox zDC1SwitchPic = (PictureBox)sender;
+            int index = (int)zDC1SwitchPic.Tag;
+            if (MsgPublishEvent != null) MsgPublishEvent("device/zdc1/" + device.mac + "/set", "{\"mac\":\"" + device.mac + "\",\"plug_" + index + "\":{\"on\":" + (((DeviceItemZDC1)device).zDC1Switch[index] ? "0" : "1") + "}}");
+            if (autoCheck)
+            {
+                ((DeviceItemZDC1)device).zDC1Switch[index] = !((DeviceItemZDC1)device).zDC1Switch[index];
+                zDC1RefreshSwitch(index);
+            }
+        }
+
+
+        private void RegetZDC1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (MsgPublishEvent != null) MsgPublishEvent("device/zdc1/" + device.mac + "/set", "{\"mac\": \"" + device.mac + "\",\"lock\":null,\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}");
+        }
+
+
 
 
 
         #endregion
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (MsgPublishEvent != null) MsgPublishEvent("device/ztc1/" + device.mac + "/set", "{\"mac\": \"" + device.mac + "\",\"lock\":null,\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_3\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}");
-        }
     }
 }

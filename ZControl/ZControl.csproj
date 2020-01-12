@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceItemZDC1.cs" />
     <Compile Include="DeviceItemZTC1.cs" />
     <Compile Include="DeviceControl.cs">
       <SubType>UserControl</SubType>

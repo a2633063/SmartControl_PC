@@ -212,8 +212,8 @@ namespace ZControl
             try
             {
                 //创建客户端实例
-                mqttClient = new MqttClient(url,port,false,null,null, MqttSslProtocols.None);
-               
+                mqttClient = new MqttClient(url, port, false, null, null, MqttSslProtocols.None);
+
                 mqttClient.MqttMsgPublishReceived += MqttMsgPublishReceived;
                 mqttClient.ConnectionClosed += ConnectionClosed;
                 mqttClient.MqttMsgUnsubscribed += MqttMsgUnsubscribed;
@@ -229,8 +229,12 @@ namespace ZControl
                 MQTTConnectInit(true);
                 Log("MQTT服务器已连接");
 
-                mqttClient.Subscribe(new String[] { "device/ztc1/+/sensor" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-                mqttClient.Subscribe(new String[] { "device/ztc1/+/state" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                mqttClient.Subscribe(new String[] { "device/ztc1/+/sensor" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                mqttClient.Subscribe(new String[] { "device/ztc1/+/state" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+
+
+                mqttClient.Subscribe(new String[] { "device/zdc1/+/sensor" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                mqttClient.Subscribe(new String[] { "device/zdc1/+/state" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
 
                 //String temp = "asdf";
                 //mqttClient.Publish("sensor/temp", Encoding.UTF8.GetBytes(temp));
@@ -339,6 +343,11 @@ namespace ZControl
                             deviceItemZTC1.typeName = jObject["type_name"].ToString();
                             listBox1.Items.Insert(0, deviceItemZTC1);
                             break;
+                        case DEVICETYPE.TYPE_DC1:
+                            DeviceItemZDC1 deviceItemZDC1 = new DeviceItemZDC1(jObject["name"].ToString(), jObject["mac"].ToString());
+                            deviceItemZDC1.typeName = jObject["type_name"].ToString();
+                            listBox1.Items.Insert(0, deviceItemZDC1);
+                            break;
                     }
                     return;
                 }
@@ -363,6 +372,9 @@ namespace ZControl
                 {
                     case DEVICETYPE.TYPE_TC1:
                         zTC1Received(index, message);
+                        break;
+                    case DEVICETYPE.TYPE_DC1:
+                        zDC1Received(index, message);
                         break;
 
                 }
@@ -466,6 +478,69 @@ namespace ZControl
             //        deviceControl1.zTC1RefreshSwitchName(i);
             //    }
             //}
+        }
+        private void zDC1Received(int index, string message)
+        {
+            DeviceItemZDC1 device = (DeviceItemZDC1)listBox1.Items[index];
+            JObject jsonObject = JObject.Parse(message);
+            if (!device.mac.Equals(jsonObject["mac"].ToString())) return;
+
+
+            if (jsonObject.Property("name") != null)
+            {
+                device.name = jsonObject["name"].ToString();
+                if (index == listBox1.SelectedIndex) deviceControl1.zDC1RefreshName();
+                listBox1.Refresh(); //更新列表里的名称/mac地址
+            }
+
+
+            if (jsonObject.Property("power") != null)
+            {
+                device.zDC1Power = jsonObject["power"].ToString();
+                if (index == listBox1.SelectedIndex) deviceControl1.zDC1RefreshPower();
+
+            }
+            if (jsonObject.Property("voltage") != null)
+            {
+                device.zDC1Voltage = jsonObject["voltage"].ToString();
+                if (index == listBox1.SelectedIndex) deviceControl1.zDC1RefreshVoltage();
+
+            }
+            if (jsonObject.Property("current") != null)
+            {
+                device.zDC1Current = jsonObject["current"].ToString();
+                if (index == listBox1.SelectedIndex) deviceControl1.zDC1RefreshCurrent();
+
+            }
+            if (jsonObject.Property("total_time") != null)
+            {
+                device.zDC1TotalTime = (uint)jsonObject["total_time"];
+                if (index == listBox1.SelectedIndex) deviceControl1.zDC1RefreshTotalTime();
+            }
+
+            #region 解析plug
+            bool plugReturnFlag = false;
+            for (int plug_id = 0; plug_id < 6; plug_id++)
+            {
+                if (jsonObject.Property("plug_" + plug_id) == null) continue;
+                plugReturnFlag = true;
+                JObject jsonPlug = (JObject)jsonObject["plug_" + plug_id];
+                if (jsonPlug.Property("on") != null)
+                {
+                    int on = (int)jsonPlug["on"];
+                    device.zDC1Switch[plug_id] = (on != 0);
+                    deviceControl1.zDC1RefreshSwitch(plug_id);
+                }
+                if (jsonPlug.Property("setting") == null) continue;
+                JObject jsonPlugSetting = (JObject)jsonPlug["setting"];
+                if (jsonPlugSetting.Property("name") != null)
+                {
+                    device.zDC1SwitchName[plug_id] = jsonPlugSetting["name"].ToString();
+                    deviceControl1.zDC1RefreshSwitchName(plug_id);
+                }
+            }
+            #endregion
+
         }
 
         #region 设置devicelist Item自定义界面
