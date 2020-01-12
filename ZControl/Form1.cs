@@ -35,7 +35,7 @@ namespace ZControl
 
             //listBox1.Items.Add(new DeviceItemZTC1("zTC1_184d", "d0bae463184d"));
             //for (int i = 0; i < 1; i++)
-               listBox1.Items.Add(new DeviceItemZDC1("zTC1_0000", "000000000000"));
+            //   listBox1.Items.Add(new DeviceItemZDC1("zTC1_0000", "000000000000"));
 
 
             //JArray jArray = new JArray();
@@ -73,7 +73,9 @@ namespace ZControl
 
 
             if (listBox1.Items.Count < 1)
+            {
                 listBox1.Items.Add(new DeviceItemZTC1("zTC1_演示设备", "000000000000"));
+            }
 
             listBox1.SelectedIndex = 0;
             deviceControl1.Device = (DeviceItem)listBox1.SelectedItem;
