@@ -16,7 +16,7 @@
 
 - [ ] [按键伴侣ButtonMate](https://github.com/a2633063/SmartControl_ButtonMate_ESP8266)	直接控制墙壁开关,在不修改墙壁开关的前提下实现智能开关的效果
 - [x] [zTC1_a1](https://github.com/a2633063/zTC1)	      斐讯排插TC1重新开发固件,仅支持a1版本.
-- [ ] [zDC1](https://github.com/a2633063/zDC1_public)		       斐讯排插DC1重新开发固件.
+- [x] [zDC1](https://github.com/a2633063/zDC1_public)		       斐讯排插DC1重新开发固件.
 - [ ] [zA1](https://github.com/a2633063/zA1)		          斐讯空气净化器悟净A1重新开发固件.
 - [ ] [zM1](https://github.com/a2633063/zM1)		         斐讯空气检测仪悟空M1重新开发固件.
 - [ ] RGB灯             设备开发中
