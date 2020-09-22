@@ -83,9 +83,89 @@ namespace ZControl.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap device_item_0 {
+        internal static System.Drawing.Bitmap device_icon_diy {
             get {
-                object obj = ResourceManager.GetObject("device_item_0", resourceCulture);
+                object obj = ResourceManager.GetObject("device_icon_diy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap device_icon_ongoing {
+            get {
+                object obj = ResourceManager.GetObject("device_icon_ongoing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap device_icon_za1 {
+            get {
+                object obj = ResourceManager.GetObject("device_icon_za1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap device_icon_zclock {
+            get {
+                object obj = ResourceManager.GetObject("device_icon_zclock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap device_icon_zdc1 {
+            get {
+                object obj = ResourceManager.GetObject("device_icon_zdc1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap device_icon_zm1 {
+            get {
+                object obj = ResourceManager.GetObject("device_icon_zm1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap device_icon_zmops {
+            get {
+                object obj = ResourceManager.GetObject("device_icon_zmops", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap device_icon_zs7 {
+            get {
+                object obj = ResourceManager.GetObject("device_icon_zs7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap device_icon_ztc1 {
+            get {
+                object obj = ResourceManager.GetObject("device_icon_ztc1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
