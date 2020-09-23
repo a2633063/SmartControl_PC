@@ -60,10 +60,10 @@ namespace ZControl
             {
                 //Received(null, @"{""name"":""zTC1_f003"",""mac"":""d0bae462f002"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
                 //Received(null, @"{""name"":""zTC1_d0bae4642298"",""mac"":""d0bae4642298"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
-                Received(null, @"{""name"":""zM1"",""mac"":""b0f8932234f4"",""type"":4,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
-                Received(null, @"{""name"":""zDC1_35eb"",""mac"":""84f3eb5635eb"",""type"":2,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
-                Received(null, @"{""name"":""zA1"",""mac"":""b0f8932bc47a"",""type"":3,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
-                //listBox1.Items.Add(new DeviceItemZTC1("zTC1_演示设备", "000000000000"));
+                //Received(null, @"{""name"":""zM1"",""mac"":""b0f8932234f4"",""type"":4,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
+                //Received(null, @"{""name"":""zDC1_35eb"",""mac"":""84f3eb5635eb"",""type"":2,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
+                //Received(null, @"{""name"":""zA1"",""mac"":""b0f8932bc47a"",""type"":3,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
+                Received(null, @"{""name"":""演示设备,请手动删除"",""mac"":""000000000000"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.2""}");
             }
 
 
