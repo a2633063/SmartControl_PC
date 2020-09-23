@@ -60,10 +60,9 @@ namespace ZControl
             {
                 //Received(null, @"{""name"":""zTC1_f003"",""mac"":""d0bae462f002"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
                 //Received(null, @"{""name"":""zTC1_d0bae4642298"",""mac"":""d0bae4642298"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
-                Received(null, @"{""name"":""zTC1_0003"",""mac"":""000000000003"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
-                Received(null, @"{""name"":""zTC1_0004"",""mac"":""000000000004"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
-                Received(null, @"{""name"":""zTC1_0005"",""mac"":""000000000005"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
-                Received(null, @"{""name"":""zTC1_0006"",""mac"":""000000000006"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
+                Received(null, @"{""name"":""zM1"",""mac"":""b0f8932234f4"",""type"":4,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
+                Received(null, @"{""name"":""zDC1_35eb"",""mac"":""84f3eb5635eb"",""type"":2,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
+                Received(null, @"{""name"":""zA1"",""mac"":""b0f8932bc47a"",""type"":3,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
                 //listBox1.Items.Add(new DeviceItemZTC1("zTC1_演示设备", "000000000000"));
             }
 
@@ -98,6 +97,16 @@ namespace ZControl
             udpConnect();
 
 
+            int listSeclet = Properties.Settings.Default.Seclect;
+            if (listBox1.Items.Count > listSeclet && listSeclet >= 0)
+            {
+                listBox1.SelectedIndex = listSeclet;
+            }
+            else if (listBox1.Items.Count > 0)
+            {
+                listBox1.SelectedIndex = 0;
+            }
+            else listBox1.SelectedIndex = -1;
 
             #region 设置鼠标悬停提示
             var toolTip1 = new ToolTip();
@@ -105,7 +114,7 @@ namespace ZControl
             toolTip1.InitialDelay = 0;
             toolTip1.ReshowDelay = 0;
             toolTip1.ShowAlways = true;
-            toolTip1.SetToolTip(this.CboIP, "若无法通信,请选择与设备同网段的ip地址"); 
+            toolTip1.SetToolTip(this.CboIP, "若无法通信,请选择与设备同网段的ip地址");
             #endregion
 
         }
@@ -153,6 +162,7 @@ namespace ZControl
             string json = obj.ToString();
             Console.WriteLine(json);
             Properties.Settings.Default.Device = json;
+            Properties.Settings.Default.Seclect = listBox1.SelectedIndex;
             Properties.Settings.Default.Save();
         }
 
@@ -411,36 +421,42 @@ namespace ZControl
                     switch ((DEVICETYPE)(int)jObject["type"])
                     {
                         case DEVICETYPE.TYPE_TC1:
-                            FormZTC1 f = new FormZTC1(jObject["name"].ToString(), jObject["mac"].ToString());
-                            //f.MdiParent = this;
-                            f.TopLevel = false;
-                            f.Dock = DockStyle.Fill;
-                            f.FormBorderStyle = FormBorderStyle.None;
-                            f.MsgPublishEvent += send;
-                            panelDeviceControl.Controls.Add(f);
-                            f.Show();
-
-                            listBox1.Items.Insert(0, f);
-
-                            if (mqttClient != null && mqttClient.IsConnected)
-                            {
-                                String[] t = f.GetRecvMqttTopic();
-                                if (t != null)
-                                {
-                                    byte[] qos = new byte[t.Length];
-                                    for (int i = 0; i < qos.Length; i++) qos[i] = MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE;
-                                    mqttClient.Subscribe(t, qos);
-
-                                    //Log.d(Tag, "subscribe:" + d.getMqttStateTopic());
-                                }
-                            }
-                            f.RefreshStatus();
+                            listBox1.Items.Insert(0, new FormZTC1(jObject["name"].ToString(), jObject["mac"].ToString()));
                             break;
                         case DEVICETYPE.TYPE_DC1:
-                            //DeviceItemZDC1 deviceItemZDC1 = new DeviceItemZDC1(jObject["name"].ToString(), jObject["mac"].ToString());
-                            //listBox1.Items.Insert(0, deviceItemZDC1);
+                            listBox1.Items.Insert(0, new FormZDC1(jObject["name"].ToString(), jObject["mac"].ToString()));
                             break;
+                        case DEVICETYPE.TYPE_A1:
+                            listBox1.Items.Insert(0, new FormZA1(jObject["name"].ToString(), jObject["mac"].ToString()));
+                            break;
+                        case DEVICETYPE.TYPE_M1:
+                            listBox1.Items.Insert(0, new FormZM1(jObject["name"].ToString(), jObject["mac"].ToString()));
+                            break;
+                        default:
+                            return;
                     }
+
+                    FormItem f = (FormItem)listBox1.Items[0];
+                    //f.MdiParent = this;
+                    f.TopLevel = false;
+                    f.Dock = DockStyle.Fill;
+                    f.FormBorderStyle = FormBorderStyle.None;
+                    f.MsgPublishEvent += send;
+                    panelDeviceControl.Controls.Add(f);
+                    f.Show();
+                    if (mqttClient != null && mqttClient.IsConnected)
+                    {
+                        String[] t = f.GetRecvMqttTopic();
+                        if (t != null)
+                        {
+                            byte[] qos = new byte[t.Length];
+                            for (int i = 0; i < qos.Length; i++) qos[i] = MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE;
+                            mqttClient.Subscribe(t, qos);
+
+                            //Log.d(Tag, "subscribe:" + d.getMqttStateTopic());
+                        }
+                    }
+                    f.RefreshStatus();
                     return;
                 }
 

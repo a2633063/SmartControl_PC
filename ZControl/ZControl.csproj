@@ -96,6 +96,24 @@
     <Compile Include="FormDeviceClass\FormItem.Designer.cs">
       <DependentUpon>FormItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDeviceClass\FormZA1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZA1.Designer.cs">
+      <DependentUpon>FormZA1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZDC1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZDC1.Designer.cs">
+      <DependentUpon>FormZDC1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZM1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZM1.Designer.cs">
+      <DependentUpon>FormZM1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormDeviceClass\FormZTC1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +127,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDeviceClass\FormItem.resx">
       <DependentUpon>FormItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDeviceClass\FormZA1.resx">
+      <DependentUpon>FormZA1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDeviceClass\FormZDC1.resx">
+      <DependentUpon>FormZDC1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDeviceClass\FormZM1.resx">
+      <DependentUpon>FormZM1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDeviceClass\FormZTC1.resx">
       <DependentUpon>FormZTC1.cs</DependentUpon>

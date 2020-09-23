@@ -94,5 +94,17 @@ namespace ZControl.Properties {
                 this["IP"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int Seclect {
+            get {
+                return ((int)(this["Seclect"]));
+            }
+            set {
+                this["Seclect"] = value;
+            }
+        }
     }
 }

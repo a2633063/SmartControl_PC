@@ -55,61 +55,7 @@ namespace ZControl.FormDeviceClass
             picZTC1SwitchAll.MouseLeave += PicSwitch_MouseLeave;
 
         }
-
-        #region 开关图片按下效果
-        private void PicSwitch_MouseDown(object sender, MouseEventArgs e)
-        {
-            ((PictureBox)sender).BorderStyle = BorderStyle.Fixed3D;
-        }
-        private void PicSwitch_MouseUp(object sender, MouseEventArgs e)
-        {
-            ((PictureBox)sender).BorderStyle = BorderStyle.None;
-        }
-        private void PicSwitch_MouseLeave(object sender, EventArgs e)
-        {
-            ((PictureBox)sender).BorderStyle = BorderStyle.None;
-        }
-        #endregion
-        private void picZTC1SwitchAll_Click(object sender, EventArgs e)
-        {
-
-            String message = "{\"mac\":\"" + GetMac() + "\",\"plug_0\":{\"on\":1},\"plug_1\":{\"on\":1},\"plug_2\":{\"on\":1},\"plug_3\":{\"on\":1},\"plug_4\":{\"on\":1},\"plug_5\":{\"on\":1}}";
-            bool b = true;
-            for (int i = 0; i < picZTC1SwitchPic.Length; i++)
-            {
-                if (plugSwitch[i])
-                {
-                    b = false;
-                    message = "{\"mac\":\"" + GetMac() + "\",\"plug_0\":{\"on\":0},\"plug_1\":{\"on\":0},\"plug_2\":{\"on\":0},\"plug_3\":{\"on\":0},\"plug_4\":{\"on\":0},\"plug_5\":{\"on\":0}}";
-                    break;
-                }
-            }
-
-            picZTC1SwitchAll.Image = b ? Properties.Resources.device_open : Properties.Resources.device_close;
-
-
-            Send(message);
-        }
-
-        private void PicZTC1Switch_Click(object sender, EventArgs e)
-        {
-            PictureBox zTC1SwitchPic = (PictureBox)sender;
-            int index = (int)zTC1SwitchPic.Tag;
-            Send("{\"mac\":\"" + GetMac() + "\",\"plug_" + index + "\":{\"on\":" + (plugSwitch[index] ? "0" : "1") + "}}");
-
-            plugSwitch[index] = !plugSwitch[index];
-            picZTC1SwitchPic[index].Image = plugSwitch[index] ? Properties.Resources.device_open : Properties.Resources.device_close;
-            for (int i = 0; i < picZTC1SwitchPic.Length; i++)
-            {
-                if (plugSwitch[i])
-                {
-                    picZTC1SwitchAll.Image = Properties.Resources.device_open;
-                    return;
-                }
-            }
-            picZTC1SwitchAll.Image = Properties.Resources.device_close;
-
-        }
+        #region 重写函数
         public override String[] GetRecvMqttTopic()
         {
             String[] topic = new String[3];
@@ -216,6 +162,64 @@ namespace ZControl.FormDeviceClass
                             + "\"plug_4\" : {\"on\" : null,\"setting\":{\"name\":null}},"
                             + "\"plug_5\" : {\"on\" : null,\"setting\":{\"name\":null}}}");
         }
+
+        #endregion
+        #region 开关图片按下效果
+        private void PicSwitch_MouseDown(object sender, MouseEventArgs e)
+        {
+            ((PictureBox)sender).BorderStyle = BorderStyle.Fixed3D;
+        }
+        private void PicSwitch_MouseUp(object sender, MouseEventArgs e)
+        {
+            ((PictureBox)sender).BorderStyle = BorderStyle.None;
+        }
+        private void PicSwitch_MouseLeave(object sender, EventArgs e)
+        {
+            ((PictureBox)sender).BorderStyle = BorderStyle.None;
+        }
+        #endregion
+        #region 控件触发函数
+        private void picZTC1SwitchAll_Click(object sender, EventArgs e)
+        {
+
+            String message = "{\"mac\":\"" + GetMac() + "\",\"plug_0\":{\"on\":1},\"plug_1\":{\"on\":1},\"plug_2\":{\"on\":1},\"plug_3\":{\"on\":1},\"plug_4\":{\"on\":1},\"plug_5\":{\"on\":1}}";
+            bool b = true;
+            for (int i = 0; i < picZTC1SwitchPic.Length; i++)
+            {
+                if (plugSwitch[i])
+                {
+                    b = false;
+                    message = "{\"mac\":\"" + GetMac() + "\",\"plug_0\":{\"on\":0},\"plug_1\":{\"on\":0},\"plug_2\":{\"on\":0},\"plug_3\":{\"on\":0},\"plug_4\":{\"on\":0},\"plug_5\":{\"on\":0}}";
+                    break;
+                }
+            }
+
+            picZTC1SwitchAll.Image = b ? Properties.Resources.device_open : Properties.Resources.device_close;
+
+
+            Send(message);
+        }
+
+        private void PicZTC1Switch_Click(object sender, EventArgs e)
+        {
+            PictureBox zTC1SwitchPic = (PictureBox)sender;
+            int index = (int)zTC1SwitchPic.Tag;
+            Send("{\"mac\":\"" + GetMac() + "\",\"plug_" + index + "\":{\"on\":" + (plugSwitch[index] ? "0" : "1") + "}}");
+
+            plugSwitch[index] = !plugSwitch[index];
+            picZTC1SwitchPic[index].Image = plugSwitch[index] ? Properties.Resources.device_open : Properties.Resources.device_close;
+            for (int i = 0; i < picZTC1SwitchPic.Length; i++)
+            {
+                if (plugSwitch[i])
+                {
+                    picZTC1SwitchAll.Image = Properties.Resources.device_open;
+                    return;
+                }
+            }
+            picZTC1SwitchAll.Image = Properties.Resources.device_close;
+
+        }
+
         private void ZTC1linkRefresh_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             RefreshStatus();
@@ -233,6 +237,7 @@ namespace ZControl.FormDeviceClass
             }
 
             Send("{\"mac\":\"" + GetMac() + "\",\"lock\":\"" + lockStr + "\"}");
-        }
+        } 
+        #endregion
     }
 }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBoxMQTT = new System.Windows.Forms.GroupBox();
-            this.btMQTTConfirm = new System.Windows.Forms.Button();
             this.txtMQTTPassword = new System.Windows.Forms.TextBox();
             this.txtMQTTUser = new System.Windows.Forms.TextBox();
             this.numMQTTPort = new System.Windows.Forms.NumericUpDown();
@@ -59,6 +58,7 @@
             this.CboIP = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.labVersion = new System.Windows.Forms.Label();
+            this.btMQTTConfirm = new System.Windows.Forms.Button();
             this.groupBoxMQTT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).BeginInit();
             this.panelLog.SuspendLayout();
@@ -86,20 +86,6 @@
             this.groupBoxMQTT.TabIndex = 3;
             this.groupBoxMQTT.TabStop = false;
             this.groupBoxMQTT.Text = "MQTT服务器配置";
-            // 
-            // btMQTTConfirm
-            // 
-            this.btMQTTConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btMQTTConfirm.Image = global::ZControl.Properties.Resources.close;
-            this.btMQTTConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btMQTTConfirm.Location = new System.Drawing.Point(518, 9);
-            this.btMQTTConfirm.Name = "btMQTTConfirm";
-            this.btMQTTConfirm.Size = new System.Drawing.Size(54, 31);
-            this.btMQTTConfirm.TabIndex = 8;
-            this.btMQTTConfirm.Text = "连接";
-            this.btMQTTConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btMQTTConfirm.UseVisualStyleBackColor = true;
-            this.btMQTTConfirm.Click += new System.EventHandler(this.BtMQTTConfirm_Click);
             // 
             // txtMQTTPassword
             // 
@@ -317,7 +303,7 @@
             // 退出XToolStripMenuItem
             // 
             this.退出XToolStripMenuItem.Name = "退出XToolStripMenuItem";
-            this.退出XToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.退出XToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.退出XToolStripMenuItem.Text = "退出(&X)";
             // 
             // 工具TToolStripMenuItem
@@ -339,18 +325,18 @@
             // 内容CToolStripMenuItem
             // 
             this.内容CToolStripMenuItem.Name = "内容CToolStripMenuItem";
-            this.内容CToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.内容CToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.内容CToolStripMenuItem.Text = "内容(&C)";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(122, 6);
             // 
             // 关于AToolStripMenuItem
             // 
             this.关于AToolStripMenuItem.Name = "关于AToolStripMenuItem";
-            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.关于AToolStripMenuItem.Text = "关于(&A)...";
             // 
             // panel3
@@ -392,6 +378,20 @@
             this.labVersion.Size = new System.Drawing.Size(101, 12);
             this.labVersion.TabIndex = 9;
             this.labVersion.Text = "软件版本v0.0.0.0";
+            // 
+            // btMQTTConfirm
+            // 
+            this.btMQTTConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btMQTTConfirm.Image = global::ZControl.Properties.Resources.close;
+            this.btMQTTConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btMQTTConfirm.Location = new System.Drawing.Point(518, 9);
+            this.btMQTTConfirm.Name = "btMQTTConfirm";
+            this.btMQTTConfirm.Size = new System.Drawing.Size(54, 31);
+            this.btMQTTConfirm.TabIndex = 8;
+            this.btMQTTConfirm.Text = "连接";
+            this.btMQTTConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btMQTTConfirm.UseVisualStyleBackColor = true;
+            this.btMQTTConfirm.Click += new System.EventHandler(this.BtMQTTConfirm_Click);
             // 
             // Form1
             // 
