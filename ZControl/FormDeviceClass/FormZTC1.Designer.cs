@@ -87,7 +87,7 @@
             this.panelZTC1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelZTC1.Location = new System.Drawing.Point(0, 55);
             this.panelZTC1.Name = "panelZTC1";
-            this.panelZTC1.Size = new System.Drawing.Size(731, 314);
+            this.panelZTC1.Size = new System.Drawing.Size(745, 314);
             this.panelZTC1.TabIndex = 3;
             // 
             // ZTC1linkRefresh
@@ -119,6 +119,7 @@
             this.ZTC1linkHass.TabIndex = 26;
             this.ZTC1linkHass.TabStop = true;
             this.ZTC1linkHass.Text = "hass发现设备";
+            this.ZTC1linkHass.Visible = false;
             // 
             // labLock
             // 
@@ -131,6 +132,7 @@
             this.labLock.Text = "未激活";
             this.labLock.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.labLock.Visible = false;
+            this.labLock.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labLock_LinkClicked);
             // 
             // labelZTC1TotalTime
             // 
@@ -340,7 +342,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 369);
+            this.ClientSize = new System.Drawing.Size(745, 369);
             this.Controls.Add(this.panelZTC1);
             this.Name = "FormZTC1";
             this.Text = "FormZTC1";

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBoxMQTT = new System.Windows.Forms.GroupBox();
+            this.btMQTTConfirm = new System.Windows.Forms.Button();
             this.txtMQTTPassword = new System.Windows.Forms.TextBox();
             this.txtMQTTUser = new System.Windows.Forms.TextBox();
             this.numMQTTPort = new System.Windows.Forms.NumericUpDown();
@@ -41,38 +41,31 @@
             this.panelLog = new System.Windows.Forms.Panel();
             this.LabelLog = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDeviceListAdd = new System.Windows.Forms.Button();
             this.btnDeviceListDel = new System.Windows.Forms.Button();
             this.btnDeviceMQTTSend = new System.Windows.Forms.Button();
-            this.btnDeviceListAdd = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelDeviceControl = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.另存为AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.退出XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.工具TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zDC1工具toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zDC1热点配网toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.内容CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.索引IToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.搜索SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.CboIP = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.labVersion = new System.Windows.Forms.Label();
-            this.btMQTTConfirm = new System.Windows.Forms.Button();
-            this.新建NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.打开OToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.保存SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxMQTT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).BeginInit();
             this.panelLog.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxMQTT
@@ -93,6 +86,20 @@
             this.groupBoxMQTT.TabIndex = 3;
             this.groupBoxMQTT.TabStop = false;
             this.groupBoxMQTT.Text = "MQTT服务器配置";
+            // 
+            // btMQTTConfirm
+            // 
+            this.btMQTTConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btMQTTConfirm.Image = global::ZControl.Properties.Resources.close;
+            this.btMQTTConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btMQTTConfirm.Location = new System.Drawing.Point(518, 9);
+            this.btMQTTConfirm.Name = "btMQTTConfirm";
+            this.btMQTTConfirm.Size = new System.Drawing.Size(54, 31);
+            this.btMQTTConfirm.TabIndex = 8;
+            this.btMQTTConfirm.Text = "连接";
+            this.btMQTTConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btMQTTConfirm.UseVisualStyleBackColor = true;
+            this.btMQTTConfirm.Click += new System.EventHandler(this.BtMQTTConfirm_Click);
             // 
             // txtMQTTPassword
             // 
@@ -189,6 +196,7 @@
             // panelLog
             // 
             this.panelLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLog.Controls.Add(this.labVersion);
             this.panelLog.Controls.Add(this.LabelLog);
             this.panelLog.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelLog.Location = new System.Drawing.Point(0, 425);
@@ -217,6 +225,17 @@
             this.panel1.Size = new System.Drawing.Size(258, 357);
             this.panel1.TabIndex = 5;
             // 
+            // btnDeviceListAdd
+            // 
+            this.btnDeviceListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeviceListAdd.Location = new System.Drawing.Point(3, 313);
+            this.btnDeviceListAdd.Name = "btnDeviceListAdd";
+            this.btnDeviceListAdd.Size = new System.Drawing.Size(126, 23);
+            this.btnDeviceListAdd.TabIndex = 1;
+            this.btnDeviceListAdd.Text = "获取局域网设备";
+            this.btnDeviceListAdd.UseVisualStyleBackColor = true;
+            this.btnDeviceListAdd.Click += new System.EventHandler(this.BtnDeviceListAdd_Click);
+            // 
             // btnDeviceListDel
             // 
             this.btnDeviceListDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -238,17 +257,6 @@
             this.btnDeviceMQTTSend.Text = "同步MQTT服务器";
             this.btnDeviceMQTTSend.UseVisualStyleBackColor = true;
             this.btnDeviceMQTTSend.Click += new System.EventHandler(this.BtnDeviceMQTTSend_Click);
-            // 
-            // btnDeviceListAdd
-            // 
-            this.btnDeviceListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeviceListAdd.Location = new System.Drawing.Point(3, 313);
-            this.btnDeviceListAdd.Name = "btnDeviceListAdd";
-            this.btnDeviceListAdd.Size = new System.Drawing.Size(126, 23);
-            this.btnDeviceListAdd.TabIndex = 1;
-            this.btnDeviceListAdd.Text = "获取局域网设备";
-            this.btnDeviceListAdd.UseVisualStyleBackColor = true;
-            this.btnDeviceListAdd.Click += new System.EventHandler(this.BtnDeviceListAdd_Click);
             // 
             // listBox1
             // 
@@ -276,7 +284,8 @@
             // 
             // panelDeviceControl
             // 
-            this.panelDeviceControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panelDeviceControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelDeviceControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelDeviceControl.Location = new System.Drawing.Point(5, 3);
@@ -292,6 +301,7 @@
             this.帮助HToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.menuStrip1.Size = new System.Drawing.Size(578, 25);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
@@ -299,69 +309,27 @@
             // 文件FToolStripMenuItem
             // 
             this.文件FToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.新建NToolStripMenuItem,
-            this.打开OToolStripMenuItem,
-            this.toolStripSeparator,
-            this.保存SToolStripMenuItem,
-            this.另存为AToolStripMenuItem,
-            this.toolStripSeparator1,
             this.退出XToolStripMenuItem});
             this.文件FToolStripMenuItem.Name = "文件FToolStripMenuItem";
             this.文件FToolStripMenuItem.Size = new System.Drawing.Size(58, 21);
             this.文件FToolStripMenuItem.Text = "文件(&F)";
             // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(162, 6);
-            // 
-            // 另存为AToolStripMenuItem
-            // 
-            this.另存为AToolStripMenuItem.Name = "另存为AToolStripMenuItem";
-            this.另存为AToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.另存为AToolStripMenuItem.Text = "另存为(&A)";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(162, 6);
-            // 
             // 退出XToolStripMenuItem
             // 
             this.退出XToolStripMenuItem.Name = "退出XToolStripMenuItem";
-            this.退出XToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.退出XToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.退出XToolStripMenuItem.Text = "退出(&X)";
             // 
             // 工具TToolStripMenuItem
             // 
-            this.工具TToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zDC1工具toolStripMenuItem});
             this.工具TToolStripMenuItem.Name = "工具TToolStripMenuItem";
             this.工具TToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
             this.工具TToolStripMenuItem.Text = "工具(&T)";
-            // 
-            // zDC1工具toolStripMenuItem
-            // 
-            this.zDC1工具toolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zDC1热点配网toolStripMenuItem});
-            this.zDC1工具toolStripMenuItem.Name = "zDC1工具toolStripMenuItem";
-            this.zDC1工具toolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.zDC1工具toolStripMenuItem.Text = "zDC1工具";
-            // 
-            // zDC1热点配网toolStripMenuItem
-            // 
-            this.zDC1热点配网toolStripMenuItem.CheckOnClick = true;
-            this.zDC1热点配网toolStripMenuItem.Name = "zDC1热点配网toolStripMenuItem";
-            this.zDC1热点配网toolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.zDC1热点配网toolStripMenuItem.Text = "zDC1热点配网模式";
-            this.zDC1热点配网toolStripMenuItem.Click += new System.EventHandler(this.ZDC1热点配网toolStripMenuItem_Click);
             // 
             // 帮助HToolStripMenuItem
             // 
             this.帮助HToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.内容CToolStripMenuItem,
-            this.索引IToolStripMenuItem,
-            this.搜索SToolStripMenuItem,
             this.toolStripSeparator5,
             this.关于AToolStripMenuItem});
             this.帮助HToolStripMenuItem.Name = "帮助HToolStripMenuItem";
@@ -371,90 +339,66 @@
             // 内容CToolStripMenuItem
             // 
             this.内容CToolStripMenuItem.Name = "内容CToolStripMenuItem";
-            this.内容CToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.内容CToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.内容CToolStripMenuItem.Text = "内容(&C)";
-            // 
-            // 索引IToolStripMenuItem
-            // 
-            this.索引IToolStripMenuItem.Name = "索引IToolStripMenuItem";
-            this.索引IToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.索引IToolStripMenuItem.Text = "索引(&I)";
-            // 
-            // 搜索SToolStripMenuItem
-            // 
-            this.搜索SToolStripMenuItem.Name = "搜索SToolStripMenuItem";
-            this.搜索SToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.搜索SToolStripMenuItem.Text = "搜索(&S)";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(122, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // 关于AToolStripMenuItem
             // 
             this.关于AToolStripMenuItem.Name = "关于AToolStripMenuItem";
-            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.关于AToolStripMenuItem.Text = "关于(&A)...";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.CboIP);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Location = new System.Drawing.Point(351, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(222, 23);
+            this.panel3.TabIndex = 10;
+            // 
+            // CboIP
+            // 
+            this.CboIP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboIP.Location = new System.Drawing.Point(100, 2);
+            this.CboIP.Name = "CboIP";
+            this.CboIP.Size = new System.Drawing.Size(121, 20);
+            this.CboIP.TabIndex = 1;
+            this.CboIP.Text = global::ZControl.Properties.Settings.Default.IP;
+            this.CboIP.SelectedIndexChanged += new System.EventHandler(this.CboIP_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(95, 12);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "局域网网卡选择:";
             // 
             // labVersion
             // 
+            this.labVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labVersion.AutoSize = true;
-            this.labVersion.BackColor = System.Drawing.Color.White;
+            this.labVersion.BackColor = System.Drawing.SystemColors.Control;
             this.labVersion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.labVersion.Location = new System.Drawing.Point(472, 10);
+            this.labVersion.Location = new System.Drawing.Point(470, 5);
             this.labVersion.Name = "labVersion";
             this.labVersion.Size = new System.Drawing.Size(101, 12);
-            this.labVersion.TabIndex = 8;
+            this.labVersion.TabIndex = 9;
             this.labVersion.Text = "软件版本v0.0.0.0";
-            // 
-            // btMQTTConfirm
-            // 
-            this.btMQTTConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btMQTTConfirm.Image = global::ZControl.Properties.Resources.close;
-            this.btMQTTConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btMQTTConfirm.Location = new System.Drawing.Point(518, 9);
-            this.btMQTTConfirm.Name = "btMQTTConfirm";
-            this.btMQTTConfirm.Size = new System.Drawing.Size(54, 31);
-            this.btMQTTConfirm.TabIndex = 8;
-            this.btMQTTConfirm.Text = "连接";
-            this.btMQTTConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btMQTTConfirm.UseVisualStyleBackColor = true;
-            this.btMQTTConfirm.Click += new System.EventHandler(this.BtMQTTConfirm_Click);
-            // 
-            // 新建NToolStripMenuItem
-            // 
-            this.新建NToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("新建NToolStripMenuItem.Image")));
-            this.新建NToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.新建NToolStripMenuItem.Name = "新建NToolStripMenuItem";
-            this.新建NToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.新建NToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.新建NToolStripMenuItem.Text = "新建(&N)";
-            // 
-            // 打开OToolStripMenuItem
-            // 
-            this.打开OToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("打开OToolStripMenuItem.Image")));
-            this.打开OToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.打开OToolStripMenuItem.Name = "打开OToolStripMenuItem";
-            this.打开OToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.打开OToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.打开OToolStripMenuItem.Text = "打开(&O)";
-            // 
-            // 保存SToolStripMenuItem
-            // 
-            this.保存SToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("保存SToolStripMenuItem.Image")));
-            this.保存SToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.保存SToolStripMenuItem.Name = "保存SToolStripMenuItem";
-            this.保存SToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.保存SToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.保存SToolStripMenuItem.Text = "保存(&S)";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 450);
-            this.Controls.Add(this.labVersion);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelLog);
@@ -474,6 +418,8 @@
             this.panel2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -500,24 +446,17 @@
         private System.Windows.Forms.Button btnDeviceMQTTSend;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 文件FToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 新建NToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 打开OToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem 保存SToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 另存为AToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem 退出XToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 工具TToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助HToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 内容CToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 索引IToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 搜索SToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem zDC1工具toolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem zDC1热点配网toolStripMenuItem;
-        private System.Windows.Forms.Label labVersion;
         private System.Windows.Forms.Panel panelDeviceControl;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ComboBox CboIP;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labVersion;
     }
 }
 

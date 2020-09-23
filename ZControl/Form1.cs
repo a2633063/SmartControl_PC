@@ -33,29 +33,9 @@ namespace ZControl
 
             //labVersion.Text = "v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion;
             labVersion.Text = "软件版本 v0.2.0";
+            this.MinimumSize = this.Size;
 
-
-
-            //listBox1.Items.Add(new DeviceItemZTC1("zTC1_184d", "d0bae463184d"));
-            //for (int i = 0; i < 1; i++)
-            //   listBox1.Items.Add(new DeviceItemZDC1("zTC1_0000", "000000000000"));
-
-
-            //JArray jArray = new JArray();
-            //JObject obj = new JObject();
-            //foreach (DeviceItem d in listBox1.Items)
-            //{
-            //    JObject objItem = new JObject();
-            //    objItem["mac"] = d.getMac();
-            //    objItem["name"] = d.name;
-            //    objItem["type"] = (int)d.type;
-            //    objItem["type_name"] = d.typeName;
-            //    jArray.Add(objItem);
-            //}
-            //obj["device"] = jArray;
-            //string json = obj.ToString();
-            //Console.WriteLine(json);
-
+            #region 读取设备
             try
             {
                 string json = Properties.Settings.Default.Device;
@@ -73,6 +53,7 @@ namespace ZControl
                 listBox1.Items.Clear();
                 //throw;
             }
+            #endregion
 
 
             if (listBox1.Items.Count < 1)
@@ -86,6 +67,27 @@ namespace ZControl
                 //listBox1.Items.Add(new DeviceItemZTC1("zTC1_演示设备", "000000000000"));
             }
 
+
+            #region 获取本机所有ip地址
+            string hostName = Dns.GetHostName();                    //获取主机名称  
+            IPAddress[] addresses = Dns.GetHostAddresses(hostName); //解析主机IP地址  
+
+            List<string> IPList = new List<string>();
+
+
+            for (int i = 0; i < addresses.Length; i++)
+            {
+                if (addresses[i].AddressFamily.ToString().Equals("InterNetwork"))
+                    CboIP.Items.Add(addresses[i].ToString());
+            }
+            CboIP.Items.Add("127.0.0.1");
+            CboIP.Items.Add("255.255.255.255");
+            if (CboIP.Text.Length < 1)
+                CboIP.Text = "255.255.255.255";
+
+
+            #endregion
+
             //listBox1.SelectedIndex = 0;
             //deviceControl1.Device = (DeviceItem)listBox1.SelectedItem;
             //deviceControl1.MsgPublishEvent += send;
@@ -94,22 +96,36 @@ namespace ZControl
                 mqttConnect(txtMQTTServer.Text, (int)numMQTTPort.Value, txtMQTTUser.Text, txtMQTTPassword.Text);
             }
             udpConnect();
+
+
+
+            #region 设置鼠标悬停提示
+            var toolTip1 = new ToolTip();
+            toolTip1.AutoPopDelay = 10000;
+            toolTip1.InitialDelay = 0;
+            toolTip1.ReshowDelay = 0;
+            toolTip1.ShowAlways = true;
+            toolTip1.SetToolTip(this.CboIP, "若无法通信,请选择与设备同网段的ip地址"); 
+            #endregion
+
         }
 
         private void send(string topic, string message)
         {
             if (mqttClient == null || !mqttClient.IsConnected || topic == null)
             {
+                if (udpClient != null)
+                {
+                    IPEndPoint ipendpoint = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 10182);
+                    byte[] data = Encoding.Default.GetBytes(message);
+                    udpClient.Send(data, data.Length, ipendpoint);
+                }
+                //UdpClient udpclient = new UdpClient();
                 //IPEndPoint ipendpoint = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 10182);
+
                 //byte[] data = Encoding.Default.GetBytes(message);
-                //udpClient.Send(data, data.Length, ipendpoint);
-
-                UdpClient udpclient = new UdpClient();
-                IPEndPoint ipendpoint = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 10182);
-
-                byte[] data = Encoding.Default.GetBytes(message);
-                udpclient.Send(data, data.Length, ipendpoint);
-                udpclient.Close();
+                //udpclient.Send(data, data.Length, ipendpoint);
+                //udpclient.Close();
             }
             else
             {
@@ -140,7 +156,8 @@ namespace ZControl
             Properties.Settings.Default.Save();
         }
 
-        #region 更新Log显示内容(包含多线程处理)
+        #region 多线程处理   更新Log显示内容/读取ip当前选择项目
+        #region 更新Log显示内容
         delegate void SetTextCallBack(string text);
         private void Log(string text)
         {
@@ -161,6 +178,25 @@ namespace ZControl
                 this.LabelLog.Text = text;
             }
         }
+
+        #endregion
+        #region 读取ComboBox当前选择项目
+        public delegate string commbdelegate(ComboBox cb);
+        public string commb(ComboBox cb)
+        {
+            if (cb.InvokeRequired)
+            {
+                commbdelegate dt = new commbdelegate(commb);
+                IAsyncResult ia = cb.BeginInvoke(dt, new object[] { cb });
+                return (string)cb.EndInvoke(ia);  //这里需要利用EndInvoke来获取返回值
+            }
+            else
+            {
+                return cb.Text;
+            }
+        }
+
+        #endregion
         #endregion
         #region MQTT通信
 
@@ -250,7 +286,7 @@ namespace ZControl
 
                 foreach (FormItem d in listBox1.Items)
                 {
-                    String[] topic= d.GetRecvMqttTopic();
+                    String[] topic = d.GetRecvMqttTopic();
                     if (topic != null)
                     {
                         byte[] qos = new byte[topic.Length];
@@ -286,7 +322,7 @@ namespace ZControl
         {
             System.Console.WriteLine("ConnectionClosed");
             MQTTConnectInit(false);
-            Log("MQTT服务器已断开");
+            Log("MQTT服务器已断开,当前使用局域网udp通信");
         }
         void MqttMsgUnsubscribed(object sender, MqttMsgUnsubscribedEventArgs e)
         {
@@ -317,23 +353,33 @@ namespace ZControl
 
         private void RecivceMsg()
         {
-            //IPEndPoint local = new IPEndPoint(0xffffffff, 10181);
-            udpClient = new UdpClient(10181);
 
             IPEndPoint remote = new IPEndPoint(IPAddress.Any, 0);
             while (true)
             {
+                if (udpClient == null)
+                {
+                    String ip = commb(CboIP);
+                    if (ip.Equals("255.255.255.255")) ip = "0.0.0.0";
+                    IPEndPoint local = new IPEndPoint(IPAddress.Parse(ip), 10181);
+                    udpClient = new UdpClient(local);
+                    //udpClient = new UdpClient(10181);
+                }
+                System.Console.WriteLine("RecivceMsg1");
                 try
                 {
                     byte[] recivcedata = udpClient.Receive(ref remote);
+                    System.Console.WriteLine("RecivceMsg2");
                     string strMsg = Encoding.UTF8.GetString(recivcedata, 0, recivcedata.Length);
                     //System.Console.WriteLine("udp:"+string.Format("来自{0}：{1}", remote, strMsg));
                     Received(null, strMsg);
                 }
-                catch
+                catch (Exception e)
                 {
-                    break;
+                    System.Console.WriteLine("RecivceMsg3");
+                    //break;
                 }
+                System.Console.WriteLine("RecivceMsg4");
             }
         }
 
@@ -384,7 +430,7 @@ namespace ZControl
                                     byte[] qos = new byte[t.Length];
                                     for (int i = 0; i < qos.Length; i++) qos[i] = MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE;
                                     mqttClient.Subscribe(t, qos);
-                                    
+
                                     //Log.d(Tag, "subscribe:" + d.getMqttStateTopic());
                                 }
                             }
@@ -573,15 +619,9 @@ namespace ZControl
             send(null, json);
         }
 
-        private void ZDC1热点配网toolStripMenuItem_Click(object sender, EventArgs e)
+        private void CboIP_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("zDC1 热点模式配网步骤:\r\n" +
-                "1. 排插断电,等待20秒后按住按键上电.上电2秒左右松开按键(按键不要超过5秒)\r\n" +
-                "2. pc连接热点,并断开其他网络.\r\n" +
-                "3. 单击本软件获取局域网按钮,添加新排插\r\n" +
-                "4. 输入要连接的wifi名称及密码,然后点击配对,等待排插连上路由器\r\n" +
-                "5. 恢复pc网络即可", "配对方法:");
-            //deviceControl1.ZDC1WifiShow = ((ToolStripMenuItem)sender).Checked;
+            if (udpClient != null) { udpClient.Close(); udpClient = null; }
         }
     }
 }

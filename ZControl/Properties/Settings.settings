@@ -17,5 +17,8 @@
     <Setting Name="Device" Type="System.String" Scope="User">
       <Value Profile="(Default)">{"device":[]}</Value>
     </Setting>
+    <Setting Name="IP" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

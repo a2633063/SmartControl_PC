@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -218,6 +219,20 @@ namespace ZControl.FormDeviceClass
         private void ZTC1linkRefresh_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             RefreshStatus();
+        }
+
+        private void labLock_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string lockStr = Microsoft.VisualBasic.Interaction.InputBox("请输入32位长度激活码\r\n\r\n激活码方式见文档说明.zTC1激活码免费获取!", "输入激活码", "");
+            lockStr = lockStr.Trim().ToLower();
+            Regex regex = new Regex(@"[1234567890abcdef]{32}");
+            if (/*lockStr == null || */ !regex.IsMatch(lockStr))
+            {
+                MessageBox.Show("激活码格式输入错误.请确认不包含mac地址,长度32位字符串.\r\n请重试");
+                return;
+            }
+
+            Send("{\"mac\":\"" + GetMac() + "\",\"lock\":\"" + lockStr + "\"}");
         }
     }
 }
