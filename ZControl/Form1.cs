@@ -83,8 +83,13 @@ namespace ZControl
             }
             CboIP.Items.Add("127.0.0.1");
             CboIP.Items.Add("255.255.255.255");
+
+            if (CboIP.Items.Contains(Properties.Settings.Default.IP))
+                CboIP.Text = Properties.Settings.Default.IP;
+
             if (CboIP.Text.Length < 1)
                 CboIP.Text = "255.255.255.255";
+
 
 
             #endregion
@@ -165,6 +170,7 @@ namespace ZControl
             Console.WriteLine(json);
             Properties.Settings.Default.Device = json;
             Properties.Settings.Default.Seclect = listBox1.SelectedIndex;
+            Properties.Settings.Default.IP = CboIP.Text;
             Properties.Settings.Default.Save();
         }
 
@@ -400,7 +406,7 @@ namespace ZControl
         private void PublishReceivedCallBack(String topic, String message)
         {
             System.Console.WriteLine("Received topic [" + topic + "] :" + message);
-            txtLogAll.AppendText("["+ DateTime.Now.ToLongTimeString().ToString()+"]["+ topic + "] :" + message+"\r\n");
+            txtLogAll.AppendText("[" + DateTime.Now.ToLongTimeString().ToString() + "][" + topic + "] :" + message + "\r\n");
             int index;
             try
             {
