@@ -41,11 +41,11 @@
             // 
             // trbSpeed
             // 
-            this.trbSpeed.Location = new System.Drawing.Point(15, 157);
+            this.trbSpeed.Location = new System.Drawing.Point(12, 157);
             this.trbSpeed.Maximum = 100;
             this.trbSpeed.Minimum = 1;
             this.trbSpeed.Name = "trbSpeed";
-            this.trbSpeed.Size = new System.Drawing.Size(270, 45);
+            this.trbSpeed.Size = new System.Drawing.Size(286, 45);
             this.trbSpeed.TabIndex = 3;
             this.trbSpeed.TickFrequency = 10;
             this.trbSpeed.TickStyle = System.Windows.Forms.TickStyle.Both;
@@ -55,7 +55,7 @@
             // 
             // labelVersion
             // 
-            this.labelVersion.Location = new System.Drawing.Point(13, 205);
+            this.labelVersion.Location = new System.Drawing.Point(12, 209);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(238, 18);
             this.labelVersion.TabIndex = 30;
@@ -65,7 +65,7 @@
             // linkRefresh
             // 
             this.linkRefresh.AutoSize = true;
-            this.linkRefresh.Location = new System.Drawing.Point(13, 232);
+            this.linkRefresh.Location = new System.Drawing.Point(12, 232);
             this.linkRefresh.Name = "linkRefresh";
             this.linkRefresh.Size = new System.Drawing.Size(77, 12);
             this.linkRefresh.TabIndex = 29;
@@ -76,7 +76,7 @@
             // labSpeed
             // 
             this.labSpeed.AutoSize = true;
-            this.labSpeed.Location = new System.Drawing.Point(223, 139);
+            this.labSpeed.Location = new System.Drawing.Point(245, 139);
             this.labSpeed.Name = "labSpeed";
             this.labSpeed.Size = new System.Drawing.Size(53, 12);
             this.labSpeed.TabIndex = 32;
@@ -91,7 +91,7 @@
             this.chkSwitch.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chkSwitch.Image = global::ZControl.Properties.Resources.device_close;
             this.chkSwitch.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.chkSwitch.Location = new System.Drawing.Point(92, 88);
+            this.chkSwitch.Location = new System.Drawing.Point(109, 88);
             this.chkSwitch.Name = "chkSwitch";
             this.chkSwitch.Size = new System.Drawing.Size(92, 42);
             this.chkSwitch.TabIndex = 33;
@@ -110,7 +110,7 @@
             // labLock
             // 
             this.labLock.AutoSize = true;
-            this.labLock.Location = new System.Drawing.Point(235, 58);
+            this.labLock.Location = new System.Drawing.Point(257, 58);
             this.labLock.Name = "labLock";
             this.labLock.Size = new System.Drawing.Size(41, 12);
             this.labLock.TabIndex = 34;
@@ -124,7 +124,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 311);
+            this.ClientSize = new System.Drawing.Size(620, 350);
             this.Controls.Add(this.labLock);
             this.Controls.Add(this.chkSwitch);
             this.Controls.Add(this.labSpeed);

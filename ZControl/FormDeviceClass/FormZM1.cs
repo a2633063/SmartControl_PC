@@ -33,6 +33,7 @@ namespace ZControl.FormDeviceClass
         }
         public override void Received(String topic, String message)
         {
+
             JObject jsonObject = JObject.Parse(message);
             if (!GetMac().Equals(jsonObject["mac"].ToString())) return;
 

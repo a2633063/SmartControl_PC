@@ -44,10 +44,10 @@
             // trbBrightness
             // 
             this.trbBrightness.LargeChange = 1;
-            this.trbBrightness.Location = new System.Drawing.Point(72, 163);
+            this.trbBrightness.Location = new System.Drawing.Point(77, 163);
             this.trbBrightness.Maximum = 4;
             this.trbBrightness.Name = "trbBrightness";
-            this.trbBrightness.Size = new System.Drawing.Size(210, 45);
+            this.trbBrightness.Size = new System.Drawing.Size(221, 45);
             this.trbBrightness.TabIndex = 4;
             this.trbBrightness.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.trbBrightness.Value = 4;
@@ -57,7 +57,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(13, 173);
+            this.label1.Location = new System.Drawing.Point(12, 173);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 20);
             this.label1.TabIndex = 5;
@@ -65,7 +65,7 @@
             // 
             // labelVersion
             // 
-            this.labelVersion.Location = new System.Drawing.Point(12, 211);
+            this.labelVersion.Location = new System.Drawing.Point(12, 218);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(238, 18);
             this.labelVersion.TabIndex = 32;
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 311);
+            this.ClientSize = new System.Drawing.Size(620, 350);
             this.Controls.Add(this.labFormaldehyde);
             this.Controls.Add(this.labPM25);
             this.Controls.Add(this.labHumidity);

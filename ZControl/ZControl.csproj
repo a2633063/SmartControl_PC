@@ -102,6 +102,12 @@
     <Compile Include="FormDeviceClass\FormZA1.Designer.cs">
       <DependentUpon>FormZA1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDeviceClass\FormZClock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZClock.Designer.cs">
+      <DependentUpon>FormZClock.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormDeviceClass\FormZDC1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,18 @@
     </Compile>
     <Compile Include="FormDeviceClass\FormZM1.Designer.cs">
       <DependentUpon>FormZM1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZMOPS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZMOPS.Designer.cs">
+      <DependentUpon>FormZMOPS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZS7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeviceClass\FormZS7.Designer.cs">
+      <DependentUpon>FormZS7.cs</DependentUpon>
     </Compile>
     <Compile Include="FormDeviceClass\FormZTC1.cs">
       <SubType>Form</SubType>
@@ -131,11 +149,20 @@
     <EmbeddedResource Include="FormDeviceClass\FormZA1.resx">
       <DependentUpon>FormZA1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormDeviceClass\FormZClock.resx">
+      <DependentUpon>FormZClock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormDeviceClass\FormZDC1.resx">
       <DependentUpon>FormZDC1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDeviceClass\FormZM1.resx">
       <DependentUpon>FormZM1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDeviceClass\FormZMOPS.resx">
+      <DependentUpon>FormZMOPS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDeviceClass\FormZS7.resx">
+      <DependentUpon>FormZS7.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDeviceClass\FormZTC1.resx">
       <DependentUpon>FormZTC1.cs</DependentUpon>

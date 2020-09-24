@@ -70,12 +70,12 @@
             this.panelZDC1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelZDC1.Location = new System.Drawing.Point(0, 55);
             this.panelZDC1.Name = "panelZDC1";
-            this.panelZDC1.Size = new System.Drawing.Size(745, 314);
+            this.panelZDC1.Size = new System.Drawing.Size(620, 295);
             this.panelZDC1.TabIndex = 28;
             // 
             // labelZDC1Version
             // 
-            this.labelZDC1Version.Location = new System.Drawing.Point(33, 165);
+            this.labelZDC1Version.Location = new System.Drawing.Point(33, 186);
             this.labelZDC1Version.Name = "labelZDC1Version";
             this.labelZDC1Version.Size = new System.Drawing.Size(238, 18);
             this.labelZDC1Version.TabIndex = 28;
@@ -236,7 +236,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 369);
+            this.ClientSize = new System.Drawing.Size(620, 350);
             this.Controls.Add(this.panelZDC1);
             this.Name = "FormZDC1";
             this.Text = "FormZDC1";

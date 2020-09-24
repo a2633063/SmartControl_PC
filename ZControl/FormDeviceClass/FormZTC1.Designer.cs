@@ -87,7 +87,7 @@
             this.panelZTC1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelZTC1.Location = new System.Drawing.Point(0, 55);
             this.panelZTC1.Name = "panelZTC1";
-            this.panelZTC1.Size = new System.Drawing.Size(745, 314);
+            this.panelZTC1.Size = new System.Drawing.Size(620, 295);
             this.panelZTC1.TabIndex = 3;
             // 
             // ZTC1linkRefresh
@@ -342,7 +342,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 369);
+            this.ClientSize = new System.Drawing.Size(620, 350);
             this.Controls.Add(this.panelZTC1);
             this.Name = "FormZTC1";
             this.Text = "FormZTC1";

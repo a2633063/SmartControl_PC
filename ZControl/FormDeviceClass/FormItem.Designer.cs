@@ -42,7 +42,7 @@
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitle.Location = new System.Drawing.Point(0, 0);
             this.panelTitle.Name = "panelTitle";
-            this.panelTitle.Size = new System.Drawing.Size(314, 55);
+            this.panelTitle.Size = new System.Drawing.Size(604, 55);
             this.panelTitle.TabIndex = 2;
             // 
             // labelMac
@@ -75,7 +75,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 369);
+            this.ClientSize = new System.Drawing.Size(604, 311);
             this.Controls.Add(this.panelTitle);
             this.Name = "FormItem";
             this.Text = "FormItem";

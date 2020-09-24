@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -63,6 +64,7 @@ namespace ZControl
                 //Received(null, @"{""name"":""zM1"",""mac"":""b0f8932234f4"",""type"":4,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
                 //Received(null, @"{""name"":""zDC1_35eb"",""mac"":""84f3eb5635eb"",""type"":2,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
                 //Received(null, @"{""name"":""zA1"",""mac"":""b0f8932bc47a"",""type"":3,""type_name"":""zTC1"",""ip"":""192.168.0.139""}");
+                //Received(null, @"{""name"":""zMOPS"",""mac"":""6001943fe3df"",""type"":7,""type_name"":""zMOPS"",""ip"":""192.168.0.2""}");
                 Received(null, @"{""name"":""演示设备,请手动删除"",""mac"":""000000000000"",""type"":1,""type_name"":""zTC1"",""ip"":""192.168.0.2""}");
             }
 
@@ -398,6 +400,7 @@ namespace ZControl
         private void PublishReceivedCallBack(String topic, String message)
         {
             System.Console.WriteLine("Received topic [" + topic + "] :" + message);
+            txtLogAll.AppendText("["+ DateTime.Now.ToLongTimeString().ToString()+"]["+ topic + "] :" + message+"\r\n");
             int index;
             try
             {
@@ -431,6 +434,15 @@ namespace ZControl
                             break;
                         case DEVICETYPE.TYPE_M1:
                             listBox1.Items.Insert(0, new FormZM1(jObject["name"].ToString(), jObject["mac"].ToString()));
+                            break;
+                        case DEVICETYPE.TYPE_S7:
+                            listBox1.Items.Insert(0, new FormZS7(jObject["name"].ToString(), jObject["mac"].ToString()));
+                            break;
+                        case DEVICETYPE.TYPE_CLOCK:
+                            listBox1.Items.Insert(0, new FormZClock(jObject["name"].ToString(), jObject["mac"].ToString()));
+                            break;
+                        case DEVICETYPE.TYPE_MOPS:
+                            listBox1.Items.Insert(0, new FormZMOPS(jObject["name"].ToString(), jObject["mac"].ToString()));
                             break;
                         default:
                             return;
@@ -483,8 +495,30 @@ namespace ZControl
                 ((FormItem)listBox1.Items[index]).Received(topic, message);
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+
+                #region 处理设备离线在线数据
+                if (topic != null)
+                {
+                    Regex regex = new Regex(@".*/([1234567890abcdef]{12})/availability");
+                    Match match = regex.Match(topic);
+                    if (match.Success && match.Groups.Count == 2)
+                    {
+                        for (index = 0; index < listBox1.Items.Count; index++)
+                        {
+                            //if(index)
+                            if (match.Groups[1].ToString().Equals(((FormItem)listBox1.Items[index]).GetMac()))
+                            {
+                                ((FormItem)listBox1.Items[index]).SetOnline(message.Equals("1"));
+                                //((FormItem)listBox1.Items[index]).Received(topic, message);
+                                break;
+                            }
+                        }
+                    }
+                }
+                #endregion
+
 
                 //throw;
             }

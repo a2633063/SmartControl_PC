@@ -16,7 +16,7 @@ namespace ZControl.FormDeviceClass
         public delegate void MsgPublishEventHandler(String topic, String message);
         public event MsgPublishEventHandler MsgPublishEvent;
 
-
+        bool online = false;
         DEVICETYPE type = DEVICETYPE.TYPE_UNKNOWN;
 
         public enum DEVICETYPE
@@ -112,6 +112,16 @@ namespace ZControl.FormDeviceClass
         {
             return labelMac.Text;
         }
+
+        public virtual void SetOnline(bool online)
+        {
+            this.online = online;
+        }
+        public virtual bool isOnline()
+        {
+            return online;
+        }
+
         #endregion
 
         public virtual String[] GetRecvMqttTopic()
