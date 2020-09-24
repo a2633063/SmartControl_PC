@@ -1,17 +1,13 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Globalization;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
@@ -32,8 +28,10 @@ namespace ZControl
         {
             InitializeComponent();
 
-            //labVersion.Text = "v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion;
-            labVersion.Text = "软件版本 v0.2.0";
+            //labVersion.Text = "软件版本: v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion;
+            labVersion.Text = "软件版本: v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location).FileVersion;
+            
+            //labVersion.Text = "软件版本 v0.2.0";
             this.MinimumSize = this.Size;
 
             #region 读取设备
@@ -90,6 +88,7 @@ namespace ZControl
             if (CboIP.Text.Length < 1)
                 CboIP.Text = "255.255.255.255";
 
+            CboIP.SelectedIndexChanged  += CboIP_SelectedIndexChanged;
 
 
             #endregion
@@ -148,9 +147,13 @@ namespace ZControl
                 mqttClient.Publish(topic, Encoding.UTF8.GetBytes(message));
             }
         }
-
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (udpClient != null) { udpClient.Close(); udpClient = null; }
+        }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
             mqttDisconnect();
 
             JArray jArray = new JArray();
@@ -202,15 +205,23 @@ namespace ZControl
         public delegate string commbdelegate(ComboBox cb);
         public string commb(ComboBox cb)
         {
-            if (cb.InvokeRequired)
+            try
             {
-                commbdelegate dt = new commbdelegate(commb);
-                IAsyncResult ia = cb.BeginInvoke(dt, new object[] { cb });
-                return (string)cb.EndInvoke(ia);  //这里需要利用EndInvoke来获取返回值
+                if (cb.InvokeRequired)
+                {
+                    commbdelegate dt = new commbdelegate(commb);
+                    IAsyncResult ia = cb.BeginInvoke(dt, new object[] { cb });
+                    return (string)cb.EndInvoke(ia);  //这里需要利用EndInvoke来获取返回值
+                }
+                else
+                {
+                    return cb.Text;
+                }
             }
-            else
+            catch (Exception)
             {
-                return cb.Text;
+                return null;
+                //throw;
             }
         }
 
@@ -378,26 +389,26 @@ namespace ZControl
                 if (udpClient == null)
                 {
                     String ip = commb(CboIP);
+                    if (ip == null || ip=="") continue;
                     if (ip.Equals("255.255.255.255")) ip = "0.0.0.0";
                     IPEndPoint local = new IPEndPoint(IPAddress.Parse(ip), 10181);
                     udpClient = new UdpClient(local);
                     //udpClient = new UdpClient(10181);
                 }
-                System.Console.WriteLine("RecivceMsg1");
+    
                 try
                 {
                     byte[] recivcedata = udpClient.Receive(ref remote);
-                    System.Console.WriteLine("RecivceMsg2");
+
                     string strMsg = Encoding.UTF8.GetString(recivcedata, 0, recivcedata.Length);
                     //System.Console.WriteLine("udp:"+string.Format("来自{0}：{1}", remote, strMsg));
                     Received(null, strMsg);
                 }
                 catch (Exception e)
                 {
-                    System.Console.WriteLine("RecivceMsg3");
                     //break;
                 }
-                System.Console.WriteLine("RecivceMsg4");
+
             }
         }
 
@@ -405,7 +416,7 @@ namespace ZControl
         #region MQTT/UDP接受数据处理函数(包含线程处理)
         private void PublishReceivedCallBack(String topic, String message)
         {
-            System.Console.WriteLine("Received topic [" + topic + "] :" + message);
+            Console.WriteLine("Received topic [" + topic + "] :" + message);
             txtLogAll.AppendText("[" + DateTime.Now.ToLongTimeString().ToString() + "][" + topic + "] :" + message + "\r\n");
             int index;
             try
@@ -679,5 +690,7 @@ namespace ZControl
         {
             if (udpClient != null) { udpClient.Close(); udpClient = null; }
         }
+
+
     }
 }

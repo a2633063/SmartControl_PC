@@ -395,7 +395,6 @@
             this.CboIP.Size = new System.Drawing.Size(121, 20);
             this.CboIP.TabIndex = 1;
             this.CboIP.Text = global::ZControl.Properties.Settings.Default.IP;
-            this.CboIP.SelectedIndexChanged += new System.EventHandler(this.CboIP_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -422,6 +421,7 @@
             this.Name = "Form1";
             this.Text = "ZContron PC端";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.groupBoxMQTT.ResumeLayout(false);
             this.groupBoxMQTT.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).EndInit();
