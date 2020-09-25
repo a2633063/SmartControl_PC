@@ -43,12 +43,23 @@
             this.labZDC1Switch2Name = new System.Windows.Forms.Label();
             this.labZDC1Switch1Name = new System.Windows.Forms.Label();
             this.labZDC1Switch0Name = new System.Windows.Forms.Label();
+            this.chkHassNameChoice = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.panelZDC1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch3)).BeginInit();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.chkHassNameChoice);
+            this.panel1.Controls.SetChildIndex(this.btnHass, 0);
+            this.panel1.Controls.SetChildIndex(this.chkHassNameChoice, 0);
+            this.panel1.Controls.SetChildIndex(this.label2, 0);
             // 
             // panelZDC1
             // 
@@ -70,7 +81,7 @@
             this.panelZDC1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelZDC1.Location = new System.Drawing.Point(0, 55);
             this.panelZDC1.Name = "panelZDC1";
-            this.panelZDC1.Size = new System.Drawing.Size(620, 295);
+            this.panelZDC1.Size = new System.Drawing.Size(310, 295);
             this.panelZDC1.TabIndex = 28;
             // 
             // labelZDC1Version
@@ -227,10 +238,29 @@
             this.labZDC1Switch0Name.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labZDC1Switch0Name.Location = new System.Drawing.Point(31, 47);
             this.labZDC1Switch0Name.Name = "labZDC1Switch0Name";
-            this.labZDC1Switch0Name.Size = new System.Drawing.Size(59, 20);
+            this.labZDC1Switch0Name.Size = new System.Drawing.Size(69, 20);
             this.labZDC1Switch0Name.TabIndex = 6;
-            this.labZDC1Switch0Name.Text = "插座1";
+            this.labZDC1Switch0Name.Text = "总开关";
             this.labZDC1Switch0Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkHassNameChoice
+            // 
+            this.chkHassNameChoice.AutoSize = true;
+            this.chkHassNameChoice.Location = new System.Drawing.Point(41, 223);
+            this.chkHassNameChoice.Name = "chkHassNameChoice";
+            this.chkHassNameChoice.Size = new System.Drawing.Size(228, 16);
+            this.chkHassNameChoice.TabIndex = 6;
+            this.chkHassNameChoice.Text = "使用当前设备的接口名而不是默认名称";
+            this.chkHassNameChoice.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(40, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(231, 114);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "注意: hass配置文件生成功能暂时未做验证!生成文件后请在hass中确认配置正确.若错误,请使用文档中hass配置方式";
             // 
             // FormZDC1
             // 
@@ -240,7 +270,10 @@
             this.Controls.Add(this.panelZDC1);
             this.Name = "FormZDC1";
             this.Text = "FormZDC1";
+            this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.panelZDC1, 0);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panelZDC1.ResumeLayout(false);
             this.panelZDC1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch0)).EndInit();
@@ -268,5 +301,7 @@
         private System.Windows.Forms.Label labZDC1Switch1Name;
         private System.Windows.Forms.Label labZDC1Switch0Name;
         private System.Windows.Forms.Label labelZDC1Version;
+        private System.Windows.Forms.CheckBox chkHassNameChoice;
+        private System.Windows.Forms.Label label2;
     }
 }

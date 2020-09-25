@@ -37,6 +37,7 @@
             this.LstHistory = new System.Windows.Forms.ListBox();
             this.labBattery = new System.Windows.Forms.Label();
             this.labCharge = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelVersion
@@ -155,7 +156,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(310, 350);
+            this.ClientSize = new System.Drawing.Size(620, 350);
             this.Controls.Add(this.labCharge);
             this.Controls.Add(this.labBattery);
             this.Controls.Add(this.LstHistory);
@@ -178,6 +179,8 @@
             this.Controls.SetChildIndex(this.LstHistory, 0);
             this.Controls.SetChildIndex(this.labBattery, 0);
             this.Controls.SetChildIndex(this.labCharge, 0);
+            this.Controls.SetChildIndex(this.panel1, 0);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

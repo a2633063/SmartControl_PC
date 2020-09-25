@@ -30,7 +30,7 @@ namespace ZControl
 
             //labVersion.Text = "软件版本: v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion;
             labVersion.Text = "软件版本: v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location).FileVersion;
-            
+
             //labVersion.Text = "软件版本 v0.2.0";
             this.MinimumSize = this.Size;
 
@@ -88,7 +88,7 @@ namespace ZControl
             if (CboIP.Text.Length < 1)
                 CboIP.Text = "255.255.255.255";
 
-            CboIP.SelectedIndexChanged  += CboIP_SelectedIndexChanged;
+            CboIP.SelectedIndexChanged += CboIP_SelectedIndexChanged;
 
 
             #endregion
@@ -153,7 +153,7 @@ namespace ZControl
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
             mqttDisconnect();
 
             JArray jArray = new JArray();
@@ -389,13 +389,13 @@ namespace ZControl
                 if (udpClient == null)
                 {
                     String ip = commb(CboIP);
-                    if (ip == null || ip=="") continue;
+                    if (ip == null || ip == "") continue;
                     if (ip.Equals("255.255.255.255")) ip = "0.0.0.0";
                     IPEndPoint local = new IPEndPoint(IPAddress.Parse(ip), 10181);
                     udpClient = new UdpClient(local);
                     //udpClient = new UdpClient(10181);
                 }
-    
+
                 try
                 {
                     byte[] recivcedata = udpClient.Receive(ref remote);
@@ -468,7 +468,7 @@ namespace ZControl
                     FormItem f = (FormItem)listBox1.Items[0];
                     //f.MdiParent = this;
                     f.TopLevel = false;
-                    f.Dock = DockStyle.Fill;
+                   // f.Dock = DockStyle.Fill;
                     f.FormBorderStyle = FormBorderStyle.None;
                     f.MsgPublishEvent += send;
                     panelDeviceControl.Controls.Add(f);
@@ -691,6 +691,32 @@ namespace ZControl
             if (udpClient != null) { udpClient.Close(); udpClient = null; }
         }
 
+        private void labMoreFunction_Click(object sender, EventArgs e)
+        {
+            if (this.Width == 608 && this.Height == 490)
+            {
+                //labMoreFunction.Text = "------<<<------";
+                this.Width = 608+310;
+                this.Height = 490;
+            }
+            else
+            {
+                //labMoreFunction.Text = "------>>>------";
+                this.Width = 608;
+                this.Height = 490;
+            }
+        }
 
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.Width > 608 || this.Height > 490)
+            {
+                labMoreFunction.Text = "------<<<------";
+            }
+            else
+            {
+                labMoreFunction.Text = "------>>>------";
+            }
+        }
     }
 }

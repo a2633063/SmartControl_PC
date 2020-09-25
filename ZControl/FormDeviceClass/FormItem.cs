@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,18 @@ namespace ZControl.FormDeviceClass
             "zRGBW灯",   //8
         };
 
+        public static String[] TypeEName = new String[]{
+            "Button",//0
+            "zTC1",//1
+            "zDC1",   //2
+            "zA1", //3
+            "zM1", //4
+            "zS7",   //5
+            "zClock",    //6
+            "zMOPS",   //7
+            "zRGBW"   //8
+        };
+
         public static Image[] Tyep_Icon = new Image[]{
             Properties.Resources.device_icon_ongoing,
             Properties.Resources.device_icon_diy,
@@ -58,7 +71,6 @@ namespace ZControl.FormDeviceClass
             Properties.Resources.device_icon_zmops,
             Properties.Resources.device_icon_ongoing,
             Properties.Resources.device_icon_ongoing,
-
         };
         public FormItem()
         {
@@ -93,6 +105,10 @@ namespace ZControl.FormDeviceClass
         public String GetTypeName()
         {
             return TypeName[(int)type];
+        }
+        public String GetTypeEName()
+        {
+            return TypeEName[(int)type];
         }
         public Image GetTypeIcon()
         {
@@ -153,5 +169,41 @@ namespace ZControl.FormDeviceClass
         }
 
 
+
+        protected virtual String GetHassString()
+        {
+            return null;
+        }
+        private void btnHass_Click(object sender, EventArgs e)
+        {
+            String hass = GetHassString();
+            if (hass == null)
+            {
+                MessageBox.Show("当前设备hass配置文件未完成.");
+                return;
+            }
+
+
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "YAML(*.yaml)|"; //设置“另存为文件类型”或“文件类型”框中出现的选择内容
+            saveFileDialog.Title = "储存位置";
+            saveFileDialog.FileName = GetTypeEName().ToLower()+"_" + GetMac()+".yaml" ;
+            //saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+
+            FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
+            StreamWriter wr = null;
+            wr = new StreamWriter(fs);
+            wr.WriteLine(hass);
+            wr.Close();
+            }
+
+
+
+
+        }
     }
 }

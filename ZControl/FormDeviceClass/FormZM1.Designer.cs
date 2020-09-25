@@ -38,8 +38,16 @@
             this.labPM25 = new System.Windows.Forms.Label();
             this.labFormaldehyde = new System.Windows.Forms.Label();
             this.timerSend = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbBrightness)).BeginInit();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.SetChildIndex(this.btnHass, 0);
+            this.panel1.Controls.SetChildIndex(this.label2, 0);
             // 
             // trbBrightness
             // 
@@ -127,6 +135,15 @@
             // 
             this.timerSend.Tick += new System.EventHandler(this.timerSend_Tick);
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(40, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(231, 114);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "注意: hass配置文件生成功能暂时未做验证!生成文件后请在hass中确认配置正确.若错误,请使用文档中hass配置方式";
+            // 
             // FormZM1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -142,6 +159,7 @@
             this.Controls.Add(this.trbBrightness);
             this.Name = "FormZM1";
             this.Text = "FormZM1";
+            this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.trbBrightness, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.linkRefresh, 0);
@@ -150,6 +168,7 @@
             this.Controls.SetChildIndex(this.labHumidity, 0);
             this.Controls.SetChildIndex(this.labPM25, 0);
             this.Controls.SetChildIndex(this.labFormaldehyde, 0);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trbBrightness)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,5 +186,6 @@
         private System.Windows.Forms.Label labPM25;
         private System.Windows.Forms.Label labFormaldehyde;
         private System.Windows.Forms.Timer timerSend;
+        private System.Windows.Forms.Label label2;
     }
 }
