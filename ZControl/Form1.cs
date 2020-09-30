@@ -746,7 +746,7 @@ namespace ZControl
             string s = f.ShowDialog();
             if (s != null)
             {
-               // MessageBox.Show(s);
+                // MessageBox.Show(s);
                 Json2Device(s);
             }
 
@@ -809,14 +809,16 @@ namespace ZControl
                 toolTip1.SetToolTip(this.labVersion, "已是最新版本");
                 labVersion.Text = labVersion.Text + "(√)";
             }
-            //这里就回到了主线程里面了
-            //做一些事情
 
         }
 
         private void LabVersion_Click(object sender, EventArgs e)
         {
-            if (versionInfo == null) return;
+            if (versionInfo == null) 
+            {
+                System.Diagnostics.Process.Start("https://github.com/a2633063/SmartControl_PC/releases/latest");
+                return; 
+            }
             DialogResult res = MessageBox.Show("更新内容:\r\n" + versionInfo.message + "\r\n\r\n更新时间:" + versionInfo.created_at + "\r\n\r\n点击确认打开浏览器开始下载文件", "有新版本:" + versionInfo.tag_name, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (res == DialogResult.OK)
             {
@@ -826,7 +828,21 @@ namespace ZControl
 
         private void OnConnectedFail(object state)//由于是主线程的同步对象Post调用，这个是在主线程中执行的
         {
-            labVersion.Text = state.ToString();
+            //labVersion.Text = state.ToString();
+
+
+            toolTip1.SetToolTip(this.labVersion, "检测新版本失败,请点击确认是否有新版本更新");
+            versionInfo = null;
+
+            labVersion.Text = labVersion.Text + "(×)";
+            labVersion.ForeColor = Color.FromArgb(0, 0, 255);
+            labVersion.Cursor = Cursors.Hand;
+            Font s = new Font(this.labVersion.Font.FontFamily, this.labVersion.Font.Size, FontStyle.Underline);
+            labVersion.Font = s;
+            labVersion.Click += LabVersion_Click;
+
+
+
             //这里就回到了主线程里面了
             //做一些事情
 
@@ -836,7 +852,7 @@ namespace ZControl
             OTAInfo otaInfo = new OTAInfo();
             try
             {
-                String JsonStr = getWebHtml("https://gitee.com/api/v5/repos/a2633063/zA1/releases/latest");
+                String JsonStr = getWebHtml("https://gitee.com/api/v5/repos/a2633063/SmartControl_PC/releases/latest");
                 if (JsonStr == null || JsonStr.Length < 3)
                     throw new Exception("获取最新版本信息失败");
 
@@ -891,7 +907,7 @@ namespace ZControl
                 }
                 #endregion
 
-                JsonStr = getWebHtml("https://gitee.com/api/v5/repos/a2633063/Release/releases/tags/zA1");
+                JsonStr = getWebHtml("https://gitee.com/api/v5/repos/a2633063/Release/releases/tags/zControl_PC");
                 obj = JObject.Parse(JsonStr);
 
                 if (obj["name"].ToString().Equals("zA1发布地址_" + otaInfo.tag_name))
