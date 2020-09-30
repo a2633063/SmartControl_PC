@@ -63,6 +63,8 @@
             this.CboIP = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnDeviceImport = new System.Windows.Forms.Button();
+            this.btnDeviceExport = new System.Windows.Forms.Button();
             this.groupBoxMQTT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).BeginInit();
             this.panelLog.SuspendLayout();
@@ -232,9 +234,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnDeviceMQTTSend);
             this.panel1.Controls.Add(this.btnDeviceListAdd);
             this.panel1.Controls.Add(this.btnDeviceListDel);
-            this.panel1.Controls.Add(this.btnDeviceMQTTSend);
+            this.panel1.Controls.Add(this.btnDeviceExport);
+            this.panel1.Controls.Add(this.btnDeviceImport);
             this.panel1.Controls.Add(this.listBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 68);
@@ -245,9 +249,9 @@
             // btnDeviceListAdd
             // 
             this.btnDeviceListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeviceListAdd.Location = new System.Drawing.Point(129, 335);
+            this.btnDeviceListAdd.Location = new System.Drawing.Point(129, 336);
             this.btnDeviceListAdd.Name = "btnDeviceListAdd";
-            this.btnDeviceListAdd.Size = new System.Drawing.Size(126, 23);
+            this.btnDeviceListAdd.Size = new System.Drawing.Size(126, 22);
             this.btnDeviceListAdd.TabIndex = 1;
             this.btnDeviceListAdd.Text = "获取局域网设备";
             this.btnDeviceListAdd.UseVisualStyleBackColor = true;
@@ -258,7 +262,7 @@
             this.btnDeviceListDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeviceListDel.Location = new System.Drawing.Point(129, 314);
             this.btnDeviceListDel.Name = "btnDeviceListDel";
-            this.btnDeviceListDel.Size = new System.Drawing.Size(126, 23);
+            this.btnDeviceListDel.Size = new System.Drawing.Size(126, 22);
             this.btnDeviceListDel.TabIndex = 1;
             this.btnDeviceListDel.Text = "删除此设备";
             this.btnDeviceListDel.UseVisualStyleBackColor = true;
@@ -267,9 +271,9 @@
             // btnDeviceMQTTSend
             // 
             this.btnDeviceMQTTSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeviceMQTTSend.Location = new System.Drawing.Point(3, 335);
+            this.btnDeviceMQTTSend.Location = new System.Drawing.Point(3, 336);
             this.btnDeviceMQTTSend.Name = "btnDeviceMQTTSend";
-            this.btnDeviceMQTTSend.Size = new System.Drawing.Size(126, 23);
+            this.btnDeviceMQTTSend.Size = new System.Drawing.Size(126, 22);
             this.btnDeviceMQTTSend.TabIndex = 1;
             this.btnDeviceMQTTSend.Text = "同步MQTT服务器";
             this.btnDeviceMQTTSend.UseVisualStyleBackColor = true;
@@ -424,6 +428,28 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "局域网网卡选择:";
             // 
+            // btnDeviceImport
+            // 
+            this.btnDeviceImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeviceImport.Location = new System.Drawing.Point(66, 314);
+            this.btnDeviceImport.Name = "btnDeviceImport";
+            this.btnDeviceImport.Size = new System.Drawing.Size(63, 22);
+            this.btnDeviceImport.TabIndex = 3;
+            this.btnDeviceImport.Text = "导入设备";
+            this.btnDeviceImport.UseVisualStyleBackColor = true;
+            this.btnDeviceImport.Click += new System.EventHandler(this.btnDeviceImport_Click);
+            // 
+            // btnDeviceExport
+            // 
+            this.btnDeviceExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeviceExport.Location = new System.Drawing.Point(3, 314);
+            this.btnDeviceExport.Name = "btnDeviceExport";
+            this.btnDeviceExport.Size = new System.Drawing.Size(63, 22);
+            this.btnDeviceExport.TabIndex = 4;
+            this.btnDeviceExport.Text = "导出设备";
+            this.btnDeviceExport.UseVisualStyleBackColor = true;
+            this.btnDeviceExport.Click += new System.EventHandler(this.btnDeviceExport_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -494,6 +520,8 @@
         private System.Windows.Forms.TextBox txtLogAll;
         private System.Windows.Forms.Label labMoreFunction;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnDeviceExport;
+        private System.Windows.Forms.Button btnDeviceImport;
     }
 }
 

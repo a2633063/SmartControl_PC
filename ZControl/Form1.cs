@@ -36,17 +36,10 @@ namespace ZControl
             this.MinimumSize = this.Size;
 
             #region 读取设备
+
             try
             {
-                string json = Properties.Settings.Default.Device;
-                JObject jsonObject = JObject.Parse(json);
-                JArray array = (JArray)jsonObject["device"];
-                for (int i = array.Count; i > 0; i--)
-                {
-                    JObject jObject = (JObject)array[i - 1];
-                    Console.WriteLine(jObject.ToString());
-                    Received(null, jObject.ToString());
-                }
+                Json2Device(Properties.Settings.Default.Device);
             }
             catch (Exception)
             {
@@ -158,21 +151,7 @@ namespace ZControl
 
             mqttDisconnect();
 
-            JArray jArray = new JArray();
-            JObject obj = new JObject();
-            foreach (FormItem d in listBox1.Items)
-            {
-                if (d.GetMac().Equals("000000000000")) continue;
-                JObject objItem = new JObject();
-                objItem["mac"] = d.GetMac();
-                objItem["name"] = d.GetName();
-                objItem["type"] = (int)d.GetTypeID();
-                objItem["type_name"] = d.GetTypeName();
-                jArray.Add(objItem);
-            }
-            obj["device"] = jArray;
-            string json = obj.ToString();
-            Console.WriteLine(json);
+            string json = GetDeviceJsonString();
             Properties.Settings.Default.Device = json;
             Properties.Settings.Default.Seclect = listBox1.SelectedIndex;
             Properties.Settings.Default.IP = CboIP.Text;
@@ -577,7 +556,42 @@ namespace ZControl
         #endregion
         #endregion
 
+        #region 子函数
+        private string GetDeviceJsonString()
+        {
+            JArray jArray = new JArray();
+            JObject obj = new JObject();
+            foreach (FormItem d in listBox1.Items)
+            {
+                if (d.GetMac().Equals("000000000000")) continue;
+                JObject objItem = new JObject();
+                objItem["mac"] = d.GetMac();
+                objItem["name"] = d.GetName();
+                objItem["type"] = (int)d.GetTypeID();
+                objItem["type_name"] = d.GetTypeName();
+                jArray.Add(objItem);
+            }
+            obj["device"] = jArray;
+            string json = obj.ToString();
+            Console.WriteLine(json);
+            return json;
+        }
+        private void Json2Device(string s)
+        {
 
+            string json = Properties.Settings.Default.Device;
+            JObject jsonObject = JObject.Parse(json);
+            JArray array = (JArray)jsonObject["device"];
+            for (int i = array.Count; i > 0; i--)
+            {
+                JObject jObject = (JObject)array[i - 1];
+                Console.WriteLine(jObject.ToString());
+                Received(null, jObject.ToString());
+            }
+
+        }
+        #endregion
+        #region 控件事件
         #region 设置devicelist Item自定义界面
         const int DEVICE_LIST_ITEM_HEIGHT = 40;
         private void ListBox1_DrawItem(object sender, DrawItemEventArgs e)
@@ -623,7 +637,7 @@ namespace ZControl
             e.ItemHeight = DEVICE_LIST_ITEM_HEIGHT;
         }
         #endregion
-        #region 控件事件
+
 
         private void BtMQTTConfirm_Click(object sender, EventArgs e)
         {
@@ -720,6 +734,23 @@ namespace ZControl
         }
 
 
+        private void btnDeviceExport_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(GetDeviceJsonString());
+            MessageBox.Show("设备导出至剪贴板成功!");
+        }
+
+        private void btnDeviceImport_Click(object sender, EventArgs e)
+        {
+            FormDialogDeviceImport f = new FormDialogDeviceImport();
+            string s = f.ShowDialog();
+            if (s != null)
+            {
+               // MessageBox.Show(s);
+                Json2Device(s);
+            }
+
+        }
         #endregion
 
         #region 检查软件更新
@@ -883,5 +914,7 @@ namespace ZControl
         }
 
         #endregion
+
+
     }
 }

@@ -138,6 +138,12 @@
     <Compile Include="FormDeviceClass\FormZTC1.Designer.cs">
       <DependentUpon>FormZTC1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDialogDeviceImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDialogDeviceImport.Designer.cs">
+      <DependentUpon>FormDialogDeviceImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDeviceClass\FormZTC1.resx">
       <DependentUpon>FormZTC1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDialogDeviceImport.resx">
+      <DependentUpon>FormDialogDeviceImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
