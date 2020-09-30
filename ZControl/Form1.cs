@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -26,8 +27,8 @@ namespace ZControl
 
         public Form1()
         {
-            InitializeComponent();
 
+            InitializeComponent();
             //labVersion.Text = "软件版本: v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion;
             labVersion.Text = "软件版本: v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location).FileVersion;
 
@@ -115,7 +116,6 @@ namespace ZControl
             else listBox1.SelectedIndex = -1;
 
             #region 设置鼠标悬停提示
-            var toolTip1 = new ToolTip();
             toolTip1.AutoPopDelay = 10000;
             toolTip1.InitialDelay = 0;
             toolTip1.ReshowDelay = 0;
@@ -123,6 +123,8 @@ namespace ZControl
             toolTip1.SetToolTip(this.CboIP, "若无法通信,请选择与设备同网段的ip地址");
             #endregion
 
+
+            checkUpdate();
         }
 
         private void send(string topic, string message)
@@ -176,7 +178,17 @@ namespace ZControl
             Properties.Settings.Default.IP = CboIP.Text;
             Properties.Settings.Default.Save();
         }
-
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.Width > 608 || this.Height > 490)
+            {
+                labMoreFunction.Text = "------<<<------";
+            }
+            else
+            {
+                labMoreFunction.Text = "------>>>------";
+            }
+        }
         #region 多线程处理   更新Log显示内容/读取ip当前选择项目
         #region 更新Log显示内容
         delegate void SetTextCallBack(string text);
@@ -468,7 +480,7 @@ namespace ZControl
                     FormItem f = (FormItem)listBox1.Items[0];
                     //f.MdiParent = this;
                     f.TopLevel = false;
-                   // f.Dock = DockStyle.Fill;
+                    // f.Dock = DockStyle.Fill;
                     f.FormBorderStyle = FormBorderStyle.None;
                     f.MsgPublishEvent += send;
                     panelDeviceControl.Controls.Add(f);
@@ -611,6 +623,7 @@ namespace ZControl
             e.ItemHeight = DEVICE_LIST_ITEM_HEIGHT;
         }
         #endregion
+        #region 控件事件
 
         private void BtMQTTConfirm_Click(object sender, EventArgs e)
         {
@@ -628,7 +641,6 @@ namespace ZControl
 
 
         }
-
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -696,7 +708,7 @@ namespace ZControl
             if (this.Width == 608 && this.Height == 490)
             {
                 //labMoreFunction.Text = "------<<<------";
-                this.Width = 608+310;
+                this.Width = 608 + 310;
                 this.Height = 490;
             }
             else
@@ -707,16 +719,169 @@ namespace ZControl
             }
         }
 
-        private void Form1_SizeChanged(object sender, EventArgs e)
+
+        #endregion
+
+        #region 检查软件更新
+        private string getWebHtml(string url)
         {
-            if (this.Width > 608 || this.Height > 490)
+            // 获取网页源代码
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            //if (cbProxy.Checked)
+            //{
+            //    var cre = new NetworkCredential(ProxyID.Text, ProxyPW.Text);
+            //    var proxy = new WebProxy(ProxyUrl.Text, Convert.ToInt32(ProxyPort.Value)) { Credentials = cre };
+            //    request.Proxy = proxy;
+            //}
+            WebResponse response = request.GetResponse();
+            Stream resStream = response.GetResponseStream();
+            StreamReader sr = new StreamReader(resStream);
+            return sr.ReadToEnd();
+
+
+        }
+        private SynchronizationContext mainThreadSynContext;
+
+        private void checkUpdate()
+        {
+            mainThreadSynContext = SynchronizationContext.Current;
+            Thread mythread = new Thread(ThreadMain);
+            mythread.Start(labVersion.Text.Replace("软件版本: ", ""));
+        }
+        class OTAInfo
+        {
+            public String tag_name = null; //版本名称
+            public String message = null;  //更新内容
+            public String title = null;    //更新内容标题
+            public String url = null;     //固件下载地址
+            public String created_at = null;     //ota日期
+        }
+        OTAInfo versionInfo = null;
+        private void OnConnected(object state)//由于是主线程的同步对象Post调用，这个是在主线程中执行的
+        {
+            if (state != null)
             {
-                labMoreFunction.Text = "------<<<------";
+                toolTip1.SetToolTip(this.labVersion, "检测到新版本,点击更新");
+                versionInfo = (OTAInfo)state;
+
+                labVersion.Text = labVersion.Text + "(×)";
+                labVersion.ForeColor = Color.FromArgb(0, 0, 255);
+                labVersion.Cursor = Cursors.Hand;
+                Font s = new Font(this.labVersion.Font.FontFamily, this.labVersion.Font.Size, FontStyle.Underline);
+                labVersion.Font = s;
+                labVersion.Click += LabVersion_Click;
+
             }
             else
             {
-                labMoreFunction.Text = "------>>>------";
+                labVersion.Cursor = Cursors.Default;
+                toolTip1.SetToolTip(this.labVersion, "已是最新版本");
+                labVersion.Text = labVersion.Text + "(√)";
+            }
+            //这里就回到了主线程里面了
+            //做一些事情
+
+        }
+
+        private void LabVersion_Click(object sender, EventArgs e)
+        {
+            if (versionInfo == null) return;
+            DialogResult res = MessageBox.Show("更新内容:\r\n" + versionInfo.message + "\r\n\r\n更新时间:" + versionInfo.created_at + "\r\n\r\n点击确认打开浏览器开始下载文件", "有新版本:" + versionInfo.tag_name, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (res == DialogResult.OK)
+            {
+                System.Diagnostics.Process.Start(versionInfo.url);
             }
         }
+
+        private void OnConnectedFail(object state)//由于是主线程的同步对象Post调用，这个是在主线程中执行的
+        {
+            labVersion.Text = state.ToString();
+            //这里就回到了主线程里面了
+            //做一些事情
+
+        }
+        private void ThreadMain(object v)
+        {
+            OTAInfo otaInfo = new OTAInfo();
+            try
+            {
+                String JsonStr = getWebHtml("https://gitee.com/api/v5/repos/a2633063/zA1/releases/latest");
+                if (JsonStr == null || JsonStr.Length < 3)
+                    throw new Exception("获取最新版本信息失败");
+
+                //Console.WriteLine(s);
+                JObject obj = JObject.Parse(JsonStr);
+
+                otaInfo = new OTAInfo();
+                otaInfo.title = obj["name"].ToString();
+                otaInfo.message = obj["body"].ToString();
+                otaInfo.tag_name = obj["tag_name"].ToString();
+                otaInfo.created_at = obj["created_at"].ToString();
+
+                String tag_name_old = v.ToString();
+                if (tag_name_old.Equals(otaInfo.tag_name))
+                {
+                    Console.WriteLine("已经是最新版本");
+                    mainThreadSynContext.Post(new SendOrPostCallback(OnConnected), null);//通知主线程
+                    return;
+                }
+
+
+                // Toast.makeText(getActivity(), "已是最新版本", Toast.LENGTH_SHORT).show();
+                Console.WriteLine("当前版本:" + tag_name_old + ",发布版本:" + otaInfo.tag_name);
+                bool show_ota = true;
+                String[] version_new = otaInfo.tag_name.Replace("v", "").Split('.');
+                String[] version_old = tag_name_old.Replace("v", "").Split('.');
+                #region 判断当前是否是更新版本
+                for (int i = 0; i < version_new.Length && i < version_old.Length; i++)
+                {
+                    try
+                    {
+                        int a = Convert.ToInt32(version_new[i]);
+                        int b = Convert.ToInt32(version_old[i]);
+                        if (b < a) break;
+                        else if (b > a)
+                        {
+                            show_ota = false;
+                            break;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        //e.printStackTrace();
+                    }
+                }
+
+                if (!show_ota)
+                {
+                    //Toast.makeText(MainActivity.this, "当前版本暂时未发布，测试中\n当前版本:" + tag_name_old + "\n发布版本:" + tag_name, Toast.LENGTH_LONG).show();
+                    mainThreadSynContext.Post(new SendOrPostCallback(OnConnected), null);//通知主线程
+                    return;
+                }
+                #endregion
+
+                JsonStr = getWebHtml("https://gitee.com/api/v5/repos/a2633063/Release/releases/tags/zA1");
+                obj = JObject.Parse(JsonStr);
+
+                if (obj["name"].ToString().Equals("zA1发布地址_" + otaInfo.tag_name))
+                {
+                    String otauriAll = obj["body"].ToString();
+                    otaInfo.url = otauriAll.Trim();
+                    mainThreadSynContext.Post(new SendOrPostCallback(OnConnected), otaInfo);//通知主线程
+                }
+                else
+                    throw new Exception("获取固件下载地址获取失败");
+
+
+
+            }
+            catch (Exception e)
+            {
+                mainThreadSynContext.Post(new SendOrPostCallback(OnConnectedFail), e.Message);//通知主线程
+                //throw;
+            }
+        }
+
+        #endregion
     }
 }

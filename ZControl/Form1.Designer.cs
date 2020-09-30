@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBoxMQTT = new System.Windows.Forms.GroupBox();
             this.btMQTTConfirm = new System.Windows.Forms.Button();
             this.txtMQTTPassword = new System.Windows.Forms.TextBox();
@@ -47,6 +48,7 @@
             this.btnDeviceMQTTSend = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labMoreFunction = new System.Windows.Forms.Label();
             this.txtLogAll = new System.Windows.Forms.TextBox();
             this.panelDeviceControl = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -60,7 +62,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.CboIP = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.labMoreFunction = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBoxMQTT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).BeginInit();
             this.panelLog.SuspendLayout();
@@ -209,14 +211,15 @@
             // labVersion
             // 
             this.labVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.labVersion.AutoSize = true;
             this.labVersion.BackColor = System.Drawing.SystemColors.Control;
+            this.labVersion.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labVersion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.labVersion.Location = new System.Drawing.Point(484, 5);
+            this.labVersion.Location = new System.Drawing.Point(372, 5);
             this.labVersion.Name = "labVersion";
-            this.labVersion.Size = new System.Drawing.Size(101, 12);
+            this.labVersion.Size = new System.Drawing.Size(200, 15);
             this.labVersion.TabIndex = 9;
             this.labVersion.Text = "软件版本v0.0.0.0";
+            this.labVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // LabelLog
             // 
@@ -242,7 +245,7 @@
             // btnDeviceListAdd
             // 
             this.btnDeviceListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeviceListAdd.Location = new System.Drawing.Point(3, 314);
+            this.btnDeviceListAdd.Location = new System.Drawing.Point(129, 335);
             this.btnDeviceListAdd.Name = "btnDeviceListAdd";
             this.btnDeviceListAdd.Size = new System.Drawing.Size(126, 23);
             this.btnDeviceListAdd.TabIndex = 1;
@@ -297,6 +300,20 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(334, 358);
             this.panel2.TabIndex = 6;
+            // 
+            // labMoreFunction
+            // 
+            this.labMoreFunction.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labMoreFunction.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labMoreFunction.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.labMoreFunction.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labMoreFunction.Location = new System.Drawing.Point(321, 3);
+            this.labMoreFunction.Name = "labMoreFunction";
+            this.labMoreFunction.Size = new System.Drawing.Size(11, 350);
+            this.labMoreFunction.TabIndex = 3;
+            this.labMoreFunction.Text = "------>>>------";
+            this.labMoreFunction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labMoreFunction.Click += new System.EventHandler(this.labMoreFunction_Click);
             // 
             // txtLogAll
             // 
@@ -407,20 +424,6 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "局域网网卡选择:";
             // 
-            // labMoreFunction
-            // 
-            this.labMoreFunction.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labMoreFunction.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labMoreFunction.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.labMoreFunction.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labMoreFunction.Location = new System.Drawing.Point(321, 3);
-            this.labMoreFunction.Name = "labMoreFunction";
-            this.labMoreFunction.Size = new System.Drawing.Size(11, 350);
-            this.labMoreFunction.TabIndex = 3;
-            this.labMoreFunction.Text = "------>>>------";
-            this.labMoreFunction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labMoreFunction.Click += new System.EventHandler(this.labMoreFunction_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -490,6 +493,7 @@
         private System.Windows.Forms.Label labVersion;
         private System.Windows.Forms.TextBox txtLogAll;
         private System.Windows.Forms.Label labMoreFunction;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
