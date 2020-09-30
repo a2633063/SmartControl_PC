@@ -910,7 +910,7 @@ namespace ZControl
                 JsonStr = getWebHtml("https://gitee.com/api/v5/repos/a2633063/Release/releases/tags/zControl_PC");
                 obj = JObject.Parse(JsonStr);
 
-                if (obj["name"].ToString().Equals("zA1发布地址_" + otaInfo.tag_name))
+                if (obj["name"].ToString().Equals("zControl_PC发布地址_" + otaInfo.tag_name))
                 {
                     String otauriAll = obj["body"].ToString();
                     otaInfo.url = otauriAll.Trim();
