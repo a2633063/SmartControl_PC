@@ -148,6 +148,7 @@ namespace ZControl.FormDeviceClass
         const string hassConfig = "fan:\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'za1_MACMAC'\n" +
+                    "    unique_id: za1_MACMAC\n" +
                     "    state_topic: \"device/za1/MACMAC/state\"\n" +
                     "    command_topic: \"device/za1/MACMAC/set\"\n" +
                     "    state_value_template: >\n" +

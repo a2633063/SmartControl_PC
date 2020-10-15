@@ -99,6 +99,7 @@ namespace ZControl.FormDeviceClass
         const string hassConfig = "sensor:\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zm1_MACMAC_temperature'\n" +
+                    "    unique_id: zm1_MACMAC_temperature\n" +
                     "    # friendly_name: 温度\n" +
                     "    state_topic: 'device/zm1/MACMAC/sensor'\n" +
                     "    unit_of_measurement: '°C'\n" +
@@ -106,6 +107,7 @@ namespace ZControl.FormDeviceClass
                     "    value_template: '{{ value_json.temperature }}'\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zm1_MACMAC_humidity'\n" +
+                    "    unique_id: zm1_MACMAC_humidity\n" +
                     "    # friendly_name: 湿度\n" +
                     "    state_topic: 'device/zm1/MACMAC/sensor'\n" +
                     "    unit_of_measurement: '%'\n" +
@@ -113,6 +115,7 @@ namespace ZControl.FormDeviceClass
                     "    value_template: '{{ value_json.humidity }}'\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zm1_MACMAC_pm25'\n" +
+                    "    unique_id: zm1_MACMAC_pm25\n" +
                     "    # friendly_name: PM25\n" +
                     "    state_topic: 'device/zm1/MACMAC/sensor'\n" +
                     "    unit_of_measurement: 'μg/m³'\n" +
@@ -120,6 +123,7 @@ namespace ZControl.FormDeviceClass
                     "    value_template: '{{ value_json.PM25 }}'\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zm1_MACMAC_hcho'\n" +
+                    "    unique_id: zm1_MACMAC_hcho\n" +
                     "    # friendly_name: 甲醛\n" +
                     "    state_topic: 'device/zm1/MACMAC/sensor'\n" +
                     "    unit_of_measurement: 'mg/m³'\n" +
@@ -129,6 +133,7 @@ namespace ZControl.FormDeviceClass
                     "light:\n" +
                     "  - platform: mqtt\n" +
                     "    name: zm1_MACMAC_brightness\n" +
+                    "    unique_id: zm1_MACMAC_brightness\n" +
                     "    schema: template\n" +
                     "    command_topic: \"device/zm1/MACMAC/set\"\n" +
                     "    state_topic: \"device/zm1/MACMAC/state\"\n" +

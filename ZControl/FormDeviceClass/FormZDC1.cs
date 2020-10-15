@@ -98,7 +98,7 @@ namespace ZControl.FormDeviceClass
                 }
                 if (jsonPlug.Property("setting") == null) continue;
                 JObject jsonPlugSetting = (JObject)jsonPlug["setting"];
-                if (plug_id>0 && jsonPlugSetting.Property("name") != null)
+                if (plug_id > 0 && jsonPlugSetting.Property("name") != null)
                 {
                     labZDC1SwitchName[plug_id].Text = jsonPlugSetting["name"].ToString();
                     labZDC1SwitchName[plug_id].Left = picZDC1SwitchPic[plug_id].Left + picZDC1SwitchPic[plug_id].Width / 2 - labZDC1SwitchName[plug_id].Width / 2;
@@ -167,6 +167,7 @@ namespace ZControl.FormDeviceClass
         const string hassConfig = "switch:\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zDC1_0_MACMAC'\n" +
+                    "    unique_id: zdc1_0_MACMAC\n" +
                     "    state_topic: 'device/zdc1/MACMAC/state'\n" +
                     "    command_topic: 'device/zdc1/MACMAC/set'\n" +
                     "    payload_on: '{\"mac\":\"MACMAC\",\"plug_0\":{\"on\":1},\"plug_1\":{\"on\":1},\"plug_2\":{\"on\":1},\"plug_3\":{\"on\":1}}'\n" +
@@ -176,6 +177,7 @@ namespace ZControl.FormDeviceClass
                     "    state_off: '0'\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zDC1_1_MACMAC'\n" +
+                    "    unique_id: zdc1_1_MACMAC\n" +
                     "    state_topic: 'device/zdc1/MACMAC/state'\n" +
                     "    command_topic: 'device/zdc1/MACMAC/set'\n" +
                     "    payload_on: '{\"mac\":\"MACMAC\",\"plug_1\":{\"on\":1}}'\n" +
@@ -185,6 +187,7 @@ namespace ZControl.FormDeviceClass
                     "    state_off: '0'\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zDC1_2_MACMAC'\n" +
+                    "    unique_id: zdc1_2_MACMAC\n" +
                     "    state_topic: 'device/zdc1/MACMAC/state'\n" +
                     "    command_topic: 'device/zdc1/MACMAC/set'\n" +
                     "    payload_on: '{\"mac\":\"MACMAC\",\"plug_2\":{\"on\":1}}'\n" +
@@ -194,6 +197,7 @@ namespace ZControl.FormDeviceClass
                     "    state_off: '0'\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zDC1_3_MACMAC'\n" +
+                    "    unique_id: zdc1_3_MACMAC\n" +
                     "    state_topic: 'device/zdc1/MACMAC/state'\n" +
                     "    command_topic: 'device/zdc1/MACMAC/set'\n" +
                     "    payload_on: '{\"mac\":\"MACMAC\",\"plug_3\":{\"on\":1}}'\n" +
@@ -205,18 +209,21 @@ namespace ZControl.FormDeviceClass
                     "sensor:\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zdc1_power_MACMAC'\n" +
+                    "    unique_id: zdc1_power_MACMAC\n" +
                     "    state_topic: 'device/zdc1/MACMAC/sensor'\n" +
                     "    unit_of_measurement: 'W'\n" +
                     "    icon: 'mdi:gauge'\n" +
                     "    value_template: '{{ value_json.power }}'\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zdc1_current_MACMAC'\n" +
+                    "    unique_id: zdc1_current_MACMAC\n" +
                     "    state_topic: 'device/zdc1/MACMAC/sensor'\n" +
                     "    unit_of_measurement: 'A'\n" +
                     "    icon: 'mdi:gauge'\n" +
                     "    value_template: '{{ value_json.current}}'\n" +
                     "  - platform: mqtt\n" +
                     "    name: 'zdc1_voltage_MACMAC'\n" +
+                    "    unique_id: zdc1_voltage_MACMAC\n" +
                     "    state_topic: 'device/zdc1/MACMAC/sensor'\n" +
                     "    unit_of_measurement: 'V'\n" +
                     "    icon: 'mdi:gauge'\n" +
