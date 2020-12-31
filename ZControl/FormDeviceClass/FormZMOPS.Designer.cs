@@ -33,9 +33,21 @@
             this.linkRefresh = new System.Windows.Forms.LinkLabel();
             this.picSwitch = new System.Windows.Forms.PictureBox();
             this.labSwitchName = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.panelZDC1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSwitch)).BeginInit();
             this.SuspendLayout();
+            // 
+            // btnHass
+            // 
+            this.btnHass.Enabled = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.SetChildIndex(this.btnHass, 0);
+            this.panel1.Controls.SetChildIndex(this.label2, 0);
             // 
             // panelZDC1
             // 
@@ -47,7 +59,7 @@
             this.panelZDC1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelZDC1.Location = new System.Drawing.Point(0, 55);
             this.panelZDC1.Name = "panelZDC1";
-            this.panelZDC1.Size = new System.Drawing.Size(308, 295);
+            this.panelZDC1.Size = new System.Drawing.Size(310, 295);
             this.panelZDC1.TabIndex = 28;
             // 
             // labelVersion
@@ -95,6 +107,15 @@
             this.labSwitchName.Text = "开关";
             this.labSwitchName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(40, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(231, 114);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "注意: hass配置文件生成功能暂时未做验证!生成文件后请在hass中确认配置正确.若错误,请使用文档中hass配置方式";
+            // 
             // FormZMOPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -103,7 +124,9 @@
             this.Controls.Add(this.panelZDC1);
             this.Name = "FormZMOPS";
             this.Text = "FormZMOPS";
+            this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.panelZDC1, 0);
+            this.panel1.ResumeLayout(false);
             this.panelZDC1.ResumeLayout(false);
             this.panelZDC1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSwitch)).EndInit();
@@ -118,5 +141,6 @@
         private System.Windows.Forms.PictureBox picSwitch;
         private System.Windows.Forms.Label labSwitchName;
         private System.Windows.Forms.Label labelVersion;
+        private System.Windows.Forms.Label label2;
     }
 }

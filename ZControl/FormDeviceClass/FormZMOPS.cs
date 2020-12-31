@@ -97,5 +97,29 @@ namespace ZControl.FormDeviceClass
         {
             RefreshStatus();
         }
+
+        #region hass配置文件相关
+        const string hassConfig = "switch:\n" +
+                "  - platform: mqtt\n" +
+                "    name: 'zmops_MACMAC'\n" +
+                "    unique_id: zmops_MACMAC\n" +
+                "    state_topic: 'device/zmops/MACMAC/state'\n" +
+                "    command_topic: 'device/zmops/MACMAC/set'\n" +
+                "    payload_on: '{\"mac\":\"MACMAC\",\"on\":1}'\n" +
+                "    payload_off: '{\"mac\":\"MACMAC\",\"on\":0}'\n" +
+                "    value_template: '{{ value_json.on }}'\n" +
+                "    state_on: '1'\n" +
+                "    state_off: '0'\n" +
+                "    availability_topic: \"device/zmops/MACMAC/availability\"\n" +
+                "    payload_available: 1\n" +
+                "    payload_not_available: 0";
+
+        protected override String GetHassString()
+        {
+            String str = hassConfig.Replace("\n", "\r\n").Replace("MACMAC", GetMac());
+            return str;
+        }
+
+        #endregion
     }
 }
