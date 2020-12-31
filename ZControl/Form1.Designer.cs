@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBoxMQTT = new System.Windows.Forms.GroupBox();
             this.btMQTTConfirm = new System.Windows.Forms.Button();
             this.txtMQTTPassword = new System.Windows.Forms.TextBox();
@@ -43,9 +44,11 @@
             this.labVersion = new System.Windows.Forms.Label();
             this.LabelLog = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDeviceMQTTSend = new System.Windows.Forms.Button();
             this.btnDeviceListAdd = new System.Windows.Forms.Button();
             this.btnDeviceListDel = new System.Windows.Forms.Button();
-            this.btnDeviceMQTTSend = new System.Windows.Forms.Button();
+            this.btnDeviceExport = new System.Windows.Forms.Button();
+            this.btnDeviceImport = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labMoreFunction = new System.Windows.Forms.Label();
@@ -63,8 +66,6 @@
             this.CboIP = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnDeviceImport = new System.Windows.Forms.Button();
-            this.btnDeviceExport = new System.Windows.Forms.Button();
             this.groupBoxMQTT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMQTTPort)).BeginInit();
             this.panelLog.SuspendLayout();
@@ -246,6 +247,17 @@
             this.panel1.Size = new System.Drawing.Size(258, 358);
             this.panel1.TabIndex = 5;
             // 
+            // btnDeviceMQTTSend
+            // 
+            this.btnDeviceMQTTSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeviceMQTTSend.Location = new System.Drawing.Point(3, 336);
+            this.btnDeviceMQTTSend.Name = "btnDeviceMQTTSend";
+            this.btnDeviceMQTTSend.Size = new System.Drawing.Size(126, 22);
+            this.btnDeviceMQTTSend.TabIndex = 1;
+            this.btnDeviceMQTTSend.Text = "同步MQTT服务器";
+            this.btnDeviceMQTTSend.UseVisualStyleBackColor = true;
+            this.btnDeviceMQTTSend.Click += new System.EventHandler(this.BtnDeviceMQTTSend_Click);
+            // 
             // btnDeviceListAdd
             // 
             this.btnDeviceListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -268,16 +280,27 @@
             this.btnDeviceListDel.UseVisualStyleBackColor = true;
             this.btnDeviceListDel.Click += new System.EventHandler(this.BtnDeviceListDel_Click);
             // 
-            // btnDeviceMQTTSend
+            // btnDeviceExport
             // 
-            this.btnDeviceMQTTSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeviceMQTTSend.Location = new System.Drawing.Point(3, 336);
-            this.btnDeviceMQTTSend.Name = "btnDeviceMQTTSend";
-            this.btnDeviceMQTTSend.Size = new System.Drawing.Size(126, 22);
-            this.btnDeviceMQTTSend.TabIndex = 1;
-            this.btnDeviceMQTTSend.Text = "同步MQTT服务器";
-            this.btnDeviceMQTTSend.UseVisualStyleBackColor = true;
-            this.btnDeviceMQTTSend.Click += new System.EventHandler(this.BtnDeviceMQTTSend_Click);
+            this.btnDeviceExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeviceExport.Location = new System.Drawing.Point(3, 314);
+            this.btnDeviceExport.Name = "btnDeviceExport";
+            this.btnDeviceExport.Size = new System.Drawing.Size(63, 22);
+            this.btnDeviceExport.TabIndex = 4;
+            this.btnDeviceExport.Text = "导出设备";
+            this.btnDeviceExport.UseVisualStyleBackColor = true;
+            this.btnDeviceExport.Click += new System.EventHandler(this.btnDeviceExport_Click);
+            // 
+            // btnDeviceImport
+            // 
+            this.btnDeviceImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeviceImport.Location = new System.Drawing.Point(66, 314);
+            this.btnDeviceImport.Name = "btnDeviceImport";
+            this.btnDeviceImport.Size = new System.Drawing.Size(63, 22);
+            this.btnDeviceImport.TabIndex = 3;
+            this.btnDeviceImport.Text = "导入设备";
+            this.btnDeviceImport.UseVisualStyleBackColor = true;
+            this.btnDeviceImport.Click += new System.EventHandler(this.btnDeviceImport_Click);
             // 
             // listBox1
             // 
@@ -428,28 +451,6 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "局域网网卡选择:";
             // 
-            // btnDeviceImport
-            // 
-            this.btnDeviceImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeviceImport.Location = new System.Drawing.Point(66, 314);
-            this.btnDeviceImport.Name = "btnDeviceImport";
-            this.btnDeviceImport.Size = new System.Drawing.Size(63, 22);
-            this.btnDeviceImport.TabIndex = 3;
-            this.btnDeviceImport.Text = "导入设备";
-            this.btnDeviceImport.UseVisualStyleBackColor = true;
-            this.btnDeviceImport.Click += new System.EventHandler(this.btnDeviceImport_Click);
-            // 
-            // btnDeviceExport
-            // 
-            this.btnDeviceExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeviceExport.Location = new System.Drawing.Point(3, 314);
-            this.btnDeviceExport.Name = "btnDeviceExport";
-            this.btnDeviceExport.Size = new System.Drawing.Size(63, 22);
-            this.btnDeviceExport.TabIndex = 4;
-            this.btnDeviceExport.Text = "导出设备";
-            this.btnDeviceExport.UseVisualStyleBackColor = true;
-            this.btnDeviceExport.Click += new System.EventHandler(this.btnDeviceExport_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -461,6 +462,7 @@
             this.Controls.Add(this.panelLog);
             this.Controls.Add(this.groupBoxMQTT);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";

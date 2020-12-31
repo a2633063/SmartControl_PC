@@ -90,11 +90,7 @@ namespace ZControl
             //listBox1.SelectedIndex = 0;
             //deviceControl1.Device = (DeviceItem)listBox1.SelectedItem;
             //deviceControl1.MsgPublishEvent += send;
-            if (txtMQTTServer.TextLength > 0 && txtMQTTUser.TextLength > 0 && txtMQTTPassword.TextLength > 0)
-            {
-                mqttConnect(txtMQTTServer.Text, (int)numMQTTPort.Value, txtMQTTUser.Text, txtMQTTPassword.Text);
-            }
-            udpConnect();
+
 
 
             int listSeclet = Properties.Settings.Default.Seclect;
@@ -116,8 +112,22 @@ namespace ZControl
             toolTip1.SetToolTip(this.CboIP, "若无法通信,请选择与设备同网段的ip地址");
             #endregion
 
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = 100;
+            timer.Tick += Timer_Tick;
+            timer.Enabled = true;
 
             checkUpdate();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            ((System.Windows.Forms.Timer)sender).Enabled = false;
+            if (txtMQTTServer.TextLength > 0 && txtMQTTUser.TextLength > 0 && txtMQTTPassword.TextLength > 0)
+            {
+                mqttConnect(txtMQTTServer.Text, (int)numMQTTPort.Value, txtMQTTUser.Text, txtMQTTPassword.Text);
+            }
+            udpConnect();
         }
 
         private void send(string topic, string message)
@@ -929,8 +939,7 @@ namespace ZControl
             }
         }
 
+
         #endregion
-
-
     }
 }
