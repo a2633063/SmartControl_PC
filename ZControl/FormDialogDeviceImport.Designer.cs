@@ -50,18 +50,18 @@
             this.txtDeviceJson.Location = new System.Drawing.Point(12, 24);
             this.txtDeviceJson.Multiline = true;
             this.txtDeviceJson.Name = "txtDeviceJson";
-            this.txtDeviceJson.Size = new System.Drawing.Size(389, 397);
+            this.txtDeviceJson.Size = new System.Drawing.Size(389, 367);
             this.txtDeviceJson.TabIndex = 1;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(12, 427);
+            this.button1.Location = new System.Drawing.Point(12, 397);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(389, 37);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "导入";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 476);
+            this.ClientSize = new System.Drawing.Size(413, 446);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtDeviceJson);
             this.Controls.Add(this.label1);

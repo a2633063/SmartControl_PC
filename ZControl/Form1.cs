@@ -589,7 +589,7 @@ namespace ZControl
         private void Json2Device(string s)
         {
 
-            string json = Properties.Settings.Default.Device;
+            string json = s;
             JObject jsonObject = JObject.Parse(json);
             JArray array = (JArray)jsonObject["device"];
             for (int i = array.Count; i > 0; i--)

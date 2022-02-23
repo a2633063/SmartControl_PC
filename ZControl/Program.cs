@@ -15,7 +15,10 @@ namespace ZControl
         [STAThread]
         static void Main()
         {
+#if DEBUG
+#else
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+#endif
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
