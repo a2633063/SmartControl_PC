@@ -61,7 +61,7 @@ namespace ZControl.FormDeviceClass
 
             if (jsonObject.Property("speed") != null)
             {
-                trbSpeed.Value =  (int)jsonObject["speed"];
+                trbSpeed.Value = (int)jsonObject["speed"];
             }
             if (jsonObject.Property("on") != null)
             {
@@ -88,7 +88,7 @@ namespace ZControl.FormDeviceClass
 
         private void trbSpeed_ValueChanged(object sender, EventArgs e)
         {
-            labSpeed.Text = "风速"+trbSpeed.Value;
+            labSpeed.Text = "风速" + trbSpeed.Value;
         }
 
         private void chkSwitch_CheckedChanged(object sender, EventArgs e)
@@ -109,8 +109,8 @@ namespace ZControl.FormDeviceClass
         private void chkSwitch_Click(object sender, EventArgs e)
         {
             Console.WriteLine("chkSwitch_Click");
-            Send("{\"mac\": \"" + GetMac() + "\",\"on\" : "+ (chkSwitch.Checked?"1":"0")+"}");
-    
+            Send("{\"mac\": \"" + GetMac() + "\",\"on\" : " + (chkSwitch.Checked ? "1" : "0") + "}");
+
         }
 
         private void trbSpeed_Scroll(object sender, EventArgs e)
@@ -123,7 +123,7 @@ namespace ZControl.FormDeviceClass
 
         private void timerSend_Tick(object sender, EventArgs e)
         {
-           // Console.WriteLine("timerSend_Tick");
+            // Console.WriteLine("timerSend_Tick");
 
             Send("{\"mac\": \"" + GetMac() + "\",\"speed\" : " + trbSpeed.Value + "}");
             timerSend.Enabled = false;
@@ -145,53 +145,31 @@ namespace ZControl.FormDeviceClass
 
 
         #region hass配置文件相关
-        const string hassConfig = "fan:\n" +
-                    "  - platform: mqtt\n" +
-                    "    name: 'za1_MACMAC'\n" +
-                    "    unique_id: za1_MACMAC\n" +
-                    "    state_topic: \"device/za1/MACMAC/state\"\n" +
-                    "    command_topic: \"device/za1/MACMAC/set\"\n" +
-                    "    state_value_template: >\n" +
-                    "      {%- if value_json.on == 0 -%}\n" +
-                    "        {\"mac\":\"MACMAC\",\"on\":0}\n" +
-                    "      {%- else -%}\n" +
-                    "        {\"mac\":\"MACMAC\",\"on\":1}\n" +
-                    "      {%- endif -%}\n" +
-                    "    speed_state_topic: \"device/za1/MACMAC/state\"\n" +
-                    "    speed_command_topic: \"device/za1/MACMAC/set\"\n" +
-                    "    speed_value_template: >\n" +
-                    "      {%- if value_json.speed < 25 -%}\n" +
-                    "        {\"mac\":\"MACMAC\",\"speed\":10}\n" +
-                    "      {%- elif value_json.speed < 75  -%}\n" +
-                    "        {\"mac\":\"MACMAC\",\"speed\":50}\n" +
-                    "      {%- else  -%}\n" +
-                    "        {\"mac\":\"MACMAC\",\"speed\":100}\n" +
-                    "      {%- endif -%}\n" +
-                    "    qos: 0\n" +
-                    "    payload_on: '{\"mac\":\"MACMAC\",\"on\":1}'\n" +
-                    "    payload_off: '{\"mac\":\"MACMAC\",\"on\":0}'\n" +
-                    "    payload_low_speed: '{\"mac\":\"MACMAC\",\"speed\":10}'\n" +
-                    "    payload_medium_speed: '{\"mac\":\"MACMAC\",\"speed\":50}'\n" +
-                    "    payload_high_speed: '{\"mac\":\"MACMAC\",\"speed\":100}'\n" +
-                    "    speeds:\n" +
-                    "      - low\n" +
-                    "      - medium\n" +
-                    "      - high\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":10}'\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":20}'\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":30}'\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":40}'\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":50}'\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":60}'\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":70}'\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":80}'\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":90}'\n" +
-                    "      - '{\"mac\":\"MACMAC\",\"speed\":100}'\n" +
-                    "          \n" +
-                    "homeassistant:\n" +
-                    "  customize:\n" +
-                    "    fan.za1_MACMAC:\n" +
-                    "      friendly_name: zA1空气净化器\n";
+        const string hassConfig =   "fan:\n" +
+                                    "  - platform: mqtt\n" +
+                                    "    name: 'za1_MACMAC'\n" +
+                                    "    unique_id: za1_MACMAC\n" +
+                                    "    state_topic: \"device/za1/MACMAC/state\"\n" +
+                                    "    command_topic: \"device/za1/MACMAC/set\"\n" +
+                                    "    payload_on: '{\"mac\":\"MACMAC\",\"on\":1}'\n" +
+                                    "    payload_off: '{\"mac\":\"MACMAC\",\"on\":0}'\n" +
+                                    "    state_value_template: >\n" +
+                                    "      {%- if value_json.on == 0 -%}\n" +
+                                    "        {\"mac\":\"MACMAC\",\"on\":0}\n" +
+                                    "      {%- else -%}\n" +
+                                    "        {\"mac\":\"MACMAC\",\"on\":1}\n" +
+                                    "      {%- endif -%}\n" +
+                                    "    qos: 0\n" +
+                                    "    percentage_state_topic: \"device/za1/MACMAC/state\"\n" +
+                                    "    percentage_command_topic: \"device/za1/MACMAC/set\"\n" +
+                                    "    percentage_command_template: '{\"mac\":\"MACMAC\",\"speed\":{{ value }}}'\n" +
+                                    "    percentage_value_template: '{{ value_json.speed }}'\n" +
+                                    "\n" +
+
+                                    "homeassistant:\n" +
+                                    "  customize:\n" +
+                                    "    fan.za1_MACMAC:\n" +
+                                    "      friendly_name: zA1空气净化器\n";
 
         protected override String GetHassString()
         {
