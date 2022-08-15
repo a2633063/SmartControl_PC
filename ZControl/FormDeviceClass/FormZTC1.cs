@@ -83,6 +83,20 @@ namespace ZControl.FormDeviceClass
                     labLock.Enabled = true;
                 }
             }
+
+
+            if (jsonObject.Property("child_lock") != null)
+            {
+                int child_lock = (int)jsonObject["child_lock"];
+                chkZTC1ChildLock.Checked = (child_lock != 0);
+            }
+
+            if (jsonObject.Property("led_lock") != null)
+            {
+                int led_lock = (int)jsonObject["led_lock"];
+                chkZTC1LedLock.Checked = (led_lock != 0);
+            }
+
             if (jsonObject.Property("power") != null)
             {
                 labelZTC1Power.Text = jsonObject["power"].ToString() + "W";
@@ -155,6 +169,8 @@ namespace ZControl.FormDeviceClass
             Send("{\"mac\": \"" + GetMac() + "\","
                             + "\"version\":null,"
                             + "\"lock\":null,"
+                            + "\"led_lock\":null,"
+                            + "\"child_lock\":null,"
                             + "\"plug_0\" : {\"on\" : null,\"setting\":{\"name\":null}},"
                             + "\"plug_1\" : {\"on\" : null,\"setting\":{\"name\":null}},"
                             + "\"plug_2\" : {\"on\" : null,\"setting\":{\"name\":null}},"
@@ -361,7 +377,8 @@ namespace ZControl.FormDeviceClass
         protected override String GetHassString()
         {
             String str = hassConfig.Replace("\n", "\r\n").Replace("MACMAC", GetMac());
-            if (chkHassNameChoice.Checked){
+            if (chkHassNameChoice.Checked)
+            {
                 str = str.Replace("zTC1插口1", labZTC1SwitchName[0].Text);
                 str = str.Replace("zTC1插口2", labZTC1SwitchName[1].Text);
                 str = str.Replace("zTC1插口3", labZTC1SwitchName[2].Text);
@@ -373,5 +390,15 @@ namespace ZControl.FormDeviceClass
         }
 
         #endregion
+
+        private void chkZTC1LedLock_Click(object sender, EventArgs e)
+        {
+            Send("{\"mac\":\"" + GetMac() + "\",\"led_lock\":" + (chkZTC1LedLock.Checked?1:0) + "}");
+        }
+
+        private void chkZTC1ChildLock_Click(object sender, EventArgs e)
+        {
+            Send("{\"mac\":\"" + GetMac() + "\",\"child_lock\":" + (chkZTC1ChildLock.Checked ? 1 : 0) + "}");
+        }
     }
 }

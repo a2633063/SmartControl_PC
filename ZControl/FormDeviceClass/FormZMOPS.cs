@@ -121,5 +121,15 @@ namespace ZControl.FormDeviceClass
         }
 
         #endregion
+
+        private void chkMOPSLedLock_Click(object sender, EventArgs e)
+        {
+            Send("{\"mac\":\"" + GetMac() + "\",\"led_lock\":" + (((CheckBox)sender).Checked ? 1 : 0) + "}");
+        }
+
+        private void chkZMOPSChildLock_Click(object sender, EventArgs e)
+        {
+            Send("{\"mac\":\"" + GetMac() + "\",\"child_lock\":" + (((CheckBox)sender).Checked ? 1 : 0) + "}");
+        }
     }
 }

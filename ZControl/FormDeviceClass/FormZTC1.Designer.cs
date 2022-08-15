@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panelZTC1 = new System.Windows.Forms.Panel();
+            this.chkZTC1LedLock = new System.Windows.Forms.CheckBox();
+            this.chkZTC1ChildLock = new System.Windows.Forms.CheckBox();
             this.ZTC1linkRefresh = new System.Windows.Forms.LinkLabel();
             this.labelZTC1Version = new System.Windows.Forms.Label();
             this.ZTC1linkHass = new System.Windows.Forms.LinkLabel();
@@ -74,6 +76,8 @@
             // panelZTC1
             // 
             this.panelZTC1.BackColor = System.Drawing.Color.Transparent;
+            this.panelZTC1.Controls.Add(this.chkZTC1LedLock);
+            this.panelZTC1.Controls.Add(this.chkZTC1ChildLock);
             this.panelZTC1.Controls.Add(this.ZTC1linkRefresh);
             this.panelZTC1.Controls.Add(this.labelZTC1Version);
             this.panelZTC1.Controls.Add(this.ZTC1linkHass);
@@ -101,6 +105,28 @@
             this.panelZTC1.Size = new System.Drawing.Size(310, 295);
             this.panelZTC1.TabIndex = 3;
             // 
+            // chkZTC1LedLock
+            // 
+            this.chkZTC1LedLock.AutoSize = true;
+            this.chkZTC1LedLock.Location = new System.Drawing.Point(218, 235);
+            this.chkZTC1LedLock.Name = "chkZTC1LedLock";
+            this.chkZTC1LedLock.Size = new System.Drawing.Size(72, 16);
+            this.chkZTC1LedLock.TabIndex = 28;
+            this.chkZTC1LedLock.Text = "夜间模式";
+            this.chkZTC1LedLock.UseVisualStyleBackColor = true;
+            this.chkZTC1LedLock.Click += new System.EventHandler(this.chkZTC1LedLock_Click);
+            // 
+            // chkZTC1ChildLock
+            // 
+            this.chkZTC1ChildLock.AutoSize = true;
+            this.chkZTC1ChildLock.Location = new System.Drawing.Point(218, 213);
+            this.chkZTC1ChildLock.Name = "chkZTC1ChildLock";
+            this.chkZTC1ChildLock.Size = new System.Drawing.Size(48, 16);
+            this.chkZTC1ChildLock.TabIndex = 28;
+            this.chkZTC1ChildLock.Text = "童锁";
+            this.chkZTC1ChildLock.UseVisualStyleBackColor = true;
+            this.chkZTC1ChildLock.Click += new System.EventHandler(this.chkZTC1ChildLock_Click);
+            // 
             // ZTC1linkRefresh
             // 
             this.ZTC1linkRefresh.AutoSize = true;
@@ -116,7 +142,7 @@
             // 
             this.labelZTC1Version.Location = new System.Drawing.Point(28, 231);
             this.labelZTC1Version.Name = "labelZTC1Version";
-            this.labelZTC1Version.Size = new System.Drawing.Size(238, 18);
+            this.labelZTC1Version.Size = new System.Drawing.Size(126, 18);
             this.labelZTC1Version.TabIndex = 27;
             this.labelZTC1Version.Text = "固件版本";
             this.labelZTC1Version.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -419,5 +445,7 @@
         private System.Windows.Forms.Label labZTC1Switch0Name;
         private System.Windows.Forms.CheckBox chkHassNameChoice;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkZTC1ChildLock;
+        private System.Windows.Forms.CheckBox chkZTC1LedLock;
     }
 }

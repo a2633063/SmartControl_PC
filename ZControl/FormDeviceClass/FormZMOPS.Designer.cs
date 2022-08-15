@@ -34,6 +34,8 @@
             this.picSwitch = new System.Windows.Forms.PictureBox();
             this.labSwitchName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.chkMOPSLedLock = new System.Windows.Forms.CheckBox();
+            this.chkZMOPSChildLock = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panelZDC1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSwitch)).BeginInit();
@@ -52,6 +54,8 @@
             // panelZDC1
             // 
             this.panelZDC1.BackColor = System.Drawing.Color.Transparent;
+            this.panelZDC1.Controls.Add(this.chkMOPSLedLock);
+            this.panelZDC1.Controls.Add(this.chkZMOPSChildLock);
             this.panelZDC1.Controls.Add(this.labelVersion);
             this.panelZDC1.Controls.Add(this.linkRefresh);
             this.panelZDC1.Controls.Add(this.picSwitch);
@@ -116,6 +120,28 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "注意: hass配置文件生成功能暂时未做验证!生成文件后请在hass中确认配置正确.若错误,请使用文档中hass配置方式";
             // 
+            // chkMOPSLedLock
+            // 
+            this.chkMOPSLedLock.AutoSize = true;
+            this.chkMOPSLedLock.Location = new System.Drawing.Point(198, 207);
+            this.chkMOPSLedLock.Name = "chkMOPSLedLock";
+            this.chkMOPSLedLock.Size = new System.Drawing.Size(72, 16);
+            this.chkMOPSLedLock.TabIndex = 29;
+            this.chkMOPSLedLock.Text = "夜间模式";
+            this.chkMOPSLedLock.UseVisualStyleBackColor = true;
+            this.chkMOPSLedLock.Click += new System.EventHandler(this.chkMOPSLedLock_Click);
+            // 
+            // chkZMOPSChildLock
+            // 
+            this.chkZMOPSChildLock.AutoSize = true;
+            this.chkZMOPSChildLock.Location = new System.Drawing.Point(198, 191);
+            this.chkZMOPSChildLock.Name = "chkZMOPSChildLock";
+            this.chkZMOPSChildLock.Size = new System.Drawing.Size(48, 16);
+            this.chkZMOPSChildLock.TabIndex = 30;
+            this.chkZMOPSChildLock.Text = "童锁";
+            this.chkZMOPSChildLock.UseVisualStyleBackColor = true;
+            this.chkZMOPSChildLock.Click += new System.EventHandler(this.chkZMOPSChildLock_Click);
+            // 
             // FormZMOPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -142,5 +168,7 @@
         private System.Windows.Forms.Label labSwitchName;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkMOPSLedLock;
+        private System.Windows.Forms.CheckBox chkZMOPSChildLock;
     }
 }
