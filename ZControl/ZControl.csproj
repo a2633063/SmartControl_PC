@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>086BCC65E9A2B93D5D32E304BA3D0B8BB7C1A0FA</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>05251713C852FE57C0262300A69978161D64B3C5</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>ZControl_TemporaryKey.pfx</ManifestKeyFile>
@@ -199,9 +199,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="ZControl_1_TemporaryKey.pfx" />
-    <None Include="ZControl_2_TemporaryKey.pfx" />
-    <None Include="ZControl_3_TemporaryKey.pfx" />
     <None Include="ZControl_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
