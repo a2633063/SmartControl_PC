@@ -99,9 +99,8 @@ namespace ZControl.FormDeviceClass
         }
 
         #region hass配置文件相关
-        const string hassConfig = "switch:\n" +
-                "  - platform: mqtt\n" +
-                "    name: 'zmops_MACMAC'\n" +
+        const string hassConfig = "mqtt:\n" +
+                "  - name: 'zmops_MACMAC'\n" +
                 "    unique_id: zmops_MACMAC\n" +
                 "    state_topic: 'device/zmops/MACMAC/state'\n" +
                 "    command_topic: 'device/zmops/MACMAC/set'\n" +

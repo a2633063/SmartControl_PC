@@ -96,80 +96,87 @@ namespace ZControl.FormDeviceClass
 
 
         #region hass配置文件相关
-        const string hassConfig = "sensor:\n" +
-                    "  - platform: mqtt\n" +
-                    "    name: 'zm1_MACMAC_temperature'\n" +
-                    "    unique_id: zm1_MACMAC_temperature\n" +
-                    "    # friendly_name: 温度\n" +
-                    "    state_topic: 'device/zm1/MACMAC/sensor'\n" +
-                    "    unit_of_measurement: '°C'\n" +
-                    "    icon: 'mdi:thermometer'\n" +
-                    "    value_template: '{{ value_json.temperature }}'\n" +
-                    "  - platform: mqtt\n" +
-                    "    name: 'zm1_MACMAC_humidity'\n" +
-                    "    unique_id: zm1_MACMAC_humidity\n" +
-                    "    # friendly_name: 湿度\n" +
-                    "    state_topic: 'device/zm1/MACMAC/sensor'\n" +
-                    "    unit_of_measurement: '%'\n" +
-                    "    icon: mdi:water-percent\n" +
-                    "    value_template: '{{ value_json.humidity }}'\n" +
-                    "  - platform: mqtt\n" +
-                    "    name: 'zm1_MACMAC_pm25'\n" +
-                    "    unique_id: zm1_MACMAC_pm25\n" +
-                    "    # friendly_name: PM25\n" +
-                    "    state_topic: 'device/zm1/MACMAC/sensor'\n" +
-                    "    unit_of_measurement: 'μg/m³'\n" +
-                    "    icon: mdi:blur\n" +
-                    "    value_template: '{{ value_json.PM25 }}'\n" +
-                    "  - platform: mqtt\n" +
-                    "    name: 'zm1_MACMAC_hcho'\n" +
-                    "    unique_id: zm1_MACMAC_hcho\n" +
-                    "    # friendly_name: 甲醛\n" +
-                    "    state_topic: 'device/zm1/MACMAC/sensor'\n" +
-                    "    unit_of_measurement: 'mg/m³'\n" +
-                    "    icon: mdi:chemical-weapon\n" +
-                    "    value_template: '{{ value_json.formaldehyde }}'\n" +
-                    "\n" +
-                    "light:\n" +
-                    "  - platform: mqtt\n" +
-                    "    name: zm1_MACMAC_brightness\n" +
-                    "    unique_id: zm1_MACMAC_brightness\n" +
-                    "    schema: template\n" +
-                    "    command_topic: \"device/zm1/MACMAC/set\"\n" +
-                    "    state_topic: \"device/zm1/MACMAC/state\"\n" +
-                    "    command_on_template: >\n" +
-                    "      {\"mac\": \"MACMAC\"\n" +
-                    "      {%- if brightness is defined -%}\n" +
-                    "      , \"brightness\": {{ ((brightness-1) / 64 )|int +1 }}\n" +
-                    "      {%- else -%}\n" +
-                    "      , \"brightness\": 4\n" +
-                    "      {%- endif -%}\n" +
-                    "      }\n" +
-                    "    command_off_template: '{\"mac\": \"MACMAC\", \"brightness\": 0}'\n" +
-                    "    state_template: >\n" +
-                    "      {%- if value_json.brightness == 0 -%}\n" +
-                    "        off\n" +
-                    "      {%- else -%}\n" +
-                    "        on\n" +
-                    "      {%- endif -%}\n" +
-                    "    brightness_template: >\n" +
-                    "      {%- if value_json.brightness is defined -%}\n" +
-                    "        {{ ( value_json.brightness *64 )|int }}\n" +
-                    "      {%- endif -%}\n" +
-                    "\n" +
-                    "\n" +
-                    "homeassistant:\n" +
-                    "  customize:\n" +
-                    "    light.zm1_MACMAC_brightness:\n" +
-                    "      friendly_name: zM1亮度\n" +
-                    "    sensor.zm1_MACMAC_temperature:\n" +
-                    "      friendly_name: zM1温度\n" +
-                    "    sensor.zm1_MACMAC_humidity:\n" +
-                    "      friendly_name: zM1湿度\n" +
-                    "    sensor.zm1_MACMAC_pm25:\n" +
-                    "      friendly_name: zM1 PM2.5\n" +
-                    "    sensor.zm1_MACMAC_hcho:\n" +
-                    "      friendly_name: zM1甲醛\n";
+        const string hassConfig =   "mqtt:\n" +
+                                    "  sensor:\n" +
+                                    "    - name: 'zm1_MACMAC_temperature'\n" +
+                                    "      unique_id: zm1_MACMAC_temperature\n" +
+                                    "#     friendly_name: 温度\n" +
+                                    "      state_topic: 'device/zm1/MACMAC/sensor'\n" +
+                                    "      unit_of_measurement: '°C'\n" +
+                                    "      icon: 'mdi:thermometer'\n" +
+                                    "      value_template: '{{ value_json.temperature }}'\n" +
+                                    "#      availability_topic: \"device/zm1/MACMAC/availability\"\n" +
+                                    "#      payload_available: 1\n" +
+                                    "#      payload_not_available: 0\n" +
+                                    "    - name: 'zm1_MACMAC_humidity'\n" +
+                                    "      unique_id: zm1_MACMAC_humidity\n" +
+                                    "#     friendly_name: 湿度\n" +
+                                    "      state_topic: 'device/zm1/MACMAC/sensor'\n" +
+                                    "      unit_of_measurement: '%'\n" +
+                                    "      icon: mdi:water-percent\n" +
+                                    "      value_template: '{{ value_json.humidity }}'\n" +
+                                    "#      availability_topic: \"device/zm1/MACMAC/availability\"\n" +
+                                    "#      payload_available: 1\n" +
+                                    "#      payload_not_available: 0\n" +
+                                    "    - name: 'zm1_MACMAC_pm25'\n" +
+                                    "      unique_id: zm1_MACMAC_pm25\n" +
+                                    "#      availability_topic: \"device/zm1/MACMAC/availability\"\n" +
+                                    "#      payload_available: 1\n" +
+                                    "#      payload_not_available: 0\n" +
+                                    "#      friendly_name: PM25\n" +
+                                    "      state_topic: 'device/zm1/MACMAC/sensor'\n" +
+                                    "      unit_of_measurement: 'μg/m³'\n" +
+                                    "      icon: mdi:blur\n" +
+                                    "      value_template: '{{ value_json.PM25 }}'\n" +
+                                    "    - name: 'zm1_MACMAC_hcho'\n" +
+                                    "      unique_id: zm1_MACMAC_hcho\n" +
+                                    "#     friendly_name: 甲醛\n" +
+                                    "      state_topic: 'device/zm1/MACMAC/sensor'\n" +
+                                    "      unit_of_measurement: 'mg/m³'\n" +
+                                    "      icon: mdi:chemical-weapon\n" +
+                                    "      value_template: '{{ value_json.formaldehyde }}'\n" +
+                                    "#      availability_topic: \"device/zm1/MACMAC/availability\"\n" +
+                                    "#      payload_available: 1\n" +
+                                    "#      payload_not_available: 0\n" +
+                                    "  light:\n" +
+                                    "      name: zm1_MACMAC_brightness\n" +
+                                    "      unique_id: zm1_MACMAC_brightness\n" +
+                                    "      schema: template\n" +
+                                    "      command_topic: \"device/zm1/MACMAC/set\"\n" +
+                                    "      state_topic: \"device/zm1/MACMAC/state\"\n" +
+                                    "      command_on_template: >\n" +
+                                    "        {\"mac\": \"MACMAC\"\n" +
+                                    "        {%- if brightness is defined -%}\n" +
+                                    "        , \"brightness\": {{ ((brightness-1) / 64 )|int +1 }}\n" +
+                                    "        {%- else -%}\n" +
+                                    "        , \"brightness\": 4\n" +
+                                    "        {%- endif -%}\n" +
+                                    "        }\n" +
+                                    "      command_off_template: '{\"mac\": \"MACMAC\", \"brightness\": 0}'\n" +
+                                    "      state_template: >\n" +
+                                    "        {%- if value_json.brightness == 0 -%}\n" +
+                                    "          off\n" +
+                                    "        {%- else -%}\n" +
+                                    "          on\n" +
+                                    "        {%- endif -%}\n" +
+                                    "      brightness_template: >\n" +
+                                    "        {%- if value_json.brightness is defined -%}\n" +
+                                    "          {{ ( value_json.brightness *64 )|int }}\n" +
+                                    "        {%- endif -%}\n" +
+                                    "\n" +
+                                    "\n" +
+                                    "homeassistant:\n" +
+                                    "  customize:\n" +
+                                    "    light.zm1_MACMAC_brightness:\n" +
+                                    "      friendly_name: zM1亮度\n" +
+                                    "    sensor.zm1_MACMAC_temperature:\n" +
+                                    "      friendly_name: zM1温度\n" +
+                                    "    sensor.zm1_MACMAC_humidity:\n" +
+                                    "      friendly_name: zM1湿度\n" +
+                                    "    sensor.zm1_MACMAC_pm25:\n" +
+                                    "      friendly_name: zM1 PM2.5\n" +
+                                    "    sensor.zm1_MACMAC_hcho:\n" +
+                                    "      friendly_name: zM1甲醛\n";
 
         protected override String GetHassString()
         {

@@ -258,121 +258,176 @@ namespace ZControl.FormDeviceClass
 
 
         #region hass配置文件相关
-        const string hassConfig = "switch:\n" +
-         "  - platform: mqtt\n" +
-         "    name: 'ztc1_1_MACMAC'\n" +
-         "    unique_id: ztc1_1_MACMAC\n" +
-         "    state_topic: 'device/ztc1/MACMAC/state'\n" +
-         "    command_topic: 'device/ztc1/MACMAC/set'\n" +
-         "    payload_on: '{\"mac\":\"MACMAC\",\"plug_0\":{\"on\":1}}'\n" +
-         "    payload_off: '{\"mac\":\"MACMAC\",\"plug_0\":{\"on\":0}}'\n" +
-         "    value_template: '{{ value_json.plug_0.on }}'\n" +
-         "    state_on: '1'\n" +
-         "    state_off: '0'\n" +
-         "  - platform: mqtt\n" +
-         "    name: 'ztc1_2_MACMAC'\n" +
-         "    unique_id: ztc1_2_MACMAC\n" +
-         "    state_topic: 'device/ztc1/MACMAC/state'\n" +
-         "    command_topic: 'device/ztc1/MACMAC/set'\n" +
-         "    payload_on: '{\"mac\":\"MACMAC\",\"plug_1\":{\"on\":1}}'\n" +
-         "    payload_off: '{\"mac\":\"MACMAC\",\"plug_1\":{\"on\":0}}'\n" +
-         "    value_template: '{{ value_json.plug_1.on }}'\n" +
-         "    state_on: '1'\n" +
-         "    state_off: '0'\n" +
-         "  - platform: mqtt\n" +
-         "    name: 'ztc1_3_MACMAC'\n" +
-         "    unique_id: ztc1_3_MACMAC\n" +
-         "    state_topic: 'device/ztc1/MACMAC/state'\n" +
-         "    command_topic: 'device/ztc1/MACMAC/set'\n" +
-         "    payload_on: '{\"mac\":\"MACMAC\",\"plug_2\":{\"on\":1}}'\n" +
-         "    payload_off: '{\"mac\":\"MACMAC\",\"plug_2\":{\"on\":0}}'\n" +
-         "    value_template: '{{ value_json.plug_2.on }}'\n" +
-         "    state_on: '1'\n" +
-         "    state_off: '0'\n" +
-         "  - platform: mqtt\n" +
-         "    name: 'ztc1_4_MACMAC'\n" +
-         "    unique_id: ztc1_4_MACMAC\n" +
-         "    state_topic: 'device/ztc1/MACMAC/state'\n" +
-         "    command_topic: 'device/ztc1/MACMAC/set'\n" +
-         "    payload_on: '{\"mac\":\"MACMAC\",\"plug_3\":{\"on\":1}}'\n" +
-         "    payload_off: '{\"mac\":\"MACMAC\",\"plug_3\":{\"on\":0}}'\n" +
-         "    value_template: '{{ value_json.plug_3.on }}'\n" +
-         "    state_on: '1'\n" +
-         "    state_off: '0'\n" +
-         "  - platform: mqtt\n" +
-         "    name: 'ztc1_5_MACMAC'\n" +
-         "    unique_id: ztc1_5_MACMAC\n" +
-         "    state_topic: 'device/ztc1/MACMAC/state'\n" +
-         "    command_topic: 'device/ztc1/MACMAC/set'\n" +
-         "    payload_on: '{\"mac\":\"MACMAC\",\"plug_4\":{\"on\":1}}'\n" +
-         "    payload_off: '{\"mac\":\"MACMAC\",\"plug_4\":{\"on\":0}}'\n" +
-         "    value_template: '{{ value_json.plug_4.on }}'\n" +
-         "    state_on: '1'\n" +
-         "    state_off: '0'\n" +
-         "  - platform: mqtt\n" +
-         "    name: 'ztc1_6_MACMAC'\n" +
-         "    unique_id: ztc1_6_MACMAC\n" +
-         "    state_topic: 'device/ztc1/MACMAC/state'\n" +
-         "    command_topic: 'device/ztc1/MACMAC/set'\n" +
-         "    payload_on: '{\"mac\":\"MACMAC\",\"plug_5\":{\"on\":1}}'\n" +
-         "    payload_off: '{\"mac\":\"MACMAC\",\"plug_5\":{\"on\":0}}'\n" +
-         "    value_template: '{{ value_json.plug_5.on }}'\n" +
-         "    state_on: '1'\n" +
-         "    state_off: '0'\n" +
-         "\n" +
-         "sensor:\n" +
-         "  - platform: mqtt\n" +
-         "    name: 'ztc1_power_MACMAC'\n" +
-         "    unique_id: ztc1_power_MACMAC\n" +
-         "    state_topic: 'device/ztc1/MACMAC/sensor'\n" +
-         "    unit_of_measurement: 'W'\n" +
-         "    icon: 'mdi:gauge'\n" +
-         "    value_template: '{{ value_json.power }}'\n" +
-         "  - platform: mqtt\n" +
-         "    name: 'ztc1_time_MACMAC'\n" +
-         "    unique_id: ztc1_time_MACMAC\n" +
-         "    state_topic: 'device/ztc1/MACMAC/sensor'\n" +
-         "    #unit_of_measurement: '秒'\n" +
-         "    icon: 'mdi:gauge'\n" +
-         "    #value_template: '{{ value_json.total_time }}'\n" +
-         "    value_template: >-\n" +
-         "      {% set time = value_json.total_time %}\n" +
-         "      {% set minutes = ((time % 3600) / 60) | int %}\n" +
-         "      {% set hours = ((time % 86400) / 3600) | int %}\n" +
-         "      {% set days = (time / 86400) | int %}\n" +
-         "      {%- if time < 60 -%}\n" +
-         "        <1分钟\n" +
-         "      {%- else -%}\n" +
-         "        {%- if days > 0 -%}\n" +
-         "            {{ days }}天\n" +
-         "        {%- endif -%}\n" +
-         "        {%- if hours > 0 -%}\n" +
-         "            {{ hours }}小时\n" +
-         "        {%- endif -%}\n" +
-         "        {%- if minutes > 0 -%}\n" +
-         "            {{ minutes }}分钟\n" +
-         "        {%- endif -%}\n" +
-         "      {%- endif -%}\n" +
-         "    \n" +
-         "#可以手动修改一下内容来自定义各设备名称\n" +
-         "homeassistant:\n" +
-         "  customize:\n" +
-         "    switch.ztc1_1_MACMAC:\n" +
-         "      friendly_name: zTC1插口1\n" +
-         "    switch.ztc1_2_MACMAC:\n" +
-         "      friendly_name: zTC1插口2\n" +
-         "    switch.ztc1_3_MACMAC:\n" +
-         "      friendly_name: zTC1插口3\n" +
-         "    switch.ztc1_4_MACMAC:\n" +
-         "      friendly_name: zTC1插口4\n" +
-         "    switch.ztc1_5_MACMAC:\n" +
-         "      friendly_name: zTC1插口5\n" +
-         "    switch.ztc1_6_MACMAC:\n" +
-         "      friendly_name: zTC1插口6\n" +
-         "    sensor.ztc1_power_MACMAC:\n" +
-         "      friendly_name: zTC1功率\n" +
-         "    sensor.ztc1_time_MACMAC:\n" +
-         "      friendly_name: zTC1运行时间\n";
+        const string hassConfig = "mqtt:\n" +
+                                    "  switch:\n" +
+                                    "    - name: 'ztc1_1_MACMAC'\n" +
+                                    "      unique_id: ztc1_1_MACMAC\n" +
+                                    "      state_topic: 'device/ztc1/MACMAC/state'\n" +
+                                    "      command_topic: 'device/ztc1/MACMAC/set'\n" +
+                                    "      payload_on: '{\"mac\":\"MACMAC\",\"plug_0\":{\"on\":1}}'\n" +
+                                    "      payload_off: '{\"mac\":\"MACMAC\",\"plug_0\":{\"on\":0}}'\n" +
+                                    "      value_template: '{{ value_json.plug_0.on }}'\n" +
+                                    "      state_on: '1'\n" +
+                                    "      state_off: '0'\n" +
+                                    "      availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "      payload_available: 1\n" +
+                                    "      payload_not_available: 0\n" +
+                                    "    - name: 'ztc1_2_MACMAC'\n" +
+                                    "      unique_id: ztc1_2_MACMAC\n" +
+                                    "      state_topic: 'device/ztc1/MACMAC/state'\n" +
+                                    "      command_topic: 'device/ztc1/MACMAC/set'\n" +
+                                    "      payload_on: '{\"mac\":\"MACMAC\",\"plug_1\":{\"on\":1}}'\n" +
+                                    "      payload_off: '{\"mac\":\"MACMAC\",\"plug_1\":{\"on\":0}}'\n" +
+                                    "      value_template: '{{ value_json.plug_1.on }}'\n" +
+                                    "      state_on: '1'\n" +
+                                    "      state_off: '0'\n" +
+                                    "      availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "      payload_available: 1\n" +
+                                    "      payload_not_available: 0\n" +
+                                    "    - name: 'ztc1_3_MACMAC'\n" +
+                                    "      unique_id: ztc1_3_MACMAC\n" +
+                                    "      state_topic: 'device/ztc1/MACMAC/state'\n" +
+                                    "      command_topic: 'device/ztc1/MACMAC/set'\n" +
+                                    "      payload_on: '{\"mac\":\"MACMAC\",\"plug_2\":{\"on\":1}}'\n" +
+                                    "      payload_off: '{\"mac\":\"MACMAC\",\"plug_2\":{\"on\":0}}'\n" +
+                                    "      value_template: '{{ value_json.plug_2.on }}'\n" +
+                                    "      state_on: '1'\n" +
+                                    "      state_off: '0'\n" +
+                                    "      availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "      payload_available: 1\n" +
+                                    "      payload_not_available: 0\n" +
+                                    "    - name: 'ztc1_4_MACMAC'\n" +
+                                    "      unique_id: ztc1_4_MACMAC\n" +
+                                    "      state_topic: 'device/ztc1/MACMAC/state'\n" +
+                                    "      command_topic: 'device/ztc1/MACMAC/set'\n" +
+                                    "      payload_on: '{\"mac\":\"MACMAC\",\"plug_3\":{\"on\":1}}'\n" +
+                                    "      payload_off: '{\"mac\":\"MACMAC\",\"plug_3\":{\"on\":0}}'\n" +
+                                    "      value_template: '{{ value_json.plug_3.on }}'\n" +
+                                    "      state_on: '1'\n" +
+                                    "      state_off: '0'\n" +
+                                    "      availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "      payload_available: 1\n" +
+                                    "      payload_not_available: 0\n" +
+                                    "    - name: 'ztc1_5_MACMAC'\n" +
+                                    "      unique_id: ztc1_5_MACMAC\n" +
+                                    "      state_topic: 'device/ztc1/MACMAC/state'\n" +
+                                    "      command_topic: 'device/ztc1/MACMAC/set'\n" +
+                                    "      payload_on: '{\"mac\":\"MACMAC\",\"plug_4\":{\"on\":1}}'\n" +
+                                    "      payload_off: '{\"mac\":\"MACMAC\",\"plug_4\":{\"on\":0}}'\n" +
+                                    "      value_template: '{{ value_json.plug_4.on }}'\n" +
+                                    "      state_on: '1'\n" +
+                                    "      state_off: '0'\n" +
+                                    "      availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "      payload_available: 1\n" +
+                                    "      payload_not_available: 0\n" +
+                                    "    - name: 'ztc1_6_MACMAC'\n" +
+                                    "      unique_id: ztc1_6_MACMAC\n" +
+                                    "      state_topic: 'device/ztc1/MACMAC/state'\n" +
+                                    "      command_topic: 'device/ztc1/MACMAC/set'\n" +
+                                    "      payload_on: '{\"mac\":\"MACMAC\",\"plug_5\":{\"on\":1}}'\n" +
+                                    "      payload_off: '{\"mac\":\"MACMAC\",\"plug_5\":{\"on\":0}}'\n" +
+                                    "      value_template: '{{ value_json.plug_5.on }}'\n" +
+                                    "      state_on: '1'\n" +
+                                    "      state_off: '0'\n" +
+                                    "      availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "      payload_available: 1\n" +
+                                    "      payload_not_available: 0\n" +
+                                    "  sensor:\n" +
+                                    "    - name: 'ztc1_power_MACMAC'\n" +
+                                    "      unique_id: ztc1_power_MACMAC\n" +
+                                    "      state_topic: 'device/ztc1/MACMAC/sensor'\n" +
+                                    "      unit_of_measurement: 'W'\n" +
+                                    "      icon: 'mdi:gauge'\n" +
+                                    "      value_template: '{{ value_json.power }}'\n" +
+                                    "      availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "      payload_available: 1\n" +
+                                    "      payload_not_available: 0\n" +
+                                    "    - name: 'ztc1_time_MACMAC'\n" +
+                                    "      unique_id: ztc1_time_MACMAC\n" +
+                                    "      state_topic: 'device/ztc1/MACMAC/sensor'\n" +
+                                    "      #unit_of_measurement: '秒'\n" +
+                                    "      icon: 'mdi:gauge'\n" +
+                                    "      availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "      payload_available: 1\n" +
+                                    "      payload_not_available: 0\n" +
+                                    "      #value_template: '{{ value_json.total_time }}'\n" +
+                                    "      value_template: >-\n" +
+                                    "        {% set time = value_json.total_time %}\n" +
+                                    "        {% set minutes = ((time % 3600) / 60) | int %}\n" +
+                                    "        {% set hours = ((time % 86400) / 3600) | int %}\n" +
+                                    "        {% set days = (time / 86400) | int %}\n" +
+                                    "        {%- if time < 60 -%}\n" +
+                                    "          <1分钟\n" +
+                                    "        {%- else -%}\n" +
+                                    "          {%- if days > 0 -%}\n" +
+                                    "              {{ days }}天\n" +
+                                    "          {%- endif -%}\n" +
+                                    "          {%- if hours > 0 -%}\n" +
+                                    "              {{ hours }}小时\n" +
+                                    "          {%- endif -%}\n" +
+                                    "          {%- if minutes > 0 -%}\n" +
+                                    "              {{ minutes }}分钟\n" +
+                                    "          {%- endif -%}\n" +
+                                    "        {%- endif -%}\n" +
+                                    "    \n" +
+                                    "sensor:\n" +
+                                    "  - platform: mqtt\n" +
+                                    "    name: 'ztc1_power_MACMAC'\n" +
+                                    "    unique_id: ztc1_power_MACMAC\n" +
+                                    "    state_topic: 'device/ztc1/MACMAC/sensor'\n" +
+                                    "    unit_of_measurement: 'W'\n" +
+                                    "    icon: 'mdi:gauge'\n" +
+                                    "    value_template: '{{ value_json.power }}'\n" +
+                                    "    availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "    payload_available: 1\n" +
+                                    "    payload_not_available: 0\n" +
+                                    "  - platform: mqtt\n" +
+                                    "    name: 'ztc1_time_MACMAC'\n" +
+                                    "    unique_id: ztc1_time_MACMAC\n" +
+                                    "    state_topic: 'device/ztc1/MACMAC/sensor'\n" +
+                                    "    #unit_of_measurement: '秒'\n" +
+                                    "    icon: 'mdi:gauge'\n" +
+                                    "    availability_topic: \"device/ztc1/MACMAC/availability\"\n" +
+                                    "    payload_available: 1\n" +
+                                    "    payload_not_available: 0\n" +
+                                    "    #value_template: '{{ value_json.total_time }}'\n" +
+                                    "    value_template: >-\n" +
+                                    "      {% set time = value_json.total_time %}\n" +
+                                    "      {% set minutes = ((time % 3600) / 60) | int %}\n" +
+                                    "      {% set hours = ((time % 86400) / 3600) | int %}\n" +
+                                    "      {% set days = (time / 86400) | int %}\n" +
+                                    "      {%- if time < 60 -%}\n" +
+                                    "        <1分钟\n" +
+                                    "      {%- else -%}\n" +
+                                    "        {%- if days > 0 -%}\n" +
+                                    "            {{ days }}天\n" +
+                                    "        {%- endif -%}\n" +
+                                    "        {%- if hours > 0 -%}\n" +
+                                    "            {{ hours }}小时\n" +
+                                    "        {%- endif -%}\n" +
+                                    "        {%- if minutes > 0 -%}\n" +
+                                    "            {{ minutes }}分钟\n" +
+                                    "        {%- endif -%}\n" +
+                                    "      {%- endif -%}\n" +
+                                    "    \n" +
+                                    "homeassistant:\n" +
+                                    "  customize:\n" +
+                                    "    switch.ztc1_1_MACMAC:\n" +
+                                    "      friendly_name: zTC1插槽1\n" +
+                                    "    switch.ztc1_2_MACMAC:\n" +
+                                    "      friendly_name: zTC1插槽2\n" +
+                                    "    switch.ztc1_3_MACMAC:\n" +
+                                    "      friendly_name: zTC1插槽3\n" +
+                                    "    switch.ztc1_4_MACMAC:\n" +
+                                    "      friendly_name: zTC1插槽4\n" +
+                                    "    switch.ztc1_5_MACMAC:\n" +
+                                    "      friendly_name: zTC1插槽5\n" +
+                                    "    switch.ztc1_6_MACMAC:\n" +
+                                    "      friendly_name: zTC1插槽6\n" +
+                                    "    sensor.ztc1_power_MACMAC:\n" +
+                                    "      friendly_name: zTC1功率\n" +
+                                    "    sensor.ztc1_time_MACMAC:\n" +
+                                    "      friendly_name: zTC1运行时间\n";
 
         protected override String GetHassString()
         {

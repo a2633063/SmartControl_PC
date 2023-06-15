@@ -145,8 +145,8 @@ namespace ZControl.FormDeviceClass
 
 
         #region hass配置文件相关
-        const string hassConfig =   "fan:\n" +
-                                    "  - platform: mqtt\n" +
+        const string hassConfig = "mqtt:\n" +
+                                    "  fan:\n" +
                                     "    name: 'za1_MACMAC'\n" +
                                     "    unique_id: za1_MACMAC\n" +
                                     "    state_topic: \"device/za1/MACMAC/state\"\n" +
