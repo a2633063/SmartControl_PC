@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormZDC1));
             this.panelZDC1 = new System.Windows.Forms.Panel();
             this.labelZDC1Version = new System.Windows.Forms.Label();
             this.labelZDC1Current = new System.Windows.Forms.Label();
@@ -44,6 +45,7 @@
             this.labZDC1Switch1Name = new System.Windows.Forms.Label();
             this.labZDC1Switch0Name = new System.Windows.Forms.Label();
             this.chkHassNameChoice = new System.Windows.Forms.CheckBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelZDC1.SuspendLayout();
@@ -51,15 +53,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.chkHassNameChoice);
             this.panel1.Controls.SetChildIndex(this.btnHass, 0);
             this.panel1.Controls.SetChildIndex(this.chkHassNameChoice, 0);
             this.panel1.Controls.SetChildIndex(this.label2, 0);
+            this.panel1.Controls.SetChildIndex(this.pictureBox1, 0);
             // 
             // panelZDC1
             // 
@@ -253,14 +258,25 @@
             this.chkHassNameChoice.Text = "使用当前设备的接口名而不是默认名称";
             this.chkHassNameChoice.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(28, 34);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(254, 175);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(40, 90);
+            this.label2.Location = new System.Drawing.Point(52, -1);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(231, 114);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "注意: hass配置文件生成功能暂时未做验证!生成文件后请在hass中确认配置正确.若错误,请使用文档中hass配置方式";
+            this.label2.Size = new System.Drawing.Size(208, 32);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "配置文件使用方式见";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormZDC1
             // 
@@ -280,6 +296,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZDC1Switch3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -302,6 +319,7 @@
         private System.Windows.Forms.Label labZDC1Switch0Name;
         private System.Windows.Forms.Label labelZDC1Version;
         private System.Windows.Forms.CheckBox chkHassNameChoice;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormZM1));
             this.trbBrightness = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
@@ -39,15 +40,19 @@
             this.labFormaldehyde = new System.Windows.Forms.Label();
             this.timerSend = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbBrightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.SetChildIndex(this.btnHass, 0);
             this.panel1.Controls.SetChildIndex(this.label2, 0);
+            this.panel1.Controls.SetChildIndex(this.pictureBox1, 0);
             // 
             // trbBrightness
             // 
@@ -138,11 +143,22 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(40, 90);
+            this.label2.Location = new System.Drawing.Point(52, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(231, 114);
+            this.label2.Size = new System.Drawing.Size(208, 51);
             this.label2.TabIndex = 7;
-            this.label2.Text = "注意: hass配置文件生成功能暂时未做验证!生成文件后请在hass中确认配置正确.若错误,请使用文档中hass配置方式";
+            this.label2.Text = "配置文件使用方式见";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(28, 54);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(254, 175);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
             // 
             // FormZM1
             // 
@@ -170,6 +186,7 @@
             this.Controls.SetChildIndex(this.labFormaldehyde, 0);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trbBrightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,5 +204,6 @@
         private System.Windows.Forms.Label labFormaldehyde;
         private System.Windows.Forms.Timer timerSend;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

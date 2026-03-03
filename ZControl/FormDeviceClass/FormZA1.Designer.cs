@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormZA1));
             this.trbSpeed = new System.Windows.Forms.TrackBar();
             this.labelVersion = new System.Windows.Forms.Label();
             this.linkRefresh = new System.Windows.Forms.LinkLabel();
@@ -36,16 +37,20 @@
             this.chkSwitch = new System.Windows.Forms.CheckBox();
             this.timerSend = new System.Windows.Forms.Timer(this.components);
             this.labLock = new System.Windows.Forms.LinkLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.SetChildIndex(this.btnHass, 0);
             this.panel1.Controls.SetChildIndex(this.label2, 0);
+            this.panel1.Controls.SetChildIndex(this.pictureBox1, 0);
             // 
             // trbSpeed
             // 
@@ -128,14 +133,25 @@
             this.labLock.Visible = false;
             this.labLock.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labLock_LinkClicked);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(28, 64);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(254, 175);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(40, 90);
+            this.label2.Location = new System.Drawing.Point(52, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(231, 114);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "注意: hass配置文件生成功能暂时未做验证!生成文件后请在hass中确认配置正确.若错误,请使用文档中hass配置方式";
+            this.label2.Size = new System.Drawing.Size(208, 51);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "配置文件使用方式见";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormZA1
             // 
@@ -159,6 +175,7 @@
             this.Controls.SetChildIndex(this.labLock, 0);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trbSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,6 +190,7 @@
         private System.Windows.Forms.CheckBox chkSwitch;
         private System.Windows.Forms.Timer timerSend;
         private System.Windows.Forms.LinkLabel labLock;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
     }
 }

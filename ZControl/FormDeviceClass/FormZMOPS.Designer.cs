@@ -28,17 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormZMOPS));
             this.panelZDC1 = new System.Windows.Forms.Panel();
+            this.chkMOPSLedLock = new System.Windows.Forms.CheckBox();
+            this.chkZMOPSChildLock = new System.Windows.Forms.CheckBox();
             this.labelVersion = new System.Windows.Forms.Label();
             this.linkRefresh = new System.Windows.Forms.LinkLabel();
             this.picSwitch = new System.Windows.Forms.PictureBox();
             this.labSwitchName = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.chkMOPSLedLock = new System.Windows.Forms.CheckBox();
-            this.chkZMOPSChildLock = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panelZDC1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSwitch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnHass
@@ -47,9 +50,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.SetChildIndex(this.btnHass, 0);
             this.panel1.Controls.SetChildIndex(this.label2, 0);
+            this.panel1.Controls.SetChildIndex(this.pictureBox1, 0);
             // 
             // panelZDC1
             // 
@@ -65,6 +70,28 @@
             this.panelZDC1.Name = "panelZDC1";
             this.panelZDC1.Size = new System.Drawing.Size(310, 295);
             this.panelZDC1.TabIndex = 28;
+            // 
+            // chkMOPSLedLock
+            // 
+            this.chkMOPSLedLock.AutoSize = true;
+            this.chkMOPSLedLock.Location = new System.Drawing.Point(198, 207);
+            this.chkMOPSLedLock.Name = "chkMOPSLedLock";
+            this.chkMOPSLedLock.Size = new System.Drawing.Size(72, 16);
+            this.chkMOPSLedLock.TabIndex = 29;
+            this.chkMOPSLedLock.Text = "夜间模式";
+            this.chkMOPSLedLock.UseVisualStyleBackColor = true;
+            this.chkMOPSLedLock.Click += new System.EventHandler(this.chkMOPSLedLock_Click);
+            // 
+            // chkZMOPSChildLock
+            // 
+            this.chkZMOPSChildLock.AutoSize = true;
+            this.chkZMOPSChildLock.Location = new System.Drawing.Point(198, 191);
+            this.chkZMOPSChildLock.Name = "chkZMOPSChildLock";
+            this.chkZMOPSChildLock.Size = new System.Drawing.Size(48, 16);
+            this.chkZMOPSChildLock.TabIndex = 30;
+            this.chkZMOPSChildLock.Text = "童锁";
+            this.chkZMOPSChildLock.UseVisualStyleBackColor = true;
+            this.chkZMOPSChildLock.Click += new System.EventHandler(this.chkZMOPSChildLock_Click);
             // 
             // labelVersion
             // 
@@ -111,36 +138,25 @@
             this.labSwitchName.Text = "开关";
             this.labSwitchName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(28, 64);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(254, 175);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(40, 90);
+            this.label2.Location = new System.Drawing.Point(52, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(231, 114);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "注意: hass配置文件生成功能暂时未做验证!生成文件后请在hass中确认配置正确.若错误,请使用文档中hass配置方式";
-            // 
-            // chkMOPSLedLock
-            // 
-            this.chkMOPSLedLock.AutoSize = true;
-            this.chkMOPSLedLock.Location = new System.Drawing.Point(198, 207);
-            this.chkMOPSLedLock.Name = "chkMOPSLedLock";
-            this.chkMOPSLedLock.Size = new System.Drawing.Size(72, 16);
-            this.chkMOPSLedLock.TabIndex = 29;
-            this.chkMOPSLedLock.Text = "夜间模式";
-            this.chkMOPSLedLock.UseVisualStyleBackColor = true;
-            this.chkMOPSLedLock.Click += new System.EventHandler(this.chkMOPSLedLock_Click);
-            // 
-            // chkZMOPSChildLock
-            // 
-            this.chkZMOPSChildLock.AutoSize = true;
-            this.chkZMOPSChildLock.Location = new System.Drawing.Point(198, 191);
-            this.chkZMOPSChildLock.Name = "chkZMOPSChildLock";
-            this.chkZMOPSChildLock.Size = new System.Drawing.Size(48, 16);
-            this.chkZMOPSChildLock.TabIndex = 30;
-            this.chkZMOPSChildLock.Text = "童锁";
-            this.chkZMOPSChildLock.UseVisualStyleBackColor = true;
-            this.chkZMOPSChildLock.Click += new System.EventHandler(this.chkZMOPSChildLock_Click);
+            this.label2.Size = new System.Drawing.Size(208, 51);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "配置文件使用方式见";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormZMOPS
             // 
@@ -156,6 +172,7 @@
             this.panelZDC1.ResumeLayout(false);
             this.panelZDC1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSwitch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -167,8 +184,9 @@
         private System.Windows.Forms.PictureBox picSwitch;
         private System.Windows.Forms.Label labSwitchName;
         private System.Windows.Forms.Label labelVersion;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkMOPSLedLock;
         private System.Windows.Forms.CheckBox chkZMOPSChildLock;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -100,6 +100,7 @@ namespace ZControl.FormDeviceClass
                                     "  sensor:\n" +
                                     "    - name: 'zm1_MACMAC_temperature'\n" +
                                     "      unique_id: zm1_MACMAC_temperature\n" +
+                                    "      device_class: temperature\n" +
                                     "#     friendly_name: 温度\n" +
                                     "      state_topic: 'device/zm1/MACMAC/sensor'\n" +
                                     "      unit_of_measurement: '°C'\n" +
@@ -110,6 +111,7 @@ namespace ZControl.FormDeviceClass
                                     "#      payload_not_available: 0\n" +
                                     "    - name: 'zm1_MACMAC_humidity'\n" +
                                     "      unique_id: zm1_MACMAC_humidity\n" +
+                                    "      device_class: humidity\n" +
                                     "#     friendly_name: 湿度\n" +
                                     "      state_topic: 'device/zm1/MACMAC/sensor'\n" +
                                     "      unit_of_measurement: '%'\n" +
@@ -120,6 +122,7 @@ namespace ZControl.FormDeviceClass
                                     "#      payload_not_available: 0\n" +
                                     "    - name: 'zm1_MACMAC_pm25'\n" +
                                     "      unique_id: zm1_MACMAC_pm25\n" +
+                                    "      device_class: pm25\n" +
                                     "#      availability_topic: \"device/zm1/MACMAC/availability\"\n" +
                                     "#      payload_available: 1\n" +
                                     "#      payload_not_available: 0\n" +
@@ -130,6 +133,7 @@ namespace ZControl.FormDeviceClass
                                     "      value_template: '{{ value_json.PM25 }}'\n" +
                                     "    - name: 'zm1_MACMAC_hcho'\n" +
                                     "      unique_id: zm1_MACMAC_hcho\n" +
+                                    "      device_class: volatile_organic_compounds\n" +
                                     "#     friendly_name: 甲醛\n" +
                                     "      state_topic: 'device/zm1/MACMAC/sensor'\n" +
                                     "      unit_of_measurement: 'mg/m³'\n" +

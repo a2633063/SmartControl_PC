@@ -805,7 +805,7 @@ namespace ZControl
                 toolTip1.SetToolTip(this.labVersion, "检测到新版本,点击更新");
                 versionInfo = (OTAInfo)state;
 
-                labVersion.Text = labVersion.Text + "(×)";
+                labVersion.Text = labVersion.Text + "(↑)";
                 labVersion.ForeColor = Color.FromArgb(0, 0, 255);
                 labVersion.Cursor = Cursors.Hand;
                 Font s = new Font(this.labVersion.Font.FontFamily, this.labVersion.Font.Size, FontStyle.Underline);
